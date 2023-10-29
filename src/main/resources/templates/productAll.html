@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/index}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container-fluid">
+        <div class="row" style="margin-left: 3rem">
+            <div class="col-lg-3" th:each="product: ${productAll}" style="border: 1px solid black;margin: 2rem;text-align: center">
+                <img th:src="@{'/img/product_img/product_image/'+${product.image}}" style="margin-top: 0.5rem;width: 100%">
+                <!--        <img th:src="@{/img/product_img/product_image/laptop_acer_aspire_1.jpg}">-->
+                <p th:text="${product.name}"></p>
+                <!--        '/static/img/product_img/product_image/'-->
+                <p><span th:text="${product.moTa}"></span></p>
+                <p th:text="${product.notes}"></p>
+                <p >Giá chỉ: <span th:text="${#numbers.formatDecimal(product.price,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></span></p>
+                <p >Số lượng còn lại : <span th:text="${product.quatity}"></span></p>
+                <p><span th:text="${product.isActive}"></span></p>
+                <p>Thêm vào giỏ hàng <a href="#"><i class="fa fa-shopping-basket"></i></a></p>
+                <!--        <a th:href="@{'/delete/'+${product.id}}">Delete</a>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

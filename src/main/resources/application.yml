@@ -1,0 +1,17 @@
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/manager-material
+    username: root
+    password: "041103"
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+#  banner:
+#    location: classpath:a.txt
+  security:
+    user:
+      name: admin
+      password: admin
+      roles: admin

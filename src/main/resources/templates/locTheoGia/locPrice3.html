@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/index}">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <div class="container-fluid">
+    <div class="row" style="margin-left: 3rem">
+      <div class="col-lg-3" th:each="product: ${locPrice_20_25}" style="border: 1px solid black;margin: 2rem;text-align: center">
+        <img th:src="@{'/img/product_img/product_image/'+${product.image}}" style="margin-top: 0.5rem;width: 100%">
+        <p th:text="${product.name}"></p>
+        <p th:text="${product.moTa}"></p>
+        <!--                <p th:text="${product.image}"></p>-->
+        <p >Giá chỉ: <span th:text="${#numbers.formatDecimal(product.price,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></span></p>
+        <p >Số lượng còn lại : <span th:text="${product.quatity}"></span></p>
+        <a th:href="@{'/view/productAll/'+${product.id}}">Xem chi tiết</a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
