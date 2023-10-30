@@ -195,13 +195,9 @@ public class ViewController {
                 model.addAttribute("message","invalid password");
 
             }else {
-//                String uri = sessionService.get("security-uri");
-//                if(uri != null){
-//                    return "redirect:"+uri;
-//                }else {
-//                    model.addAttribute("message","login sucessfull");
-//                }
                 session.setAttribute("saveCus",customer);
+//                session.setAttribute("username",username);
+                session.getAttribute("saveCart");
                 model.addAttribute("customer",customerRespon.getCustomer1(username));
 
                 return "cart/shopingcart";
@@ -214,11 +210,9 @@ public class ViewController {
     }
 
     @GetMapping("/showChiTiet")
-    public String showChiTiet(Model model,HttpSession session, @RequestParam(name = "username") String username){
+    public String showChiTiet(Model model,HttpSession session){
         session.getAttribute("saveCus");
-        model.addAttribute("customer",customerRespon.getCustomer1(username));
-        model.addAttribute("customer1",customerRespon.getCustomer2(username));
-//                model.addAttribute("username",sessionService.get(String.valueOf(customer)));
+        session.getAttribute("saveProduct");
         model.addAttribute("cartItem",service.getAllItem());
         return "layout/index1";
     }

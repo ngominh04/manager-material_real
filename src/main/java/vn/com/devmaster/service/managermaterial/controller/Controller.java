@@ -1,18 +1,15 @@
 package vn.com.devmaster.service.managermaterial.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import vn.com.devmaster.service.managermaterial.domain.Category;
 import vn.com.devmaster.service.managermaterial.domain.Customer;
-import vn.com.devmaster.service.managermaterial.domain.Product;
 import vn.com.devmaster.service.managermaterial.projecttion.IProduct;
 import vn.com.devmaster.service.managermaterial.reponsitory.ProductRespon;
 import vn.com.devmaster.service.managermaterial.reponsitory.Responsitory;
 import vn.com.devmaster.service.managermaterial.service.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")

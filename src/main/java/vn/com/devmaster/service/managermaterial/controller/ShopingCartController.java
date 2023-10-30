@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import vn.com.devmaster.service.managermaterial.domain.CartItem;
 import vn.com.devmaster.service.managermaterial.domain.Customer;
 import vn.com.devmaster.service.managermaterial.domain.Product;
+import vn.com.devmaster.service.managermaterial.reponsitory.CartItemRespon;
 import vn.com.devmaster.service.managermaterial.reponsitory.CustomerRespon;
 import vn.com.devmaster.service.managermaterial.reponsitory.ProductRespon;
 import vn.com.devmaster.service.managermaterial.reponsitory.Responsitory;
@@ -28,27 +29,38 @@ public class ShopingCartController {
     Responsitory responsitory;
     @Autowired
     ProductRespon productRespon;
+    @Autowired
+    CartItemRespon cartItemRespon;
+
     // giỏ hàng
     @GetMapping("/a")
     public String showCart(Model model, HttpSession session){
+        session.setAttribute("saveCart",service.getAllItem());
+        session.getAttribute("saveCart");
         session.getAttribute("saveCus");
+        session.getAttribute("saveProduct");
         model.addAttribute("cartItem",service.getAllItem());
+        session.setAttribute("tongTien",service.getAmount());
         model.addAttribute("tongTien",service.getAmount()); // xử lí tổng tiền sản phẩm
         return "cart/shopingcart";
     }
     // add sản phẩm vào giỏ hàng
     @GetMapping("/add/{id}")
-    public String addCart(@PathVariable(name = "id" ) Integer id){
+    public String addCart(@PathVariable(name = "id" ) Integer id,HttpSession session){
         Product product = productRespon.findAllById(id);
+
         if(product != null){
             CartItem item = new CartItem();
-            item.setId(product.getId());
+//            item.setId(product.getId());
             item.setImage(product.getImage());
             item.setName(product.getName());
             item.setPrice(product.getPrice());
             item.setQuantity(1);
+            item.setProduct(product);
             service.add(item);
+//            cartItemRespon.save(item);
         }
+
         return "redirect:/shoping_cart/a";
     }
     // xóa 1 sản phẩm có trong giỏ hàng theo id

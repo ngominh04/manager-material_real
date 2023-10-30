@@ -30,4 +30,12 @@ public class CartItem {
     @Column(name = "username", length = 250)
     private String username;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+    @JoinColumn(name = "id_customer", referencedColumnName = "id")
+    private Customer customer;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+    @JoinColumn(name = "id_product", referencedColumnName = "id")
+    private Product product;
+
 }

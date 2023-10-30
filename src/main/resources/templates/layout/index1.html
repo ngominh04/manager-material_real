@@ -169,11 +169,10 @@
 
       <!-- Begin Page Content -->
       <div layout:fragment="content">
-          <div>
-              <p >Tên người dùng : <span th:text="${customer.name}"></span></p>
-              <p >Địa chỉ : <span th:text="${customer.address}"></span></p>
-              <p >Email : <span th:text="${customer.email}"></span></p>
-              <p >Phone : <span th:text="${customer.phone}"></span></p>
+          <div th:each="save: ${session.saveCart}">
+              <p class="mb-2" th:text="${save.name}"></p>
+              <p class="mb-2" th:text="${save.price}"></p>
+              <p class="mb-2" th:text="${save.quantity}"></p>
           </div>
           <section class="h-100 h-custom">
               <div class="container h-100 py-5">
@@ -181,10 +180,10 @@
                       <div class="col">
 
                           <div>
-                            <p >Tên người dùng : <span th:text="${customer.name}"></span></p>
-                            <p >Địa chỉ : <span th:text="${customer.address}"></span></p>
-                            <p >Email : <span th:text="${customer.email}"></span></p>
-                            <p >Phone : <span th:text="${customer.phone}"></span></p>
+                              <p >Tên người dùng : <span th:text="${session.saveCus.name}"></span></p>
+                              <p >Địa chỉ : <span th:text="${session.saveCus.address}"></span></p>
+                              <p >Email : <span th:text="${session.saveCus.email}"></span></p>
+                              <p >Phone : <span th:text="${session.saveCus.phone}"></span></p>
                           </div>
                           <div class="table-responsive">
                               <table class="table">
@@ -199,6 +198,7 @@
                                   <tbody>
                                   <div th:each="sp: ${cartItem}">
                                       <form th:action="@{/shoping_cart/update}" method="post">
+
                                           <input name="id" th:value="${sp.id}" type="hidden"> <!-- lấy id sản phẩm để cập nhật quantity -->
                                           <tr>
                                               <th scope="row">
@@ -329,11 +329,11 @@
 
                                           <div class="d-flex justify-content-between mb-4" style="font-weight: 500;">
                                               <p class="mb-2">Total</p>
-                                              <p class="mb-2" th:text="${#numbers.formatDecimal(tongTien,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></p>
+                                              <p class="mb-2" th:text="${#numbers.formatDecimal(session.tongTien,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></p>
                                           </div>
 
                                           <div class="d-flex justify-content-between">
-                                              <a href="#">Đặt hàng</a>
+                                              <a th:href="@{'/oder/oderUser/'+${session.saveCus.username}}">Đặt hàng</a>
                                           </div>
                                       </div>
                                   </div>

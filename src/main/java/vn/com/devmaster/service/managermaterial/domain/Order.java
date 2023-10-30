@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -13,6 +14,7 @@ import java.time.Instant;
 @Table(name = "orders")
 public class Order {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     private Integer id;
 
@@ -41,5 +43,8 @@ public class Order {
 
     @Column(name = "PHONE", length = 50)
     private String phone;
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "idord")
+    private List<OrdersDetail> ordersDetails;
 
 }

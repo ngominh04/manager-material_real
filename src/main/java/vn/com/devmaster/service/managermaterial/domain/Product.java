@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -19,9 +20,6 @@ public class Product {
     @Column(name = "NAME", length = 500)
     private String name;
 
-    public Integer getId() {
-        return id;
-    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -63,6 +61,7 @@ public class Product {
     @Column(name = "ISACTIVE")
     private Byte isactive;
 
-
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<CartItem> cartItems;
 
 }

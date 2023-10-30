@@ -3,8 +3,6 @@ package vn.com.devmaster.service.managermaterial.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import vn.com.devmaster.service.managermaterial.domain.CartItem;
-import vn.com.devmaster.service.managermaterial.domain.Customer;
-import vn.com.devmaster.service.managermaterial.projecttion.ICustomer;
 import vn.com.devmaster.service.managermaterial.reponsitory.ProductRespon;
 
 

@@ -1,12 +1,10 @@
 package vn.com.devmaster.service.managermaterial.reponsitory;
 
-import lombok.EqualsAndHashCode;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import vn.com.devmaster.service.managermaterial.domain.Category;
 import vn.com.devmaster.service.managermaterial.domain.Customer;
-import vn.com.devmaster.service.managermaterial.domain.Product;
 import vn.com.devmaster.service.managermaterial.projecttion.*;
 import vn.com.devmaster.service.managermaterial.spl.Sql;
 
