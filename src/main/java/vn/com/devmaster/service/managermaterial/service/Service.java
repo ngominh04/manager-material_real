@@ -6,6 +6,8 @@ import vn.com.devmaster.service.managermaterial.domain.CartItem;
 import vn.com.devmaster.service.managermaterial.reponsitory.ProductRespon;
 
 
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.util.*;
 
@@ -14,7 +16,8 @@ import java.util.*;
 public class Service implements IService{
     @Autowired
     private ProductRespon productRespon;
-
+    @Autowired
+    HttpSession session;
     Map<Integer, CartItem> maps= new HashMap<>();
     @Override
     public void add(CartItem item){

@@ -1,12 +1,12 @@
 package vn.com.devmaster.service.managermaterial.controller;
 
+import lombok.experimental.Tolerate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import vn.com.devmaster.service.managermaterial.domain.*;
 import vn.com.devmaster.service.managermaterial.reponsitory.CustomerRespon;
 import vn.com.devmaster.service.managermaterial.reponsitory.OderDetailRespon;
@@ -33,6 +33,7 @@ public class OderController {
     OderDetailRespon oderDetailRespon;
     @Autowired
     Service service;
+
     @GetMapping("/oderUser/{username}")
     public String showOder(Model model, HttpSession session, @PathVariable(name = "username") String username){
 
@@ -40,7 +41,6 @@ public class OderController {
         List<CartItem> cart= customer.getCartItems();
 //        oderService.save(cart);
         Order order = new Order();
-
 //        Customer customer= (Customer) session.getAttribute("saveCus");
 //        int id = UUID.randomUUID().toString().indexOf(2,10);
         String idOrder = UUID.randomUUID().toString().substring(0,10);
@@ -55,17 +55,22 @@ public class OderController {
         order.setNotes("Có");
         order.setPhone(customer.getPhone());
         order.setIdcustomer(customer);
-//        List<OrdersDetail> orderDetailList = new ArrayList<>();
-//        for (CartItem item : cart) {
-//            OrdersDetail orderDetail = new OrdersDetail();
-//            orderDetail.setIdord(order);
-//            orderDetail.setIdproduct(item.getProduct());
-//            oderDetailRespon.save(orderDetail);
-//            orderDetailList.add(orderDetail);
-//        }
+        List<OrdersDetail> orderDetailList = new ArrayList<>();
+        for (CartItem item : cart) {
+            OrdersDetail orderDetail = new OrdersDetail();
+            orderDetail.setIdord(order);
+            orderDetail.setIdproduct(item.getProduct());
+            orderDetail.setQty(cart.size());
+            orderDetail.setPrice(item.getPrice());
+            //save oder detail
+            oderDetailRespon.save(orderDetail);
+            orderDetailList.add(orderDetail);
+        }
+
 //        oderService.save((CartItem) cart);
         oderRespon.save(order);
         return "test";
     }
+
 
 }

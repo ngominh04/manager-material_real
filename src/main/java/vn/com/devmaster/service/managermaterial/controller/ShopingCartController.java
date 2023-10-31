@@ -51,7 +51,7 @@ public class ShopingCartController {
 
         if(product != null){
             CartItem item = new CartItem();
-//            item.setId(product.getId());
+            item.setId(product.getId());
             item.setImage(product.getImage());
             item.setName(product.getName());
             item.setPrice(product.getPrice());

@@ -5,8 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "orders_details")
@@ -16,7 +16,7 @@ public class OrdersDetail {
     @Column(name = "ID", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "IDORD")
     private Order idord;
 
@@ -29,5 +29,6 @@ public class OrdersDetail {
 
     @Column(name = "QTY")
     private Integer qty;
+
 
 }

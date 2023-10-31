@@ -223,6 +223,4 @@ public class ViewController {
         session.getAttribute("saveCart");
         return "layout/index1";
     }
-
-
 }
