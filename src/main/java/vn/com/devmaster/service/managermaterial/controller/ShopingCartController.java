@@ -58,7 +58,7 @@ public class ShopingCartController {
             item.setQuantity(1);
             item.setProduct(product);
             service.add(item);
-//            cartItemRespon.save(item);
+            cartItemRespon.save(item);
         }
 
         return "redirect:/shoping_cart/a";

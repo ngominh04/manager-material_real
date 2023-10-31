@@ -52,6 +52,10 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<CartItem> cartItems;
+
+    @OneToMany(mappedBy = "idcustomer", cascade = CascadeType.ALL)
+    private List<Order> orders;
+
 //
 //    public Customer() {
 //        this.shopingcart = new ShopingCart();

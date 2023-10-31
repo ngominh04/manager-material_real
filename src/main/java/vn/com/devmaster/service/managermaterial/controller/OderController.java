@@ -42,7 +42,7 @@ public class OderController {
         Order order = new Order();
 
 //        Customer customer= (Customer) session.getAttribute("saveCus");
-        int id = UUID.randomUUID().toString().indexOf(2,10);
+//        int id = UUID.randomUUID().toString().indexOf(2,10);
         String idOrder = UUID.randomUUID().toString().substring(0,10);
 //        idOrder =
 //        order.setIdcustomer();
@@ -50,14 +50,19 @@ public class OderController {
         order.setTotalMoney(service.getAmount());
         order.setOrdersDate(new Date().toInstant());
         order.setIdorders(idOrder);
-        List<OrdersDetail> orderDetailList = new ArrayList<>();
-        for (CartItem item : cart) {
-            OrdersDetail orderDetail = new OrdersDetail();
-            orderDetail.setIdord(order);
-            orderDetail.setIdproduct(item.getProduct());
-            oderDetailRespon.save(orderDetail);
-            orderDetailList.add(orderDetail);
-        }
+        order.setAddress(customer.getAddress());
+        order.setNameReciver(customer.getName());
+        order.setNotes("Có");
+        order.setPhone(customer.getPhone());
+        order.setIdcustomer(customer);
+//        List<OrdersDetail> orderDetailList = new ArrayList<>();
+//        for (CartItem item : cart) {
+//            OrdersDetail orderDetail = new OrdersDetail();
+//            orderDetail.setIdord(order);
+//            orderDetail.setIdproduct(item.getProduct());
+//            oderDetailRespon.save(orderDetail);
+//            orderDetailList.add(orderDetail);
+//        }
 //        oderService.save((CartItem) cart);
         oderRespon.save(order);
         return "test";

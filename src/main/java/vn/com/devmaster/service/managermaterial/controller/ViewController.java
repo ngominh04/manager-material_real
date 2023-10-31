@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import vn.com.devmaster.service.managermaterial.domain.CartItem;
 import vn.com.devmaster.service.managermaterial.domain.Customer;
+import vn.com.devmaster.service.managermaterial.reponsitory.CartItemRespon;
 import vn.com.devmaster.service.managermaterial.reponsitory.CustomerRespon;
 import vn.com.devmaster.service.managermaterial.reponsitory.ProductRespon;
 import vn.com.devmaster.service.managermaterial.reponsitory.Responsitory;
@@ -196,7 +198,7 @@ public class ViewController {
 
             }else {
                 session.setAttribute("saveCus",customer);
-//                session.setAttribute("username",username);
+                session.setAttribute("username",username);
                 session.getAttribute("saveCart");
                 model.addAttribute("customer",customerRespon.getCustomer1(username));
 
@@ -209,11 +211,16 @@ public class ViewController {
         return "login";
     }
 
+    @Autowired
+    CartItemRespon cartItemRespon;;
+
     @GetMapping("/showChiTiet")
-    public String showChiTiet(Model model,HttpSession session){
+    public String showChiTiet(Model model, HttpSession session, CartItem item){
         session.getAttribute("saveCus");
         session.getAttribute("saveProduct");
         model.addAttribute("cartItem",service.getAllItem());
+//        item.setCustomer();
+        session.getAttribute("saveCart");
         return "layout/index1";
     }
 
