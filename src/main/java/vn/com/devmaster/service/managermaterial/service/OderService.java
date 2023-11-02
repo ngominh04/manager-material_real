@@ -21,16 +21,16 @@ public class OderService {
     @Autowired
     HttpSession session;
 
-    @Transactional
-    public Order save(CartItem item){
-        Order order = new Order();
-//        Customer customer= (Customer) session.getAttribute("saveCus");
-        String idOrder = UUID.randomUUID().toString().substring(0,10);
-//        idOrder =
-//        order.setIdcustomer();
-        order.setTotalMoney(item.getPrice()* item.getQuantity());
-        order.setOrdersDate(new Date().toInstant());
-        order.setIdorders(idOrder);
-        return oderRespon.save(order);
-    }
+//    @Transactional
+//    public Order save(CartItem item){
+//        Order order = new Order();
+////        Customer customer= (Customer) session.getAttribute("saveCus");
+//        String idOrder = UUID.randomUUID().toString().substring(0,10);
+////        idOrder =
+////        order.setIdcustomer();
+//        order.setTotalMoney(item.getPrice()* item.getQuantity());
+//        order.setOrdersDate(new Date().toInstant());
+//        order.setIdorders(idOrder);
+//        return oderRespon.save(order);
+//    }
 }

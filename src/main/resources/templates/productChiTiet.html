@@ -176,7 +176,12 @@
               </div>
               <div >
                 <a th:href="@{'/view/getOder/'+${productId.id}}">Đặt hàng </a>
-                <a th:href="@{'/shoping_cart/add/'+${productId.id}}"> Thêm vào giỏ hàng <i class="fa fa-shopping-basket"></i></a>
+                <div th:if="${session.username == null}">
+                  <a th:href="@{'/shoping_cart/add/'+${productId.id}}"> Thêm vào giỏ hàng <i class="fa fa-shopping-basket"></i></a>
+                </div>
+                <div th:if="${session.username != null}">
+                  <a th:href="@{'/shoping_cart/add/'+${productId.id}+'/'+${session.username}}"> Add to cart <i class="fa fa-shopping-basket"></i></a>
+                </div>
               </div>
             </div>
           </div>

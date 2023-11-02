@@ -12,14 +12,15 @@ import javax.persistence.*;
 @Table(name = "orders_payment")
 public class OrdersPayment {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "IDORD")
     private Order idord;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "IDPAYMENT")
     private PaymentMethod idpayment;
 
@@ -30,6 +31,6 @@ public class OrdersPayment {
     private Integer notes;
 
     @Column(name = "STATUS", length = 50)
-    private String status;
+    private int status;
 
 }

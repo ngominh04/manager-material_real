@@ -50,11 +50,12 @@ public class Customer {
     @Column(name = "ISACTIVE")
     private Byte isactive;
 
+    @OneToMany(mappedBy = "idcustomer", cascade = CascadeType.ALL)
+    private List<Order> orders;
+
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<CartItem> cartItems;
 
-    @OneToMany(mappedBy = "idcustomer", cascade = CascadeType.ALL)
-    private List<Order> orders;
 
 //
 //    public Customer() {

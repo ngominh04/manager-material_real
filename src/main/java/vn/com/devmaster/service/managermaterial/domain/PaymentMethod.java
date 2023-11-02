@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -31,5 +32,8 @@ public class PaymentMethod {
 
     @Column(name = "ISACTIVE")
     private Byte isactive;
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "idpayment")
+    private List<OrdersPayment> ordersPayments;
 
 }

@@ -6,15 +6,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import vn.com.devmaster.service.managermaterial.domain.CartItem;
 import vn.com.devmaster.service.managermaterial.domain.Customer;
+import vn.com.devmaster.service.managermaterial.domain.PaymentMethod;
 import vn.com.devmaster.service.managermaterial.reponsitory.CartItemRespon;
 import vn.com.devmaster.service.managermaterial.reponsitory.CustomerRespon;
 import vn.com.devmaster.service.managermaterial.reponsitory.ProductRespon;
 import vn.com.devmaster.service.managermaterial.reponsitory.Responsitory;
+import vn.com.devmaster.service.managermaterial.service.CartService;
 import vn.com.devmaster.service.managermaterial.service.ParamService;
 import vn.com.devmaster.service.managermaterial.service.Service;
 import vn.com.devmaster.service.managermaterial.service.SessionService;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/view")
@@ -101,48 +104,48 @@ public class ViewController {
     }
 
 
-    // id product -> trang đặt hàng
-    @GetMapping("/getOder/{id}")
-    String showOder_1(Model model,@PathVariable(name = "id") Integer id){
-        model.addAttribute("productId",productRespon.findAllById(id));
-        model.addAttribute("payment",responsitory.getPaymentActive());
-        model.addAttribute("tranport",responsitory.getTransPort(id));
-        model.addAttribute("paymentId",responsitory.getPayment(id));
-        return "oder/oderChiTiet";
-    }
-
-    // lấy id product và id transport -> ra trang tổng tiền
-    @GetMapping("/getOder/{id}/tp{id1}")
-    String showOder_2(Model model,@PathVariable(name = "id") Integer id,@PathVariable(name = "id1") Integer id1){
-        model.addAttribute("productId",productRespon.findAllById(id));
-        model.addAttribute("payment",responsitory.getPaymentActive());
-        model.addAttribute("tranport",responsitory.getTransPort(id));
-        model.addAttribute("tranport2",responsitory.getTransPort2(id,id1));
-        model.addAttribute("paymentId",responsitory.getPayment(id));
-        return "oder/oderTransport";
-    }
-
-    // lấy id product và id payment -> ra trang payment
-    @GetMapping("/getOder/{id}/pm{id1}")
-    String showOder_3(Model model,@PathVariable(name = "id") Integer id,@PathVariable(name = "id1") Integer id1){
-        model.addAttribute("productId",productRespon.findAllById(id));
-        model.addAttribute("payment",responsitory.getPaymentActive());
-        model.addAttribute("tranport",responsitory.getTransPort(id));
-        model.addAttribute("tranport2",responsitory.getTransPort2(id,id1));
-        model.addAttribute("paymentId",responsitory.getPayment(id1));
-        return "oder/oderPayment";
-    }
-
-    //chuyển từ trang tranport -> trang payment và ngược lại
-    @GetMapping("/getOder/{id}/tp{id1}/pm{id2}")
-    String showOder_3(Model model,@PathVariable(name = "id") Integer id,@PathVariable(name = "id1") Integer id1,@PathVariable(name = "id2") Integer id2){
-        model.addAttribute("productId",productRespon.findAllById(id));
-        model.addAttribute("payment",responsitory.getPaymentActive());
-        model.addAttribute("tranport",responsitory.getTransPort(id1));
-        model.addAttribute("tranport2",responsitory.getTransPort2(id,id1));
-        model.addAttribute("paymentId",responsitory.getPayment(id2));
-        return "/oder/oderPayment";
-    }
+//    // id product -> trang đặt hàng
+//    @GetMapping("/getOder/{id}")
+//    String showOder_1(Model model,@PathVariable(name = "id") Integer id){
+//        model.addAttribute("productId",productRespon.findAllById(id));
+//        model.addAttribute("payment",responsitory.getPaymentActive());
+//        model.addAttribute("tranport",responsitory.getTransPort(id));
+//        model.addAttribute("paymentId",responsitory.getPayment(id));
+//        return "oder/oderChiTiet";
+//    }
+//
+//    // lấy id product và id transport -> ra trang tổng tiền
+//    @GetMapping("/getOder/{id}/tp{id1}")
+//    String showOder_2(Model model,@PathVariable(name = "id") Integer id,@PathVariable(name = "id1") Integer id1){
+//        model.addAttribute("productId",productRespon.findAllById(id));
+//        model.addAttribute("payment",responsitory.getPaymentActive());
+//        model.addAttribute("tranport",responsitory.getTransPort(id));
+//        model.addAttribute("tranport2",responsitory.getTransPort2(id,id1));
+//        model.addAttribute("paymentId",responsitory.getPayment(id));
+//        return "oder/oderTransport";
+//    }
+//
+//    // lấy id product và id payment -> ra trang payment
+//    @GetMapping("/getOder/{id}/pm{id1}")
+//    String showOder_3(Model model,@PathVariable(name = "id") Integer id,@PathVariable(name = "id1") Integer id1){
+//        model.addAttribute("productId",productRespon.findAllById(id));
+//        model.addAttribute("payment",responsitory.getPaymentActive());
+//        model.addAttribute("tranport",responsitory.getTransPort(id));
+//        model.addAttribute("tranport2",responsitory.getTransPort2(id,id1));
+//        model.addAttribute("paymentId",responsitory.getPayment(id1));
+//        return "oder/oderPayment";
+//    }
+//
+//    //chuyển từ trang tranport -> trang payment và ngược lại
+//    @GetMapping("/getOder/{id}/tp{id1}/pm{id2}")
+//    String showOder_3(Model model,@PathVariable(name = "id") Integer id,@PathVariable(name = "id1") Integer id1,@PathVariable(name = "id2") Integer id2){
+//        model.addAttribute("productId",productRespon.findAllById(id));
+//        model.addAttribute("payment",responsitory.getPaymentActive());
+//        model.addAttribute("tranport",responsitory.getTransPort(id1));
+//        model.addAttribute("tranport2",responsitory.getTransPort2(id,id1));
+//        model.addAttribute("paymentId",responsitory.getPayment(id2));
+//        return "/oder/oderPayment";
+//    }
 
     // lọc dưới 10 tr
     @GetMapping("/locPrice_10")
@@ -187,8 +190,11 @@ public class ViewController {
         return "login";
     }
 
+    @Autowired
+    CartService cartService;
+
     @PostMapping("/login_check")
-    public String login(Model  model, @RequestParam(name = "username") String username, HttpSession session){
+    public String login(Model  model, @RequestParam(name = "username") String username, HttpSession session,CartItem item){
 //        String username = paramService.getString("username","");
         String psw = paramService.getString("psw","");
         try {
@@ -199,10 +205,9 @@ public class ViewController {
             }else {
                 session.setAttribute("saveCus",customer);
                 session.setAttribute("username",username);
-                session.getAttribute("saveCart");
                 model.addAttribute("customer",customerRespon.getCustomer1(username));
-
-                return "cart/shopingcart";
+                item.setUsername(username);
+                return "login/login_check";
 
             }
         }catch (Exception e){
@@ -215,12 +220,18 @@ public class ViewController {
     CartItemRespon cartItemRespon;;
 
     @GetMapping("/showChiTiet")
-    public String showChiTiet(Model model, HttpSession session, CartItem item){
+    public String showChiTiet(Model model, HttpSession session){
+        session.setAttribute("payment",responsitory.getPaymentActive());
+        session.getAttribute("payment");
+        session.setAttribute("tranport",responsitory.getTransPort());
+        session.getAttribute("tranport");
+
+//        List<CartItem> item = (List<CartItem>) service.getAllItem();
         session.getAttribute("saveCus");
         session.getAttribute("saveProduct");
+        model.addAttribute("tongTien",service.getAmount());
         model.addAttribute("cartItem",service.getAllItem());
-//        item.setCustomer();
-        session.getAttribute("saveCart");
+
         return "layout/index1";
     }
 }

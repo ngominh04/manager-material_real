@@ -77,17 +77,13 @@ public class Sql {
     public static final String PRODUCT_TRANGCHU="select ID id,NAME name,IMAGE image,NOTES moTa,PRICE price,QUATITY quatity from product where DESCRIPTION like N'%thanh lịch%'";
     public static final String THANH_TOAN="select ID id,NAME name from payment_method where ISACTIVE = 1";
     public static final String VAN_CHUYEN="" +
-            "select distinct tm.ID id1,p.ID id2,tm.NAME name,\n" +
-            "       case\n" +
-            "            when tm.NAME = \"Xe máy\" then 50000\n" +
-            "            when tm.NAME = \"Xe tải\" then 250000\n" +
-            "            when tm.NAME = \"Máy bay\" then 550000\n" +
-            "        end giaTien\n" +
-            "       from transport_method  tm\n" +
-            "         inner join `manager-material`.product p on tm.ISACTIVE = p.ISACTIVE\n" +
-            "inner join `manager-material`.orders_transport ot on tm.ID = ot.IDTRANSPORT\n" +
-            "where tm.ISACTIVE=1 and ot.NOTES=1 and p.ID = ?1\n" +
-            "order by tm.ID asc";
+            "select distinct tm.ID id1,tm.NAME name,ot.TOTAL giaTien\n" +
+            "\n" +
+            "                  from transport_method  tm\n" +
+            "                     inner join `manager-material`.product p on tm.ISACTIVE = p.ISACTIVE\n" +
+            "            inner join `manager-material`.orders_transport ot on tm.ID = ot.IDTRANSPORT\n" +
+            "            where tm.ISACTIVE=1 and ot.NOTES=1\n" +
+            "            order by tm.ID asc";
     public static final String VAN_CHUYEN1="" +
             "select distinct p.ID id,tm.ID id1,tm.NAME name,\n" +
             "       case\n" +

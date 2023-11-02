@@ -76,7 +76,7 @@ public interface Responsitory extends JpaRepository<Category, Integer> {
     List<IPayment_method> getPaymentActive();
 
     @Query(value = Sql.VAN_CHUYEN,nativeQuery = true)
-    List<ITransport> getTransPort(Integer id);
+    List<ITransport> getTransPort();
     @Query(value = Sql.VAN_CHUYEN1,nativeQuery = true)
     ITransport getTransPort1(Integer id1);
     @Query(value = Sql.VAN_CHUYEN1,nativeQuery = true)

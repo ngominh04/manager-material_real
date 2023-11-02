@@ -11,10 +11,13 @@ import vn.com.devmaster.service.managermaterial.reponsitory.CartItemRespon;
 import vn.com.devmaster.service.managermaterial.reponsitory.CustomerRespon;
 import vn.com.devmaster.service.managermaterial.reponsitory.ProductRespon;
 import vn.com.devmaster.service.managermaterial.reponsitory.Responsitory;
+import vn.com.devmaster.service.managermaterial.service.CartService;
 import vn.com.devmaster.service.managermaterial.service.ParamService;
 import vn.com.devmaster.service.managermaterial.service.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/shoping_cart")
@@ -31,6 +34,8 @@ public class ShopingCartController {
     ProductRespon productRespon;
     @Autowired
     CartItemRespon cartItemRespon;
+    @Autowired
+    CartService cartService;
 
     // giỏ hàng
     @GetMapping("/a")
@@ -40,13 +45,20 @@ public class ShopingCartController {
         session.getAttribute("saveCus");
         session.getAttribute("saveProduct");
         model.addAttribute("cartItem",service.getAllItem());
+        session.getAttribute("tranport");
         session.setAttribute("tongTien",service.getAmount());
         model.addAttribute("tongTien",service.getAmount()); // xử lí tổng tiền sản phẩm
         return "cart/shopingcart";
     }
     // add sản phẩm vào giỏ hàng
     @GetMapping("/add/{id}")
-    public String addCart(@PathVariable(name = "id" ) Integer id,HttpSession session){
+    public String addCart(Model model,@PathVariable(name = "id" ) Integer id,HttpSession session){
+        session.setAttribute("productId",productRespon.findAllById(id));
+        session.getAttribute("productId");
+        session.setAttribute("payment",responsitory.getPaymentActive());
+        session.getAttribute("payment");
+        session.setAttribute("tranport",responsitory.getTransPort());
+        session.setAttribute("paymentId",responsitory.getPayment(id));
         Product product = productRespon.findAllById(id);
 
         if(product != null){
@@ -58,9 +70,38 @@ public class ShopingCartController {
             item.setQuantity(1);
             item.setProduct(product);
             service.add(item);
+        }
+        session.setAttribute("saveAllCart",service.getAllItem());
+        return "redirect:/shoping_cart/a";
+    }
+    @GetMapping("/add/{id}/{username}")
+    public String addCart1(@PathVariable(name = "id" ) Integer id,@PathVariable(name = "username") String username,HttpSession session){
+        session.setAttribute("productId",productRespon.findAllById(id));
+        session.getAttribute("productId");
+        session.setAttribute("payment",responsitory.getPaymentActive());
+        session.getAttribute("payment");
+        session.setAttribute("tranport",responsitory.getTransPort());
+        session.getAttribute("tranport");
+        session.setAttribute("paymentId",responsitory.getPayment(id));
+//        Product product = productRespon.findAllById(id);
+        Product product = productRespon.findAllById(id);
+
+        Customer customer = customerRespon.getCustomer1(username);
+        if(product != null){
+            CartItem item = new CartItem();
+            item.setId(product.getId());
+            item.setImage(product.getImage());
+            item.setName(product.getName());
+            item.setPrice(product.getPrice());
+            item.setCustomer(customer);
+//            item.setUsername(customer.getUsername());
+            item.setQuantity(1);
+            item.setProduct(product);
+            service.add(item);
             cartItemRespon.save(item);
         }
-
+        session.setAttribute("saveAllCart",service.getAllItem());
+//        session.setAttribute("saveItem",);
         return "redirect:/shoping_cart/a";
     }
     // xóa 1 sản phẩm có trong giỏ hàng theo id
@@ -76,12 +117,6 @@ public class ShopingCartController {
         service.update(id,quantity);
         return "redirect:/shoping_cart/a";
     }
-//    @PostMapping("update")
-//    public String update(){
-//        Integer id = paramService.getInt("id",0);
-//        int quantity = paramService.getInt("quantity",1);
-//        return "redirect:/shoping_cart/a";
-//    }
 
 
 }

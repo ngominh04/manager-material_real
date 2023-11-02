@@ -169,12 +169,12 @@
 
       <!-- Begin Page Content -->
       <div  layout:fragment="content">
+
         <h2>shopping cart</h2>
         <section class="h-100 h-custom">
           <div class="container h-100 py-5">
             <div class="row d-flex justify-content-center align-items-center h-100">
               <div class="col">
-
 <!--                <div>-->
 <!--                  <p >Tên người dùng : <span th:text="${customer.name}"></span></p>-->
 <!--                  <p >Địa chỉ : <span th:text="${customer.address}"></span></p>-->
@@ -238,76 +238,24 @@
                   <div class="card-body p-4">
                     <div class="row">
                       <div class="col-md-6 col-lg-4 col-xl-3 mb-4 mb-md-0">
-                        <form>
-                          <div class="d-flex flex-row pb-3">
-                            <div class="d-flex align-items-center pe-2">
-                              <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel1v"
-                                     value="" aria-label="..." checked />
-                            </div>
-                            <div class="rounded border w-100 p-3">
-                              <p class="d-flex align-items-center mb-0">
-                                <i class="fab fa-cc-mastercard fa-2x text-dark pe-2"></i>Credit
-                                Card
-                              </p>
-                            </div>
-                          </div>
-                          <div class="d-flex flex-row pb-3">
-                            <div class="d-flex align-items-center pe-2">
-                              <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel2v"
-                                     value="" aria-label="..." />
-                            </div>
-                            <div class="rounded border w-100 p-3">
-                              <p class="d-flex align-items-center mb-0">
-                                <i class="fab fa-cc-visa fa-2x fa-lg text-dark pe-2"></i>Debit Card
-                              </p>
-                            </div>
-                          </div>
-                          <div class="d-flex flex-row">
-                            <div class="d-flex align-items-center pe-2">
-                              <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel3v"
-                                     value="" aria-label="..." />
-                            </div>
-                            <div class="rounded border w-100 p-3">
-                              <p class="d-flex align-items-center mb-0">
-                                <i class="fab fa-cc-paypal fa-2x fa-lg text-dark pe-2"></i>PayPal
-                              </p>
-                            </div>
-                          </div>
-                          <div class="pt-5">
-                            <h6 class="mb-0"><a th:href="@{/view/products}" class="text-body"><i
-                                    class="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a></h6>
-                          </div>
-                        </form>
-                      </div>
-                      <div class="col-md-6 col-lg-4 col-xl-6">
-                        <div class="row">
-                          <div class="col-12 col-xl-6">
-                            <div class="form-outline mb-4 mb-xl-5">
-                              <input type="text" id="typeName" class="form-control form-control-lg" siez="17"
-                                     placeholder="John Smith" />
-                              <label class="form-label" for="typeName">Name on card</label>
-                            </div>
+                        <div>
+                          <h3>Chọn hình thức thanh toán</h3>
 
-<!--                            <div class="form-outline mb-4 mb-xl-5">-->
-<!--                              <input type="text" id="typeExp" class="form-control form-control-lg" placeholder="MM/YY"-->
-<!--                                     size="7" id="exp" minlength="7" maxlength="7" />-->
-<!--                              <label class="form-label" for="typeExp">Expiration</label>-->
-<!--                            </div>-->
-                          </div>
-                          <div class="col-12 col-xl-6">
-                            <div class="form-outline mb-4 mb-xl-5">
-                              <input type="text" id="typeText" class="form-control form-control-lg" siez="17"
-                                     placeholder="1111 2222 3333 4444" minlength="19" maxlength="19" />
-                              <label class="form-label" for="typeText">Card Number</label>
-                            </div>
-
-                            <div class="form-outline mb-4 mb-xl-5">
-                              <input type="password" id="typeText" class="form-control form-control-lg"
-                                     placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
-                              <label class="form-label" for="typeText">Cvv</label>
-                            </div>
-                          </div>
                         </div>
+                        <div class="pt-5">
+                          <h6 class="mb-0"><a th:href="@{/view/products}" class="text-body"><i
+                                  class="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a></h6>
+                        </div>
+                      </div>
+                      <div class="col-md-8 col-lg-5 col-xl-3 mb-4 mb-md-0">
+                        <div >
+                          <h3>Chọn hình thức giao hàng</h3>
+                          <div class="custom-control custom-radio" th:each="tp:${session.tranport}">
+                            <input th:id="'credit'+${tp.id1}" name="transportMethod" type="radio" th:value="${tp.id1}" class="custom-control-input" th:checked="${tp.id1==1}">
+                            <label class="custom-control-label" th:for="'credit'+${tp.id1}" th:text="${tp.name}"></label>
+                            </div>
+                        </div>
+
                       </div>
                       <div class="col-lg-4 col-xl-3">
                         <div class="d-flex justify-content-between" style="font-weight: 500;">
@@ -344,7 +292,6 @@
           </div>
         </section>
       </div>
-
     </div>
     <!-- End of Main Content -->
 

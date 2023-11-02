@@ -4,56 +4,56 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  <title>SB Admin 2 - Dashboard</title>
-  <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
-  <link
-          href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-          rel="stylesheet">
+    <title>SB Admin 2 - Dashboard</title>
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
 
-  <!-- Custom styles for this template-->
-  <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
-  <style>
-    @media (min-width: 1025px) {
-      .h-custom {
-        height: 100vh !important;
-      }
-    }
+    <!-- Custom styles for this template-->
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+    <style>
+        @media (min-width: 1025px) {
+            .h-custom {
+                height: 100vh !important;
+            }
+        }
 
-    .card-registration .select-input.form-control[readonly]:not([disabled]) {
-      font-size: 1rem;
-      line-height: 2.15;
-      padding-left: .75em;
-      padding-right: .75em;
-    }
+        .card-registration .select-input.form-control[readonly]:not([disabled]) {
+            font-size: 1rem;
+            line-height: 2.15;
+            padding-left: .75em;
+            padding-right: .75em;
+        }
 
-    .card-registration .select-arrow {
-      top: 13px;
-    }
+        .card-registration .select-arrow {
+            top: 13px;
+        }
 
-    .bg-grey {
-      background-color: #eae8e8;
-    }
+        .bg-grey {
+            background-color: #eae8e8;
+        }
 
-    @media (min-width: 992px) {
-      .card-registration-2 .bg-grey {
-        border-top-right-radius: 16px;
-        border-bottom-right-radius: 16px;
-      }
-    }
+        @media (min-width: 992px) {
+            .card-registration-2 .bg-grey {
+                border-top-right-radius: 16px;
+                border-bottom-right-radius: 16px;
+            }
+        }
 
-    @media (max-width: 991px) {
-      .card-registration-2 .bg-grey {
-        border-bottom-left-radius: 16px;
-        border-bottom-right-radius: 16px;
-      }
-    }
-  </style>
+        @media (max-width: 991px) {
+            .card-registration-2 .bg-grey {
+                border-bottom-left-radius: 16px;
+                border-bottom-right-radius: 16px;
+            }
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -61,332 +61,312 @@
 <!-- Page Wrapper -->
 <div id="wrapper">
 
-  <!-- Sidebar -->
-  <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-    <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" th:href="@{/}">
-      <div class="sidebar-brand-icon rotate-n-15">
-        <i class="fas fa-laugh-wink"></i>
-      </div>
-      <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
-    </a>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
-
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-      <a class="nav-link" href="index.html">
-        <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Dashboard</span></a>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-      Interface
-    </div>
-
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-         aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Components</span>
-      </a>
-      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Danh sách:</h6>
-          <a class="collapse-item" th:href="@{/view/products}">Sản phẩm</a>
-          <a class="collapse-item" th:href="@{/view/payment_method}">Các loại thanh toán</a>
-          <a class="collapse-item" th:href="@{/view/transport_method}">Các loại phương tiện <br> vận chuyển</a>
-        </div>
-      </div>
-    </li>
-
-
-
-    <!--            -->
-
-    <!--            -->
-
-    <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
-
-    <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
-      <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
-
-    <!-- Sidebar Message -->
-    <div class="sidebar-card d-none d-lg-flex">
-      <img class="sidebar-card-illustration mb-2" src="../../../../../../startbootstrap-sb-admin-2-gh-pages/img/undraw_rocket.svg" alt="...">
-      <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-      <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-    </div>
-
-  </ul>
-  <!-- End of Sidebar -->
-
-  <!-- Content Wrapper -->
-  <div id="content-wrapper" class="d-flex flex-column">
-
-    <!-- Main Content -->
-    <div id="content">
-
-      <!-- Topbar -->
-      <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-        <!-- Sidebar Toggle (Topbar) -->
-        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-          <i class="fa fa-bars"></i>
-        </button>
-
-        <!-- Topbar Search -->
-        <form
-                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-          <div class="input-group">
-            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                   aria-label="Search" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-              <button class="btn btn-primary" type="button">
-                <i class="fas fa-search fa-sm"></i>
-              </button>
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" th:href="@{/}">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
             </div>
-          </div>
-        </form>
-
-        <!-- Topbar Navbar -->
-        <a  th:href="@{/shoping_cart/a}" style="text-decoration: none;" class="text-gray-800">
-          <i class="fa fa-shopping-basket " ></i> Giỏ hàng
+            <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
         </a>
 
-      </nav>
-      <!-- End of Topbar -->
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
 
-      <!-- Begin Page Content -->
-      <div layout:fragment="content">
-          <div th:each="save: ${session.saveCart}">
-              <p class="mb-2" th:text="${save.name}"></p>
-              <p class="mb-2" th:text="${save.price}"></p>
-              <p class="mb-2" th:text="${save.quantity}"></p>
-          </div>
-          <section class="h-100 h-custom">
-              <div class="container h-100 py-5">
-                  <div class="row d-flex justify-content-center align-items-center h-100">
-                      <div class="col">
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+            <a class="nav-link" href="index.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span></a>
+        </li>
 
-                          <div>
-                              <p >Tên người dùng : <span th:text="${session.saveCus.name}"></span></p>
-                              <p >Địa chỉ : <span th:text="${session.saveCus.address}"></span></p>
-                              <p >Email : <span th:text="${session.saveCus.email}"></span></p>
-                              <p >Phone : <span th:text="${session.saveCus.phone}"></span></p>
-                          </div>
-                          <div class="table-responsive">
-                              <table class="table">
-                                  <thead>
-                                  <tr>
-                                      <th scope="col" class="h5">Shopping Bag</th>
-                                      <th scope="col">Quantity</th>
-                                      <th scope="col">Price</th>
-                                      <th scope="col">Remove</th>
-                                  </tr>
-                                  </thead>
-                                  <tbody>
-                                  <div th:each="sp: ${cartItem}">
-                                      <form th:action="@{/shoping_cart/update}" method="post">
+        <!-- Divider -->
+        <hr class="sidebar-divider">
 
-                                          <input name="id" th:value="${sp.id}" type="hidden"> <!-- lấy id sản phẩm để cập nhật quantity -->
-                                          <tr>
-                                              <th scope="row">
-                                                  <div class="d-flex align-items-center">
-                                                      <img th:src="@{'/img/product_img/product_image/'+${sp.image}}" class="img-fluid rounded-3"
-                                                           style="width: 120px;" alt="Book">
-                                                      <div class="flex-column ms-4">
-                                                          <p class="mb-2" th:text="${sp.name}"></p>
-                                                      </div>
-                                                  </div>
-                                              </th>
-
-                                              <td class="align-middle">
-                                                  <div class="d-flex flex-row">
-                                                      <button class="btn btn-link px-2"
-                                                              onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                          <i class="fas fa-minus"></i>
-                                                      </button>
-
-                                                      <input id="form1" min="0" name="quantity" th:value="${sp.quantity}" type="number"
-                                                             class="form-control form-control-sm" style="width: 50px;" />
-
-                                                      <button class="btn btn-link px-2"
-                                                              onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                          <i class="fas fa-plus"></i>
-                                                      </button>
-                                                  </div>
-                                              </td>
-                                              <td class="align-middle">
-                                                  <p class="mb-0" style="font-weight: 500;" th:text="${#numbers.formatDecimal(sp.price,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></p>
-                                              </td>
-                                              <td class="align-middle">
-                                                  <a th:href="@{'/shoping_cart/remove/'+${sp.id}}" class="text-muted"><i class="fas fa-times"></i></a>
-                                              </td>
-                                          </tr>
-                                      </form>
-                                  </div>
-                                  </tbody>
-                              </table>
-                          </div>
-                          <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
-                              <div class="card-body p-4">
-                                  <div class="row">
-                                      <div class="col-md-6 col-lg-4 col-xl-3 mb-4 mb-md-0">
-                                          <form>
-                                              <div class="d-flex flex-row pb-3">
-                                                  <div class="d-flex align-items-center pe-2">
-                                                      <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel1v"
-                                                             value="" aria-label="..." checked />
-                                                  </div>
-                                                  <div class="rounded border w-100 p-3">
-                                                      <p class="d-flex align-items-center mb-0">
-                                                          <i class="fab fa-cc-mastercard fa-2x text-dark pe-2"></i>Credit
-                                                          Card
-                                                      </p>
-                                                  </div>
-                                              </div>
-                                              <div class="d-flex flex-row pb-3">
-                                                  <div class="d-flex align-items-center pe-2">
-                                                      <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel2v"
-                                                             value="" aria-label="..." />
-                                                  </div>
-                                                  <div class="rounded border w-100 p-3">
-                                                      <p class="d-flex align-items-center mb-0">
-                                                          <i class="fab fa-cc-visa fa-2x fa-lg text-dark pe-2"></i>Debit Card
-                                                      </p>
-                                                  </div>
-                                              </div>
-                                              <div class="d-flex flex-row">
-                                                  <div class="d-flex align-items-center pe-2">
-                                                      <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel3v"
-                                                             value="" aria-label="..." />
-                                                  </div>
-                                                  <div class="rounded border w-100 p-3">
-                                                      <p class="d-flex align-items-center mb-0">
-                                                          <i class="fab fa-cc-paypal fa-2x fa-lg text-dark pe-2"></i>PayPal
-                                                      </p>
-                                                  </div>
-                                              </div>
-                                              <div class="pt-5">
-                                                  <h6 class="mb-0"><a th:href="@{/view/products}" class="text-body"><i
-                                                          class="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a></h6>
-                                              </div>
-                                          </form>
-                                      </div>
-                                      <div class="col-md-6 col-lg-4 col-xl-6">
-                                          <div class="row">
-                                              <div class="col-12 col-xl-6">
-                                                  <div class="form-outline mb-4 mb-xl-5">
-                                                      <input type="text" id="typeName" class="form-control form-control-lg" siez="17"
-                                                             placeholder="John Smith" />
-                                                      <label class="form-label" for="typeName">Name on card</label>
-                                                  </div>
-
-                                                  <!--                            <div class="form-outline mb-4 mb-xl-5">-->
-                                                  <!--                              <input type="text" id="typeExp" class="form-control form-control-lg" placeholder="MM/YY"-->
-                                                  <!--                                     size="7" id="exp" minlength="7" maxlength="7" />-->
-                                                  <!--                              <label class="form-label" for="typeExp">Expiration</label>-->
-                                                  <!--                            </div>-->
-                                              </div>
-                                              <div class="col-12 col-xl-6">
-                                                  <div class="form-outline mb-4 mb-xl-5">
-                                                      <input type="text" id="typeText" class="form-control form-control-lg" siez="17"
-                                                             placeholder="1111 2222 3333 4444" minlength="19" maxlength="19" />
-                                                      <label class="form-label" for="typeText">Card Number</label>
-                                                  </div>
-
-                                                  <div class="form-outline mb-4 mb-xl-5">
-                                                      <input type="password" id="typeText" class="form-control form-control-lg"
-                                                             placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
-                                                      <label class="form-label" for="typeText">Cvv</label>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                      <div class="col-lg-4 col-xl-3">
-                                          <div class="d-flex justify-content-between" style="font-weight: 500;">
-                                              <p class="mb-2">Subtotal</p>
-                                              <p class="mb-2">$23.49</p>
-                                          </div>
-
-                                          <div class="d-flex justify-content-between" style="font-weight: 500;">
-                                              <p class="mb-0">Shipping</p>
-                                              <p class="mb-0">$2.99</p>
-                                          </div>
-
-                                          <hr class="my-4">
-
-                                          <div class="d-flex justify-content-between mb-4" style="font-weight: 500;">
-                                              <p class="mb-2">Total</p>
-                                              <p class="mb-2" th:text="${#numbers.formatDecimal(session.tongTien,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></p>
-                                          </div>
-
-                                          <div class="d-flex justify-content-between">
-                                              <a th:href="@{'/oder/oderUser/'+${session.saveCus.username}}">Đặt hàng</a>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-
-                      </div>
-                  </div>
-              </div>
-          </section>
-      </div>
-    </div>
-    <!-- End of Main Content -->
-
-    <!-- Footer -->
-    <footer class="sticky-footer bg-white">
-      <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-          <span>Copyright &copy; Your Website 2021</span>
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Interface
         </div>
-      </div>
-    </footer>
-    <!-- End of Footer -->
 
-  </div>
-  <!-- End of Content Wrapper -->
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Components</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Danh sách:</h6>
+                    <a class="collapse-item" th:href="@{/view/products}">Sản phẩm</a>
+                    <a class="collapse-item" th:href="@{/view/payment_method}">Các loại thanh toán</a>
+                    <a class="collapse-item" th:href="@{/view/transport_method}">Các loại phương tiện <br> vận chuyển</a>
+                </div>
+            </div>
+        </li>
+
+
+
+        <!--            -->
+
+        <!--            -->
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+        <!-- Sidebar Message -->
+        <div class="sidebar-card d-none d-lg-flex">
+            <img class="sidebar-card-illustration mb-2" src="../../../../../../startbootstrap-sb-admin-2-gh-pages/img/undraw_rocket.svg" alt="...">
+            <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
+            <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
+        </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <!-- Topbar Search -->
+                <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                               aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Topbar Navbar -->
+                <a  th:href="@{/shoping_cart/a}" style="text-decoration: none;" class="text-gray-800">
+                    <i class="fa fa-shopping-basket " ></i> Giỏ hàng
+                </a>
+
+            </nav>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div  layout:fragment="content">
+
+                <h2>shopping cart</h2>
+                <section class="h-100 h-custom">
+                    <div class="container h-100 py-5">
+                        <div class="row d-flex justify-content-center align-items-center h-100">
+                            <div class="col">
+                                <div>
+                                    <table>
+                                        <thead>
+                                        <tr>
+                                            <th>
+                                                Người đặt
+                                                <hr class="my-4">
+                                            </th>
+                                            <th style="padding-left: 2rem">
+                                                Người nhận
+                                                <hr class="my-4">
+                                            </th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td class="align-middle">
+                                                <p >Tên người đặt : <span th:text="${session.saveCus.name}"></span></p>
+                                                <p >Địa chỉ : <span th:text="${session.saveCus.address}"></span></p>
+                                                <p >Email : <span th:text="${session.saveCus.email}"></span></p>
+                                                <p >Phone : <span th:text="${session.saveCus.phone}"></span></p>
+                                            </td>
+                                            <td class="align-middle" style="padding-left: 2rem">
+                                                <label for="">Tên người nhận</label>
+                                                <input type="text" th:placeholder="${session.saveCus.name}"><br>
+                                                <label for="">Địa chỉ người nhận:</label>
+                                                <input type="text" th:placeholder="${session.saveCus.address}"><br>
+                                                <label for="">Phone người nhận:</label>
+                                                <input type="text" th:placeholder="${session.saveCus.phone}">
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col" class="h5">Shopping Bag</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Remove</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <div th:each="sp: ${cartItem}">
+                                            <form th:action="@{/shoping_cart/update}" method="post">
+                                                <input name="id" th:value="${sp.id}" type="hidden"> <!-- lấy id sản phẩm để cập nhật quantity -->
+                                                <tr>
+                                                    <th scope="row">
+                                                        <div class="d-flex align-items-center">
+                                                            <img th:src="@{'/img/product_img/product_image/'+${sp.image}}" class="img-fluid rounded-3"
+                                                                 style="width: 120px;" alt="Book">
+                                                            <div class="flex-column ms-4">
+                                                                <p class="mb-2" th:text="${sp.name}"></p>
+                                                            </div>
+                                                        </div>
+                                                    </th>
+
+                                                    <td class="align-middle">
+                                                        <div class="d-flex flex-row">
+                                                            <button class="btn btn-link px-2"
+                                                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                                <i class="fas fa-minus"></i>
+                                                            </button>
+
+                                                            <input id="quantity" min="0" name="quantity" th:value="${sp.quantity}" type="number"
+                                                                   class="form-control form-control-sm" style="width: 50px;" />
+
+                                                            <button class="btn btn-link px-2"
+                                                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                                <i class="fas fa-plus"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <p class="mb-0" style="font-weight: 500;" th:text="${#numbers.formatDecimal(sp.price,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></p>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <a th:href="@{'/shoping_cart/remove/'+${sp.id}}" class="text-muted"><i class="fas fa-times"></i></a>
+                                                    </td>
+                                                </tr>
+                                            </form>
+                                        </div>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
+                                    <div class="card-body p-4">
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-4 col-xl-3 mb-4 mb-md-0">
+                                                <!--                        <form th:action="" method="get">-->
+                                                <!--                          -->
+                                                <!--                        </form>-->
+                                                <div>
+                                                    <h3>Chọn hình thức thanh toán</h3>
+                                                    <div class="custom-control custom-radio" th:each="pm:${session.payment}">
+                                                        <input th:id="'credit'+${pm.id}" name="paymentMethod" type="radio" th:value="${pm.id}" class="custom-control-input" th:checked="${pm.id==4}" >
+                                                        <label class="custom-control-label" th:for="'credit'+${pm.id}" th:text="${pm.name}"></label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="pt-5">
+                                                    <h6 class="mb-0"><a th:href="@{/view/products}" class="text-body"><i
+                                                            class="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a></h6>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8 col-lg-5 col-xl-3 mb-4 mb-md-0">
+                                                <!--                        <form th:action="" method="get">-->
+                                                <!--                          -->
+                                                <!--                        </form>-->
+                                                <div >
+                                                    <h3>Chọn hình thức giao hàng</h3>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-lg-4 col-xl-3">
+                                                <div class="d-flex justify-content-between" style="font-weight: 500;">
+                                                    <p class="mb-2">Subtotal</p>
+                                                    <p class="mb-2">$23.49</p>
+                                                </div>
+
+                                                <div class="d-flex justify-content-between" style="font-weight: 500;">
+                                                    <p class="mb-0">Shipping</p>
+                                                    <p class="mb-0">$2.99</p>
+                                                </div>
+
+                                                <hr class="my-4">
+
+                                                <div class="d-flex justify-content-between mb-4" style="font-weight: 500;">
+                                                    <p class="mb-2">Total</p>
+                                                    <p class="mb-2" th:text="${#numbers.formatDecimal(tongTien,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></p>
+                                                </div>
+
+                                                <div >
+                                                    <div class="d-flex justify-content-between">
+                                                        <a th:href="@{'/oder/oderUser/'+${session.saveCus.username}}">Mua hàng</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2021</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
 
 </div>
 <!-- End of Page Wrapper -->
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
-  <i class="fas fa-angle-up"></i>
+    <i class="fas fa-angle-up"></i>
 </a>
 
 <!-- Logout Modal-->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-        <a class="btn btn-primary" href="../../../../../../startbootstrap-sb-admin-2-gh-pages/login.html">Logout</a>
-      </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="../../../../../../startbootstrap-sb-admin-2-gh-pages/login.html">Logout</a>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- Bootstrap core JavaScript-->
