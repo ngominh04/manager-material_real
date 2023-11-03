@@ -30,7 +30,7 @@ public class CustomerController {
                                BindingResult result,
                                Model model){
         if(result.hasErrors()){
-            model.addAttribute("message","Bạn chưa nhập");
+            model.addAttribute("message","Có thông tin bạn chưa nhập");
             return "/login/register";
         }
         customerService.save(customer);

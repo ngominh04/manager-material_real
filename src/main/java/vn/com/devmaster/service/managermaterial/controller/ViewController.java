@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import vn.com.devmaster.service.managermaterial.domain.CartItem;
 import vn.com.devmaster.service.managermaterial.domain.Customer;
+import vn.com.devmaster.service.managermaterial.domain.OrdersPayment;
 import vn.com.devmaster.service.managermaterial.domain.PaymentMethod;
 import vn.com.devmaster.service.managermaterial.reponsitory.CartItemRespon;
 import vn.com.devmaster.service.managermaterial.reponsitory.CustomerRespon;
@@ -231,6 +232,7 @@ public class ViewController {
         session.getAttribute("saveProduct");
         model.addAttribute("tongTien",service.getAmount());
         model.addAttribute("cartItem",service.getAllItem());
+        model.addAttribute("payment",new OrdersPayment());
 
         return "layout/index1";
     }

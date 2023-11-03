@@ -239,7 +239,7 @@
                     <div class="row">
                       <div class="col-md-6 col-lg-4 col-xl-3 mb-4 mb-md-0">
                         <div>
-                          <h3>Chọn hình thức thanh toán</h3>
+                          <h3>Đăng nhập chọn hình thức thanh toán</h3>
 
                         </div>
                         <div class="pt-5">
@@ -249,11 +249,11 @@
                       </div>
                       <div class="col-md-8 col-lg-5 col-xl-3 mb-4 mb-md-0">
                         <div >
-                          <h3>Chọn hình thức giao hàng</h3>
-                          <div class="custom-control custom-radio" th:each="tp:${session.tranport}">
-                            <input th:id="'credit'+${tp.id1}" name="transportMethod" type="radio" th:value="${tp.id1}" class="custom-control-input" th:checked="${tp.id1==1}">
-                            <label class="custom-control-label" th:for="'credit'+${tp.id1}" th:text="${tp.name}"></label>
-                            </div>
+                          <h3>Đăng nhập chọn hình thức giao hàng</h3>
+<!--                          <div class="custom-control custom-radio" th:each="tp:${session.tranport}">-->
+<!--                            <input th:id="'credit'+${tp.id1}" name="transportMethod" type="radio" th:value="${tp.id1}" class="custom-control-input" th:checked="${tp.id1==1}">-->
+<!--                            <label class="custom-control-label" th:for="'credit'+${tp.id1}" th:text="${tp.name}"></label>-->
+<!--                            </div>-->
                         </div>
 
                       </div>

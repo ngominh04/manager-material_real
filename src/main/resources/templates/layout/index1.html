@@ -268,16 +268,15 @@
                                     <div class="card-body p-4">
                                         <div class="row">
                                             <div class="col-md-6 col-lg-4 col-xl-3 mb-4 mb-md-0">
-                                                <!--                        <form th:action="" method="get">-->
-                                                <!--                          -->
-                                                <!--                        </form>-->
-                                                <div>
-                                                    <h3>Chọn hình thức thanh toán</h3>
-                                                    <div class="custom-control custom-radio" th:each="pm:${session.payment}">
-                                                        <input th:id="'credit'+${pm.id}" name="paymentMethod" type="radio" th:value="${pm.id}" class="custom-control-input" th:checked="${pm.id==4}" >
-                                                        <label class="custom-control-label" th:for="'credit'+${pm.id}" th:text="${pm.name}"></label>
+                                                <form th:action="@{/oder/savePm_Tp}" method="post" enctype="multipart/form-data">
+                                                    <div>
+                                                        <h3>Chọn hình thức thanh toán</h3>
+                                                        <div class="custom-control custom-radio" th:each="pm:${session.payment}">
+                                                            <input th:id="${pm.id}" name="idpayment" type="radio" th:field="${payment.idpayment}" th:value="idpayment" class="custom-control-input"  th:checked="${pm.id==4}">
+                                                            <label class="custom-control-label" th:for="${pm.id}" th:text="${pm.name}"></label>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                </form>
 
                                                 <div class="pt-5">
                                                     <h6 class="mb-0"><a th:href="@{/view/products}" class="text-body"><i
@@ -285,11 +284,15 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-8 col-lg-5 col-xl-3 mb-4 mb-md-0">
-                                                <!--                        <form th:action="" method="get">-->
-                                                <!--                          -->
-                                                <!--                        </form>-->
+<!--                                                    <form th:action="" method="get">-->
+<!--                                                        -->
+<!--                                                    </form>-->
                                                 <div >
                                                     <h3>Chọn hình thức giao hàng</h3>
+                                                    <div class="custom-control custom-radio" th:each="tp:${session.tranport}">
+                                                        <input th:id="'credit'+${tp.id1}" name="transportMethod" type="radio" th:value="${tp.id1}" class="custom-control-input" th:checked="${tp.id1==1}">
+                                                        <label class="custom-control-label" th:for="'credit'+${tp.id1}" th:text="${tp.name}"></label>
+                                                    </div>
                                                 </div>
 
                                             </div>
