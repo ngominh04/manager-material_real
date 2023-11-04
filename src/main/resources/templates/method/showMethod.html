@@ -142,29 +142,24 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>User name</th>
-            <th>Pass word</th>
-            <th>Address</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Create date</th>
+            <th>Notes</th>
+            <th>Created Date</th>
+            <th>Updated Date</th>
             <th>IsActive</th>
-            <th>Edit</th>
+
         </tr>
         </thead>
         <tbody>
         <tr th:each="show: ${showAll}">
             <td th:text="${show.id}"></td>
             <td th:text="${show.name}"></td>
-            <td th:text="${show.username}"></td>
-            <td th:text="${show.password}"></td>
-            <td th:text="${show.address}"></td>
-            <td th:text="${show.email}"></td>
-            <td th:text="${show.phone}"></td>
+            <td th:text="${show.notes}"></td>
             <td th:text="${show.createdDate}"></td>
+            <td th:text="${show.updatedDate}"></td>
             <td th:text="${show.isactive}"></td>
             <td>
-                <a th:href="@{'/customer/register/'+${show.id}}">Sửa</a><a th:href="@{'/customer/remove/'+${show.id}}">Xóa</a>
+                <a th:href="@{/method/payment}">Thêm </a>
+                <a th:href="@{#}"> Sửa </a><a th:href="@{#}"> Xóa</a>
             </td>
 
         </tr>

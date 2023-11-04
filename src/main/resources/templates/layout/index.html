@@ -223,7 +223,13 @@
 <!--                        <div th:text="${nameCustom.name}"></div>-->
                     </form>
 
-                    <a class="text-gray-800" th:href="@{/view/login}" style="text-decoration: none;">Đăng nhập</a>
+                    <div th:if="${session.username==null}" style="margin-left: -8rem">
+                        <a class="text-gray-800" th:href="@{/view/login}" style="text-decoration: none;">Đăng nhập</a>
+                    </div>
+                    <div th:if="${session.username != null}" style="margin-left: -8rem">
+                        <a class="text-gray-800" th:href="@{/view/logout}" style="text-decoration: none;">Đăng xuất</a>
+                    </div>
+
 
 
                     <!-- Topbar Navbar -->

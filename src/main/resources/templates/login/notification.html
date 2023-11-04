@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/index}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div th:if="${session.username != null}">
+        <h1>Bạn đã đăng kí thành công, hãy đăng nhập lại để mua sản phẩm</h1>
+    </div>
+    <div th:if="${session.username == null}">
+        <h1>Bạn đã đăng xuất thành công</h1>
+    </div>
+
+</div>
+
+</body>
+</html>

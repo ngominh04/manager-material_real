@@ -21,6 +21,7 @@ public class CustomerService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
         entity.setCreatedDate(Date.format(formatter));
         entity.setIsactive((byte) 1);
+        entity.setPhanquyen((byte) 0);
         return customerDao.save(entity);
     }
 

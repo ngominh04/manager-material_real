@@ -50,6 +50,9 @@ public class Customer {
     @Column(name = "ISACTIVE")
     private Byte isactive;
 
+    @Column(name = "phan_quyen")
+    private Byte phanquyen;
+
     @OneToMany(mappedBy = "idcustomer", cascade = CascadeType.ALL)
     private List<Order> orders;
 

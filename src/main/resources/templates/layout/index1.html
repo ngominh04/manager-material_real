@@ -272,8 +272,10 @@
                                                     <div>
                                                         <h3>Chọn hình thức thanh toán</h3>
                                                         <div class="custom-control custom-radio" th:each="pm:${session.payment}">
-                                                            <input th:id="${pm.id}" name="idpayment" type="radio" th:field="${payment.idpayment}" th:value="idpayment" class="custom-control-input"  th:checked="${pm.id==4}">
+                                                            <input th:id="${pm.id}" name="idpayment" type="radio" class="custom-control-input"  th:checked="${pm.id==4}">
+
                                                             <label class="custom-control-label" th:for="${pm.id}" th:text="${pm.name}"></label>
+                                                            <p th:id="${pm.notes}"></p>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -388,7 +390,15 @@
 <!-- Page level custom scripts -->
 <script src="../../../../../../startbootstrap-sb-admin-2-gh-pages/js/demo/chart-area-demo.js"></script>
 <script src="../../../../../../startbootstrap-sb-admin-2-gh-pages/js/demo/chart-pie-demo.js"></script>
+<script  th:inline="javascript">
+    function greetWorld() {
+        alert("hello world")
+    }
 
+    function salute(id) {
+        alert("Bạn đã chọn phương thức thanh toán: " + id)
+    }
+</script>
 </body>
 
 </html>

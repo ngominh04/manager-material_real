@@ -12,10 +12,7 @@ import vn.com.devmaster.service.managermaterial.reponsitory.CartItemRespon;
 import vn.com.devmaster.service.managermaterial.reponsitory.CustomerRespon;
 import vn.com.devmaster.service.managermaterial.reponsitory.ProductRespon;
 import vn.com.devmaster.service.managermaterial.reponsitory.Responsitory;
-import vn.com.devmaster.service.managermaterial.service.CartService;
-import vn.com.devmaster.service.managermaterial.service.ParamService;
-import vn.com.devmaster.service.managermaterial.service.Service;
-import vn.com.devmaster.service.managermaterial.service.SessionService;
+import vn.com.devmaster.service.managermaterial.service.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -198,23 +195,41 @@ public class ViewController {
     public String login(Model  model, @RequestParam(name = "username") String username, HttpSession session,CartItem item){
 //        String username = paramService.getString("username","");
         String psw = paramService.getString("psw","");
+        Customer customer= customerRespon.getCustomer1(username);
         try {
-            Customer customer= customerRespon.getCustomer1(username);
+
             if(!customer.getPassword().equals(psw)){
                 model.addAttribute("message","invalid password");
 
             }else {
                 session.setAttribute("saveCus",customer);
+                session.setAttribute("saveIdCustomer",customer.getId());
                 session.setAttribute("username",username);
                 model.addAttribute("customer",customerRespon.getCustomer1(username));
                 item.setUsername(username);
-                return "login/login_check";
+                if(customer.getPhanquyen() == 1){
+                    return "admin/admin";
+                }else {
+                    return "login/login_check";
+                }
+
 
             }
         }catch (Exception e){
             model.addAttribute("message","invalid user name");
         }
+
         return "login";
+    }
+    @Autowired
+    CustomerService customerService;
+    @GetMapping("/logout")
+    public String logout(HttpSession session,Customer customer){
+        session.removeAttribute("username");
+        session.removeAttribute("saveCus");
+        session.removeAttribute("saveIdCustomer");
+        customerService.delete(customer);
+        return "login/notification";
     }
 
     @Autowired

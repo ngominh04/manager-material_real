@@ -70,13 +70,14 @@ public class OderController {
         }
 //        // save oder payment
 //        Collection<PaymentMethod> paymentMethod = (Collection<PaymentMethod>) session.getAttribute("payment");
-        OrdersPayment ordersPayment = new OrdersPayment();
-        model.addAttribute("payment",ordersPayment);
-        ordersPayment.setTotal(0);
-        ordersPayment.setNotes(1);
-        ordersPayment.setIdord(order);
-        ordersPayment.setStatus(1);
-////        ordersPayment.setIdpayment();
+//        OrdersPayment ordersPayment = new OrdersPayment();
+//        model.addAttribute("payment1",new OrdersPayment());
+        session.getAttribute("payment");
+//        ordersPayment.setTotal(0);
+//        ordersPayment.setNotes(1);
+//        ordersPayment.setIdord(order);
+//        ordersPayment.setStatus(1);
+//        ordersPayment.setIdpayment();
 
 //        orderPaymentService.save(ordersPayment);
         session.removeAttribute("cartItem");
@@ -85,15 +86,15 @@ public class OderController {
         return "test";
     }
     @PostMapping("/savePm_Tp")
-    public String savePaymentTransport(@ModelAttribute(name = "payment") OrdersPayment payment,
+    public String savePaymentTransport(@ModelAttribute(name = "payment") OrdersPayment ordersPayment,
                                        @ModelAttribute(name = "transport1") OrdersTransport transport,Model model){
 //        Order order = (Order) session.getAttribute("saveOder");
-        model.addAttribute("payment1",new OrdersPayment());
+//        model.addAttribute("payment1",new OrdersPayment());
 //        payment.setStatus(1);
 //        payment.setTotal(0);
 //        payment.setIdord(order);
 //        payment.setNotes(1);
-        orderPaymentService.save(payment);
+        orderPaymentService.save(ordersPayment);
         return "layout/index1";
     }
 }
