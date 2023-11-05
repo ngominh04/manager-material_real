@@ -158,13 +158,14 @@
             <td th:text="${show.updatedDate}"></td>
             <td th:text="${show.isactive}"></td>
             <td>
-                <a th:href="@{/method/payment}">Thêm </a>
-                <a th:href="@{#}"> Sửa </a><a th:href="@{#}"> Xóa</a>
+                <a th:href="@{'/method/payment/'+${show.id}}"> Sửa </a><a th:href="@{'/method/removePayment/'+${show.id}}"> Xóa</a>
             </td>
-
         </tr>
         <tbody>
     </table>
+    <div>
+        <a th:href="@{/method/payment}">Thêm payment</a>
+    </div>
 
 </div>
 <div >

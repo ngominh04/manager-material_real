@@ -138,27 +138,41 @@
 <body>
 
 <div class='login'>
-    <form th:action="@{'/customer/saveOrUpdate/'+${customer1.id}}"  method="post"  enctype="multipart/form-data" >
-        <h2>Register</h2>
-        <input name='username' placeholder='Username' type='text' th:value="${customer1.username}">
+    <div th:if="${paymentMethod1 == null}">
+        <form th:action="@{/method/saveOrUpdate}"  method="post"  enctype="multipart/form-data" >
+            <h2>Payment method</h2>
+            <input name='name' placeholder='Name payment' type='text' >
 
-        <input id='pwd' name='password' placeholder='Password' type='password' th:value="${customer1.password}">
+            <input id='notes' name='notes' placeholder='Mô tả chi tiết' type='text'>
 
-        <input id='name' name='name' placeholder='Full name' type='text' th:value="${customer1.name}">
+            <div class='agree'>
+                <input id='agree' name='agree' type='checkbox'>
+                <label for='agree'></label>Accept rules and conditions
+            </div>
+            <input class='animated' type='submit' value='Save Payment' >
+            <a class='forgot' href='#'>Already have an account?</a>
+        </form>
+    </div>
 
-        <input id='phone' name='phone' placeholder='Phone' type='text' th:value="${customer1.phone}">
 
-        <input id="email" name='email' placeholder='E-Mail ' type='text' th:value="${customer1.email}">
+    <div th:if="${paymentMethod1 != null}">
+        <form th:action="@{'/method/saveOrUpdate/'+${paymentMethod1.id}}"  method="post"  enctype="multipart/form-data" >
+            <h2>Payment method</h2>
+            <input name='name' placeholder='Name payment' type='text' th:value="${paymentMethod1.name}">
 
-        <input id='address' name='address' placeholder='Address' type='text' th:value="${customer1.address}">
+            <input id='notes' name='notes' placeholder='Mô tả chi tiết' type='text' th:value="${paymentMethod1.notes}">
+            <input id='createdDate' name='createdDate' placeholder='createdDate' type='text' th:value="${paymentMethod1.createdDate}">
+            <input id='updatedDate' name='updatedDate' placeholder='updatedDate' type='text' th:value="${paymentMethod1.updatedDate}">
+            <input id='isactive' name='isactive' placeholder='isactive' type='text' th:value="${paymentMethod1.isactive}">
+            <div class='agree'>
+                <input id='agree' name='agree' type='checkbox'>
+                <label for='agree'></label>Accept rules and conditions
+            </div>
+            <input class='animated' type='submit' value='Save Payment' >
+            <a class='forgot' href='#'>Already have an account?</a>
+        </form>
+    </div>
 
-        <div class='agree'>
-            <input id='agree' name='agree' type='checkbox'>
-            <label for='agree'></label>Accept rules and conditions
-        </div>
-        <input class='animated' type='submit' value='Register' >
-        <a class='forgot' href='#'>Already have an account?</a>
-    </form>
 </div>
 </body>
 </html>

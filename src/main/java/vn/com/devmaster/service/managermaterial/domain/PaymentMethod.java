@@ -14,6 +14,7 @@ import java.util.List;
 @Table(name = "payment_method")
 public class PaymentMethod {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     private Integer id;
 
@@ -25,10 +26,10 @@ public class PaymentMethod {
     private String notes;
 
     @Column(name = "CREATED_DATE")
-    private Instant createdDate;
+    private String createdDate;
 
     @Column(name = "UPDATED_DATE")
-    private Instant updatedDate;
+    private String updatedDate;
 
     @Column(name = "ISACTIVE")
     private Byte isactive;

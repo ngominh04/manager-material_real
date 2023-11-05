@@ -138,27 +138,53 @@
 <body>
 
 <div class='login'>
-    <form th:action="@{'/customer/saveOrUpdate/'+${customer1.id}}"  method="post"  enctype="multipart/form-data" >
-        <h2>Register</h2>
-        <input name='username' placeholder='Username' type='text' th:value="${customer1.username}">
-        <p style="color: red" th:text="${message}"></p>
-        <input id='pwd' name='password' placeholder='Password' type='password' th:value="${customer1.password}">
-        <p style="color: red" th:text="${message}"></p>
-        <input id='name' name='name' placeholder='Full name' type='text' th:value="${customer1.name}">
-        <p style="color: red" th:text="${message}"></p>
-        <input id='phone' name='phone' placeholder='Phone' type='text' th:value="${customer1.phone}">
-        <p style="color: red" th:text="${message}"></p>
-        <input id="email" name='email' placeholder='E-Mail ' type='text' th:value="${customer1.email}">
-        <p style="color: red" th:text="${message}"></p>
-        <input id='address' name='address' placeholder='Address' type='text' th:value="${customer1.address}">
-        <p style="color: red" th:text="${message}"></p>
-        <div class='agree'>
-            <input id='agree' name='agree' type='checkbox'>
-            <label for='agree'></label>Accept rules and conditions
-        </div>
-        <input class='animated' type='submit' value='Register' >
-        <a class='forgot' href='#'>Already have an account?</a>
-    </form>
+    <div th:if="${customer1 == null}">
+        <form th:action="@{/customer/saveOrUpdate}"  method="post"  enctype="multipart/form-data" >
+            <h2>Register</h2>
+            <input name='username' placeholder='Username' type='text' >
+            <p style="color: red" th:text="${message}"></p>
+            <input id='pwd' name='password' placeholder='Password' type='password' >
+            <p style="color: red" th:text="${message}"></p>
+            <input id='name' name='name' placeholder='Full name' type='text' >
+            <p style="color: red" th:text="${message}"></p>
+            <input id='phone' name='phone' placeholder='Phone' type='text' >
+            <p style="color: red" th:text="${message}"></p>
+            <input id="email" name='email' placeholder='E-Mail ' type='text' >
+            <p style="color: red" th:text="${message}"></p>
+            <input id='address' name='address' placeholder='Address' type='text' >
+            <p style="color: red" th:text="${message}"></p>
+            <div class='agree'>
+                <input id='agree' name='agree' type='checkbox'>
+                <label for='agree'></label>Accept rules and conditions
+            </div>
+            <input class='animated' type='submit' value='Register' >
+            <a class='forgot' href='#'>Already have an account?</a>
+        </form>
+    </div>
+    <div th:if="${customer1 != null}">
+        <form th:action="@{'/customer/saveOrUpdate/'+${customer1.id}}"  method="post"  enctype="multipart/form-data" >
+            <h2>Register</h2>
+            <input name='username' placeholder='Username' type='text' th:value="${customer1.username}">
+            <p style="color: red" th:text="${message}"></p>
+            <input id='pwd' name='password' placeholder='Password' type='password' th:value="${customer1.password}">
+            <p style="color: red" th:text="${message}"></p>
+            <input id='name' name='name' placeholder='Full name' type='text' th:value="${customer1.name}">
+            <p style="color: red" th:text="${message}"></p>
+            <input id='phone' name='phone' placeholder='Phone' type='text' th:value="${customer1.phone}">
+            <p style="color: red" th:text="${message}"></p>
+            <input id="email" name='email' placeholder='E-Mail ' type='text' th:value="${customer1.email}">
+            <p style="color: red" th:text="${message}"></p>
+            <input id='address' name='address' placeholder='Address' type='text' th:value="${customer1.address}">
+            <p style="color: red" th:text="${message}"></p>
+            <div class='agree'>
+                <input id='agree' name='agree' type='checkbox'>
+                <label for='agree'></label>Accept rules and conditions
+            </div>
+            <input class='animated' type='submit' value='Register' >
+            <a class='forgot' href='#'>Already have an account?</a>
+        </form>
+    </div>
+
 </div>
 </body>
 </html>

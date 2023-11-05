@@ -13,6 +13,7 @@ import java.time.Instant;
 @Table(name = "transport_method")
 public class TransportMethod {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     private Integer id;
 
@@ -24,10 +25,10 @@ public class TransportMethod {
     private String notes;
 
     @Column(name = "CREATED_DATE")
-    private Instant createdDate;
+    private String createdDate;
 
     @Column(name = "UPDATED_DATE")
-    private Instant updatedDate;
+    private String updatedDate;
 
     @Column(name = "ISACTIVE")
     private Byte isactive;

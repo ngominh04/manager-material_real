@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import vn.com.devmaster.service.managermaterial.domain.PaymentMethod;
 import vn.com.devmaster.service.managermaterial.reponsitory.PaymentRespon;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +16,11 @@ public class PaymentService {
     PaymentRespon paymentRespon;
 
     public PaymentMethod save(PaymentMethod entity) {
+        entity.setIsactive((byte) 1);
+        LocalDateTime Date = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
+        entity.setCreatedDate(Date.format(formatter));
+        entity.setUpdatedDate(Date.format(formatter));
         return paymentRespon.save(entity);
     }
 

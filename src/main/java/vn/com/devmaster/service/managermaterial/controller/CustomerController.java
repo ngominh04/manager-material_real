@@ -25,12 +25,10 @@ public class CustomerController {
         model.addAttribute("customer",new Customer());
         return "/login/register";
     }
-
-    @PostMapping("/saveOrUpdate/{id}")
+    @PostMapping("/saveOrUpdate")
     public String saveOrUpdate(@Validated @ModelAttribute(name = "customer") Customer customer,
                                BindingResult result,
-                               Model model,
-                               @PathVariable(name = "id") Integer id){
+                               Model model){
         if(result.hasErrors()){
             model.addAttribute("message","Có thông tin bạn chưa nhập");
             return "/login/register";
@@ -38,10 +36,19 @@ public class CustomerController {
         customerService.save(customer);
         model.addAttribute("customer",new Customer());
 
+        return "/login/notification";
+    }
+
+    @PostMapping("/saveOrUpdate/{id}")
+    public String saveOrUpdate(@Validated @ModelAttribute(name = "customer") Customer customer,
+                               BindingResult result,
+                               Model model,
+                               @PathVariable(name = "id") Integer id){
         // cập nhật lên register để sửa
         Optional<Customer> customer1= customerService.findById(id);
         if(customer1.isPresent()){
             model.addAttribute("customer1",customer1.get());
+            customerService.save(customer);
             return "redirect:/customer/showAllCustomer";
         }else {
             model.addAttribute("customer",new Customer());
@@ -53,11 +60,6 @@ public class CustomerController {
         model.addAttribute("showAll",customerRespon.getCustomer());
         return "/login/showRegister";
     }
-//    @GetMapping("/show")
-//    public String showCustomer(Model model){
-//        model.addAttribute("showCus",customerService.findAll());
-//        return "/login/showRegister";
-//    }
 
     @GetMapping("/register/{id}")
     public String edit(@PathVariable(name = "id") Integer id,Model model){
