@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface TransportRespon extends CrudRepository<TransportMethod,Integer> {
-//    @Query(value = "select * from transport_method",nativeQuery = true)
-//    List<TransportMethod> getTransport();
+    @Query(value = "select * from transport_method",nativeQuery = true)
+    List<TransportMethod> getTransport();
 }

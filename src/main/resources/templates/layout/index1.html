@@ -106,14 +106,6 @@
                 </div>
             </div>
         </li>
-
-
-
-        <!--            -->
-
-        <!--            -->
-
-        <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 
         <!-- Sidebar Toggler (Sidebar) -->
@@ -169,7 +161,7 @@
 
             <!-- Begin Page Content -->
             <div  layout:fragment="content">
-
+            <form th:action="@{'/oder/oderUser/'+${session.saveCus.username}}" method="post" enctype="multipart/form-data">
                 <h2>shopping cart</h2>
                 <section class="h-100 h-custom">
                     <div class="container h-100 py-5">
@@ -268,46 +260,40 @@
                                     <div class="card-body p-4">
                                         <div class="row">
                                             <div class="col-md-6 col-lg-4 col-xl-3 mb-4 mb-md-0">
-                                                <form th:action="@{/oder/savePm_Tp}" method="post" enctype="multipart/form-data">
-                                                    <div>
-                                                        <h3>Chọn hình thức thanh toán</h3>
-                                                        <div class="custom-control custom-radio" th:each="pm:${session.payment}">
-                                                            <input th:id="${pm.id}" name="idpayment" type="radio" class="custom-control-input"  th:checked="${pm.id==4}">
-
-                                                            <label class="custom-control-label" th:for="${pm.id}" th:text="${pm.name}"></label>
-                                                            <p th:id="${pm.notes}"></p>
-                                                        </div>
-                                                    </div>
-                                                </form>
-
+                                                <div>
+                                                    <h3>Chọn hình thức thanh toán</h3>
+                                                    <select id="idpayment" name="idpayment">
+                                                        <option  th:each="pm:${listPayment}"
+                                                                 th:value="${pm.id}"
+                                                                 th:text="${pm.name}">
+                                                        </option>
+                                                    </select>
+                                                </div>
                                                 <div class="pt-5">
                                                     <h6 class="mb-0"><a th:href="@{/view/products}" class="text-body"><i
                                                             class="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a></h6>
                                                 </div>
                                             </div>
                                             <div class="col-md-8 col-lg-5 col-xl-3 mb-4 mb-md-0">
-<!--                                                    <form th:action="" method="get">-->
-<!--                                                        -->
-<!--                                                    </form>-->
                                                 <div >
                                                     <h3>Chọn hình thức giao hàng</h3>
+
                                                     <div class="custom-control custom-radio" th:each="tp:${session.tranport}">
                                                         <input th:id="'credit'+${tp.id1}" name="transportMethod" type="radio" th:value="${tp.id1}" class="custom-control-input" th:checked="${tp.id1==1}">
                                                         <label class="custom-control-label" th:for="'credit'+${tp.id1}" th:text="${tp.name}"></label>
                                                     </div>
                                                 </div>
-
                                             </div>
                                             <div class="col-lg-4 col-xl-3">
-                                                <div class="d-flex justify-content-between" style="font-weight: 500;">
-                                                    <p class="mb-2">Subtotal</p>
-                                                    <p class="mb-2">$23.49</p>
-                                                </div>
+<!--                                                <div class="d-flex justify-content-between" style="font-weight: 500;">-->
+<!--                                                    <p class="mb-2">Subtotal</p>-->
+<!--                                                    <p class="mb-2">$23.49</p>-->
+<!--                                                </div>-->
 
-                                                <div class="d-flex justify-content-between" style="font-weight: 500;">
-                                                    <p class="mb-0">Shipping</p>
-                                                    <p class="mb-0">$2.99</p>
-                                                </div>
+<!--                                                <div class="d-flex justify-content-between" style="font-weight: 500;">-->
+<!--                                                    <p class="mb-0">Shipping</p>-->
+<!--                                                    <p class="mb-0">$2.99</p>-->
+<!--                                                </div>-->
 
                                                 <hr class="my-4">
 
@@ -318,7 +304,7 @@
 
                                                 <div >
                                                     <div class="d-flex justify-content-between">
-                                                        <a th:href="@{'/oder/oderUser/'+${session.saveCus.username}}">Mua hàng</a>
+                                                        <button type="submit">Mua hàng</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -329,6 +315,8 @@
                         </div>
                     </div>
                 </section>
+            </form>
+
             </div>
         </div>
         <!-- End of Main Content -->

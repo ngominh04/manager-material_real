@@ -2,6 +2,7 @@ package vn.com.devmaster.service.managermaterial.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import vn.com.devmaster.service.managermaterial.domain.Order;
 import vn.com.devmaster.service.managermaterial.domain.OrdersPayment;
 import vn.com.devmaster.service.managermaterial.reponsitory.OrderPaymentRespon;
 
@@ -14,6 +15,9 @@ public class OrderPaymentService {
     OrderPaymentRespon orderPaymentRespon;
 
     public OrdersPayment save(OrdersPayment entity) {
+        entity.setTotal(0);
+        entity.setStatus(1);
+        entity.setNotes(1);
         return orderPaymentRespon.save(entity);
     }
 

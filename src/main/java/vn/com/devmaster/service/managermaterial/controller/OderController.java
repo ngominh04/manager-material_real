@@ -39,10 +39,16 @@ public class OderController {
     OrderPaymentService orderPaymentService;
     @Autowired
     OrderPaymentRespon orderPaymentRespon;
+    @Autowired
+    PaymentRespon paymentRespon;
 
-    @GetMapping("/oderUser/{username}")
-    public String showOder( HttpSession session, @PathVariable(name = "username") String username, Model model){
+    @PostMapping("/oderUser/{username}")
+    public String showOder(@RequestParam(name = "idpayment",required = false) Integer idpayment,
+                           HttpSession session,
+                           @PathVariable(name = "username") String username,
+                           Model model){
 
+//        session.getAttribute("username");
         Customer customer= customerRespon.getCustomer1(username);
         Order order = new Order();
         String idOrder = UUID.randomUUID().toString().substring(0,10);
@@ -68,33 +74,30 @@ public class OderController {
             oderDetailRespon.save(orderDetail);
             orderDetailList.add(orderDetail);
         }
-//        // save oder payment
-//        Collection<PaymentMethod> paymentMethod = (Collection<PaymentMethod>) session.getAttribute("payment");
-//        OrdersPayment ordersPayment = new OrdersPayment();
-//        model.addAttribute("payment1",new OrdersPayment());
-        session.getAttribute("payment");
-//        ordersPayment.setTotal(0);
-//        ordersPayment.setNotes(1);
-//        ordersPayment.setIdord(order);
-//        ordersPayment.setStatus(1);
-//        ordersPayment.setIdpayment();
+        // save oder payment
+        OrdersPayment ordersPayment = new OrdersPayment();
+        PaymentMethod paymentMethod = paymentRespon.findAllById(idpayment);
+        ordersPayment.setIdpayment(paymentMethod);
+        ordersPayment.setIdord(order);
+        orderPaymentService.save(ordersPayment);
 
-//        orderPaymentService.save(ordersPayment);
         session.removeAttribute("cartItem");
         session.setAttribute("saveOder",order);
         oderRespon.save(order);
         return "test";
     }
-    @PostMapping("/savePm_Tp")
-    public String savePaymentTransport(@ModelAttribute(name = "payment") OrdersPayment ordersPayment,
-                                       @ModelAttribute(name = "transport1") OrdersTransport transport,Model model){
-//        Order order = (Order) session.getAttribute("saveOder");
+//    @PostMapping("/savePm_Tp")
+//    public String savePaymentTransport(@RequestParam(name = "idpayment") Integer idpayment,
+//                                       @ModelAttribute(name = "payment") OrdersPayment ordersPayment,
+//                                       @ModelAttribute(name = "transport1") OrdersTransport transport,
+//                                       HttpSession session,
+//                                       Model model){
+////        Order order = (Order) session.getAttribute("saveOder");
+////        model.addAttribute("listPayment",orderPaymentRespon.getPayment());
 //        model.addAttribute("payment1",new OrdersPayment());
-//        payment.setStatus(1);
-//        payment.setTotal(0);
-//        payment.setIdord(order);
-//        payment.setNotes(1);
-        orderPaymentService.save(ordersPayment);
-        return "layout/index1";
-    }
+//        session.getAttribute("payment");
+////        orderPaymentService.save(ordersPayment);
+//
+//        return "layout/index1";
+//    }
 }

@@ -8,10 +8,7 @@ import vn.com.devmaster.service.managermaterial.domain.CartItem;
 import vn.com.devmaster.service.managermaterial.domain.Customer;
 import vn.com.devmaster.service.managermaterial.domain.OrdersPayment;
 import vn.com.devmaster.service.managermaterial.domain.PaymentMethod;
-import vn.com.devmaster.service.managermaterial.reponsitory.CartItemRespon;
-import vn.com.devmaster.service.managermaterial.reponsitory.CustomerRespon;
-import vn.com.devmaster.service.managermaterial.reponsitory.ProductRespon;
-import vn.com.devmaster.service.managermaterial.reponsitory.Responsitory;
+import vn.com.devmaster.service.managermaterial.reponsitory.*;
 import vn.com.devmaster.service.managermaterial.service.*;
 
 import javax.servlet.http.HttpSession;
@@ -204,6 +201,7 @@ public class ViewController {
             }else {
                 session.setAttribute("saveCus",customer);
                 session.setAttribute("saveIdCustomer",customer.getId());
+                session.setAttribute("saveNameCustomer",customer.getName());
                 session.setAttribute("username",username);
                 model.addAttribute("customer",customerRespon.getCustomer1(username));
                 item.setUsername(username);
@@ -228,12 +226,15 @@ public class ViewController {
         session.removeAttribute("username");
         session.removeAttribute("saveCus");
         session.removeAttribute("saveIdCustomer");
+        session.removeAttribute("saveNameCustomer");
         customerService.delete(customer);
         return "login/notification";
     }
 
     @Autowired
-    CartItemRespon cartItemRespon;;
+    CartItemRespon cartItemRespon;
+    @Autowired
+    PaymentRespon paymentRespon;
 
     @GetMapping("/showChiTiet")
     public String showChiTiet(Model model, HttpSession session){
@@ -248,6 +249,7 @@ public class ViewController {
         model.addAttribute("tongTien",service.getAmount());
         model.addAttribute("cartItem",service.getAllItem());
         model.addAttribute("payment",new OrdersPayment());
+        model.addAttribute("listPayment",paymentRespon.getPaymentMethod());
 
         return "layout/index1";
     }

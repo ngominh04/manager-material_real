@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import vn.com.devmaster.service.managermaterial.domain.TransportMethod;
 import vn.com.devmaster.service.managermaterial.reponsitory.TransportRespon;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +17,11 @@ public class TransportService {
     TransportRespon transportRespon;
 
     public TransportMethod save(TransportMethod entity) {
+        entity.setIsactive((byte) 1);
+        LocalDateTime Date = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
+        entity.setCreatedDate(Date.format(formatter));
+        entity.setUpdatedDate(Date.format(formatter));
         return transportRespon.save(entity);
     }
 

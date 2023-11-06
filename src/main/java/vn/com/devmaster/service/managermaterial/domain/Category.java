@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -13,6 +14,7 @@ import java.time.Instant;
 @Table(name = "category")
 public class Category {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     private Integer id;
 
@@ -30,10 +32,10 @@ public class Category {
     private String icon;
 
     @Column(name = "CREATED_DATE")
-    private Instant createdDate;
+    private String createdDate;
 
     @Column(name = "UPDATED_DATE")
-    private Instant updatedDate;
+    private String updatedDate;
 
     @Column(name = "CREATED_BY", length = 50)
     private String createdBy;
@@ -44,4 +46,6 @@ public class Category {
     @Column(name = "ISACTIVE")
     private Byte isactive;
 
+//    @OneToMany(cascade = CascadeType.ALL,mappedBy = "idcategory",fetch = FetchType.LAZY)
+//    private List<Product> product;
 }

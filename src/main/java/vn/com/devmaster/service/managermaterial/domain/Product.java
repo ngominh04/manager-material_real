@@ -14,6 +14,7 @@ import java.util.List;
 @Table(name = "product")
 public class Product {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     private Integer id;
 
@@ -36,7 +37,7 @@ public class Product {
     @Column(name = "IMAGE", length = 550)
     private String image;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "IDCATEGORY")
     private Category idcategory;
 
@@ -47,10 +48,10 @@ public class Product {
     private Integer quatity;
 
     @Column(name = "CREATED_DATE")
-    private Instant createdDate;
+    private String createdDate;
 
     @Column(name = "UPDATED_DATE")
-    private Instant updatedDate;
+    private String updatedDate;
 
     @Column(name = "CREATED_BY", length = 50)
     private String createdBy;

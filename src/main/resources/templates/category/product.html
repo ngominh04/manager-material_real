@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet' type='text/css'>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #2E3740;
+            color: #435160;
+            font-family: "Open Sans", sans-serif;
+        }
+
+        h2 {
+            color: #6D7781;
+            font-family: "Sofia", cursive;
+            font-size: 15px;
+            font-weight: bold;
+            font-size: 3.6em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        a {
+            color: #435160;
+            text-decoration: none;
+        }
+
+        .login {
+            width: 350px;
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            margin-left: -175px;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 350px;
+            padding: 20px 0px;
+            background: transparent;
+            border: 0;
+            border-bottom: 1px solid #435160;
+            outline: none;
+            color: #6D7781;
+            font-size: 16px;
+        }
+        input[type=checkbox] {
+            display: none;
+        }
+
+        label {
+            display: block;
+            position: absolute;
+            margin-right: 10px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: transparent;
+            content: "";
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            border: 3px solid #435160;
+        }
+
+        #agree:checked ~ label[for=agree] {
+            background: #435160;
+        }
+
+        input[type="submit"] {
+            background: #1FCE6D;
+            border: 0;
+            width: 350px;
+            height: 40px;
+            border-radius: 3px;
+            color: #fff;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+        input[type="submit"]:hover {
+            background: #16aa56;
+            animation-name: shake;
+        }
+
+        .forgot {
+            margin-top: 30px;
+            display: block;
+            font-size: 11px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .forgot:hover {
+            margin-top: 30px;
+            display: block;
+            font-size: 11px;
+            text-align: center;
+            font-weight: bold;
+            color: #6D7781;
+        }
+
+        .agree {
+            padding: 30px 0px;
+            font-size: 12px;
+            text-indent: 25px;
+            line-height: 15px;
+        }
+
+        ::-webkit-input-placeholder {
+            color: #435160;
+            font-size: 12px;
+        }
+
+        .animated {
+            animation-fill-mode: both;
+            animation-duration: 1s;
+        }
+
+        @keyframes shake {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            10%, 30%, 50%, 70%, 90% {
+                transform: translateX(-10px);
+            }
+            20%, 40%, 60%, 80% {
+                transform: translateX(10px);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class='login'>
+    <div th:if="${product1 == null}">
+        <form th:action="@{/product/saveOrUpdate}"  method="post"  enctype="multipart/form-data" >
+            <h2>Category</h2>
+
+            <input name='name' placeholder='Name product' type='text' >
+            <input id='notes' name='notes' placeholder='Mô tả thông số chi tiết' type='text'>
+            <input id='description' name='description' placeholder='Mô tả' type='text'>
+            <input id='idcategory' name='idcategory' placeholder='Id  category' type='number'>
+            <input id='price' name='price' placeholder='Price' type='text'>
+            <input id='quatity' name='quatity' placeholder='quatity' type='number'>
+            <input id='image' name='image' placeholder='Thêm image' type='file'>
+
+            <div class='agree'>
+                <input id='agree' name='agree' type='checkbox'>
+                <label for='agree'></label>Accept rules and conditions
+            </div>
+            <input class='animated' type='submit' value='Save product' >
+            <a class='forgot' href='#'>Already have an account?</a>
+        </form>
+    </div>
+
+
+    <div th:if="${product1 != null}">
+        <form th:action="@{'/product/saveOrUpdate/'+${product1.id}}"  method="post"  enctype="multipart/form-data" >
+            <h2>Category</h2>
+            <input name='name' placeholder='Name product' type='text' th:value="${product1.name}">
+            <input id='notes' name='notes' placeholder='Mô tả thông số chi tiết' type='text' th:value="${product1.notes}">
+            <input id='description' name='description' placeholder='Mô tả' type='text' th:value="${product1.description}">
+            <input id='idcategory' name='idcategory' placeholder='Id  category' type='number' th:value="${product1.idcategory}">
+            <input id='price' name='price' placeholder='Price' type='text' th:value="${product1.price}">
+            <input id='quatity' name='quatity' placeholder='quatity' type='number' th:value="${product1.quatity}">
+            <input id='image' name='image' placeholder='Thêm image' type='file'>
+            <input id='createdDate' name='createdDate' placeholder='createdDate' type='text' th:value="${product1.createdDate}">
+            <input id='updatedDate' name='updatedDate' placeholder='updatedDate' type='text' th:value="${product1.updatedDate}">
+            <!--            <input id='createdBy' name='createdBy' placeholder='createdBy' type='text' th:value="${category1.createdBy}">-->
+            <!--            <input id='updatedBy' name='updatedBy' placeholder='updatedBy' type='text' th:value="${category1.updatedBy}">-->
+            <input id='isactive' name='isactive' placeholder='isactive' type='text' th:value="${product1.isactive}">
+            <div class='agree'>
+                <input id='agree' name='agree' type='checkbox'>
+                <label for='agree'></label>Accept rules and conditions
+            </div>
+            <input class='animated' type='submit' value='Save product' >
+            <a class='forgot' href='#'>Already have an account?</a>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>
