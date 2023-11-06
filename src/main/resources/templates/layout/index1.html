@@ -230,18 +230,7 @@
 
                                                     <td class="align-middle">
                                                         <div class="d-flex flex-row">
-                                                            <button class="btn btn-link px-2"
-                                                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                                <i class="fas fa-minus"></i>
-                                                            </button>
-
-                                                            <input id="quantity" min="0" name="quantity" th:value="${sp.quantity}" type="number"
-                                                                   class="form-control form-control-sm" style="width: 50px;" />
-
-                                                            <button class="btn btn-link px-2"
-                                                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                                <i class="fas fa-plus"></i>
-                                                            </button>
+                                                            <p class="mb-2" th:text="${sp.quantity}"></p>
                                                         </div>
                                                     </td>
                                                     <td class="align-middle">
@@ -278,22 +267,24 @@
                                                 <div >
                                                     <h3>Chọn hình thức giao hàng</h3>
 
-                                                    <div class="custom-control custom-radio" th:each="tp:${session.tranport}">
-                                                        <input th:id="'credit'+${tp.id1}" name="transportMethod" type="radio" th:value="${tp.id1}" class="custom-control-input" th:checked="${tp.id1==1}">
-                                                        <label class="custom-control-label" th:for="'credit'+${tp.id1}" th:text="${tp.name}"></label>
-                                                    </div>
+                                                    <select id="idtransport" name="idtransport">
+                                                        <option  th:each="tp:${listTransport}"
+                                                                 th:value="${tp.id}"
+                                                                 th:text="${tp.name}">
+                                                        </option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-xl-3">
-<!--                                                <div class="d-flex justify-content-between" style="font-weight: 500;">-->
-<!--                                                    <p class="mb-2">Subtotal</p>-->
-<!--                                                    <p class="mb-2">$23.49</p>-->
-<!--                                                </div>-->
+                                                <div class="d-flex justify-content-between" style="font-weight: 500;">
+                                                    <p class="mb-2">Subtotal</p>
+                                                    <p class="mb-2">$23.49</p>
+                                                </div>
 
-<!--                                                <div class="d-flex justify-content-between" style="font-weight: 500;">-->
-<!--                                                    <p class="mb-0">Shipping</p>-->
-<!--                                                    <p class="mb-0">$2.99</p>-->
-<!--                                                </div>-->
+                                                <div class="d-flex justify-content-between" style="font-weight: 500;">
+                                                    <p class="mb-0">Shipping</p>
+                                                    <p class="mb-0">$2.99</p>
+                                                </div>
 
                                                 <hr class="my-4">
 

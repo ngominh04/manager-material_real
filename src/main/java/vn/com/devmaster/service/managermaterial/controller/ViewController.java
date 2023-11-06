@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import vn.com.devmaster.service.managermaterial.domain.CartItem;
-import vn.com.devmaster.service.managermaterial.domain.Customer;
-import vn.com.devmaster.service.managermaterial.domain.OrdersPayment;
-import vn.com.devmaster.service.managermaterial.domain.PaymentMethod;
+import vn.com.devmaster.service.managermaterial.domain.*;
 import vn.com.devmaster.service.managermaterial.reponsitory.*;
 import vn.com.devmaster.service.managermaterial.service.*;
 
@@ -235,21 +232,25 @@ public class ViewController {
     CartItemRespon cartItemRespon;
     @Autowired
     PaymentRespon paymentRespon;
+    @Autowired
+    TransportRespon  transportRespon;
+
 
     @GetMapping("/showChiTiet")
     public String showChiTiet(Model model, HttpSession session){
-        session.setAttribute("payment",responsitory.getPaymentActive());
-        session.getAttribute("payment");
-        session.setAttribute("tranport",responsitory.getTransPort());
-        session.getAttribute("tranport");
+//        session.setAttribute("payment",responsitory.getPaymentActive());
+//        session.getAttribute("payment");
+//        session.setAttribute("tranport",responsitory.getTransPort());
+//        session.getAttribute("tranport");
 
 //        List<CartItem> item = (List<CartItem>) service.getAllItem();
         session.getAttribute("saveCus");
         session.getAttribute("saveProduct");
         model.addAttribute("tongTien",service.getAmount());
         model.addAttribute("cartItem",service.getAllItem());
-        model.addAttribute("payment",new OrdersPayment());
+//        model.addAttribute("payment",new OrdersPayment());
         model.addAttribute("listPayment",paymentRespon.getPaymentMethod());
+        model.addAttribute("listTransport",transportRespon.getTransportMethod());
 
         return "layout/index1";
     }
