@@ -75,7 +75,7 @@ public class ShopingCartController {
         return "redirect:/shoping_cart/a";
     }
     @GetMapping("/add/{id}/{username}")
-    public String addCart1(@PathVariable(name = "id" ) Integer id,@PathVariable(name = "username") String username,HttpSession session){
+    public String addCart1(@PathVariable(name = "id" ) Integer id,@PathVariable(name = "username") String username,HttpSession session,Model model){
         session.setAttribute("productId",productRespon.findAllById(id));
         session.getAttribute("productId");
         session.setAttribute("payment",responsitory.getPaymentActive());
@@ -85,7 +85,7 @@ public class ShopingCartController {
         session.setAttribute("paymentId",responsitory.getPayment(id));
 //        Product product = productRespon.findAllById(id);
         Product product = productRespon.findAllById(id);
-
+        model.addAttribute("productId",productRespon.findAllById(id));
         Customer customer = customerRespon.getCustomer1(username);
         if(product != null){
             CartItem item = new CartItem();

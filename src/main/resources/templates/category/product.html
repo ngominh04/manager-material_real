@@ -140,7 +140,7 @@
 <div class='login'>
     <div th:if="${product1 == null}">
         <form th:action="@{/product/saveOrUpdate}"  method="post"  enctype="multipart/form-data" >
-            <h2>Category</h2>
+            <h2>Product</h2>
 
             <input name='name' placeholder='Name product' type='text' >
             <input id='notes' name='notes' placeholder='Mô tả thông số chi tiết' type='text'>
@@ -162,7 +162,7 @@
 
     <div th:if="${product1 != null}">
         <form th:action="@{'/product/saveOrUpdate/'+${product1.id}}"  method="post"  enctype="multipart/form-data" >
-            <h2>Category</h2>
+            <h2>Prodcut</h2>
             <input name='name' placeholder='Name product' type='text' th:value="${product1.name}">
             <input id='notes' name='notes' placeholder='Mô tả thông số chi tiết' type='text' th:value="${product1.notes}">
             <input id='description' name='description' placeholder='Mô tả' type='text' th:value="${product1.description}">

@@ -95,50 +95,6 @@ public class ViewController {
         return "productChiTiet";
     }
 
-
-//    // id product -> trang đặt hàng
-//    @GetMapping("/getOder/{id}")
-//    String showOder_1(Model model,@PathVariable(name = "id") Integer id){
-//        model.addAttribute("productId",productRespon.findAllById(id));
-//        model.addAttribute("payment",responsitory.getPaymentActive());
-//        model.addAttribute("tranport",responsitory.getTransPort(id));
-//        model.addAttribute("paymentId",responsitory.getPayment(id));
-//        return "oder/oderChiTiet";
-//    }
-//
-//    // lấy id product và id transport -> ra trang tổng tiền
-//    @GetMapping("/getOder/{id}/tp{id1}")
-//    String showOder_2(Model model,@PathVariable(name = "id") Integer id,@PathVariable(name = "id1") Integer id1){
-//        model.addAttribute("productId",productRespon.findAllById(id));
-//        model.addAttribute("payment",responsitory.getPaymentActive());
-//        model.addAttribute("tranport",responsitory.getTransPort(id));
-//        model.addAttribute("tranport2",responsitory.getTransPort2(id,id1));
-//        model.addAttribute("paymentId",responsitory.getPayment(id));
-//        return "oder/oderTransport";
-//    }
-//
-//    // lấy id product và id payment -> ra trang payment
-//    @GetMapping("/getOder/{id}/pm{id1}")
-//    String showOder_3(Model model,@PathVariable(name = "id") Integer id,@PathVariable(name = "id1") Integer id1){
-//        model.addAttribute("productId",productRespon.findAllById(id));
-//        model.addAttribute("payment",responsitory.getPaymentActive());
-//        model.addAttribute("tranport",responsitory.getTransPort(id));
-//        model.addAttribute("tranport2",responsitory.getTransPort2(id,id1));
-//        model.addAttribute("paymentId",responsitory.getPayment(id1));
-//        return "oder/oderPayment";
-//    }
-//
-//    //chuyển từ trang tranport -> trang payment và ngược lại
-//    @GetMapping("/getOder/{id}/tp{id1}/pm{id2}")
-//    String showOder_3(Model model,@PathVariable(name = "id") Integer id,@PathVariable(name = "id1") Integer id1,@PathVariable(name = "id2") Integer id2){
-//        model.addAttribute("productId",productRespon.findAllById(id));
-//        model.addAttribute("payment",responsitory.getPaymentActive());
-//        model.addAttribute("tranport",responsitory.getTransPort(id1));
-//        model.addAttribute("tranport2",responsitory.getTransPort2(id,id1));
-//        model.addAttribute("paymentId",responsitory.getPayment(id2));
-//        return "/oder/oderPayment";
-//    }
-
     // lọc dưới 10 tr
     @GetMapping("/locPrice_10")
     public String showLocPrice(Model model){
@@ -253,5 +209,9 @@ public class ViewController {
         model.addAttribute("listTransport",transportRespon.getTransportMethod());
 
         return "layout/index1";
+    }
+    @GetMapping("/testOder")
+    public String a(){
+        return "oder/Oder";
     }
 }

@@ -11,10 +11,7 @@ import vn.com.devmaster.service.managermaterial.domain.*;
 import vn.com.devmaster.service.managermaterial.projecttion.IPayment_method;
 import vn.com.devmaster.service.managermaterial.projecttion.Icustomer_ChiTIet;
 import vn.com.devmaster.service.managermaterial.reponsitory.*;
-import vn.com.devmaster.service.managermaterial.service.OderService;
-import vn.com.devmaster.service.managermaterial.service.OderTransportService;
-import vn.com.devmaster.service.managermaterial.service.OrderPaymentService;
-import vn.com.devmaster.service.managermaterial.service.Service;
+import vn.com.devmaster.service.managermaterial.service.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.*;
@@ -35,6 +32,8 @@ public class OderController {
     @Autowired
     ProductRespon productRespon;
     @Autowired
+    ProductService productService;
+    @Autowired
     CartItemRespon cartItemRespon;
     @Autowired
     OrderPaymentService orderPaymentService;
@@ -48,7 +47,8 @@ public class OderController {
     OderTransportService oderTransportService;
 
     @PostMapping("/oderUser/{username}")
-    public String showOder(@RequestParam(name = "idpayment",required = false) Integer idpayment,
+    public String showOder(@RequestParam(name = "id",required = false) Integer id,
+                           @RequestParam(name = "idpayment",required = false) Integer idpayment,
                            @RequestParam(name = "idtransport",required = false) Integer idtransport,
                            HttpSession session,
                            @PathVariable(name = "username") String username,
@@ -79,6 +79,14 @@ public class OderController {
             //save oder detail
             oderDetailRespon.save(orderDetail);
             orderDetailList.add(orderDetail);
+            // cập nhật lại số lượng sản phẩm
+            Product product = productRespon.findAllById(id);
+            product.setQuatity(product.getQuatity()-item1.getQuantity());
+            // cập nhật lại trạng thái nếu hết hàng
+            if(product.getQuatity() == 0){
+                product.setIsactive((byte) 0);
+            }
+            productRespon.save(product);
         }
         // save oder payment
         OrdersPayment ordersPayment = new OrdersPayment();
@@ -94,7 +102,6 @@ public class OderController {
         ordersTransport.setIdord(order);
         oderTransportService.save(ordersTransport,idtransport);
 
-
         session.removeAttribute("cartItem");
         session.setAttribute("saveOder",order);
         // tổng tiền
@@ -104,23 +111,20 @@ public class OderController {
         model.addAttribute("tongTien",total);
         session.removeAttribute("saveProduct");
         oderRespon.save(order);
-        return "test";
+
+
+
+        model.addAttribute("order",order);
+        model.addAttribute("ordersPayment",ordersPayment);
+        model.addAttribute("ordersTransport",ordersTransport);
+        model.addAttribute("cartItem",service.getAllItem());
+//        model.addAttribute("")
+        return "oder/Oder";
     }
-//    @GetMapping("/total")
-//    public String total(@RequestParam(name = "idtransport",required = false) Integer idtransport,Model model){
-//        TransportMethod transportMethod=transportRespon.findAllById(idtransport);
-//        if(transportMethod.getId() == 1){
-//            model.addAttribute("tongTien",service.getAmount()+50000);
-//        }
-//        if(transportMethod.getId() == 3){
-//            model.addAttribute("tongTien",service.getAmount()+150000);
-//        }
-//        if(transportMethod.getId() == 5){
-//            model.addAttribute("tongTien",service.getAmount()+250000);
-//        }
-//        else {
-//            model.addAttribute("tongTien",service.getAmount()+10000);
-//        }
-//        return "/layout/index1";
-//    }
+
+    @PostMapping("/orderUser1")
+    public String showOder1(@ModelAttribute("order") Order order){
+
+        return "oder/Oder";
+    }
 }

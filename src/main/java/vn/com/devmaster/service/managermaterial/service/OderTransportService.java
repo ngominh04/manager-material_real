@@ -21,7 +21,7 @@ public class OderTransportService {
     public OrdersTransport save(OrdersTransport entity, @Param("idtransport") Integer idtransport) {
 //        TransportMethod transportMethod = transportRespon.findAllById(idtransport);
         if(idtransport == 1){
-            entity.setTotal(50000);
+            entity.setTotal(10000);
         }
         if(idtransport == 3){
             entity.setTotal(150000);

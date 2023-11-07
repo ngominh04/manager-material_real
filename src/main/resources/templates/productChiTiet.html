@@ -157,7 +157,7 @@
             <div class="col-6" style="text-align: center;">
               <section class="regular slider">
                 <div th:each="img: ${productImage}">
-                  <img th:src="@{'/img/product_img'+${img.url}}">
+                  <img th:src="@{'/img/product_img/product_image/'+${img.url}}">
                 </div>
               </section>
 
@@ -174,14 +174,17 @@
                 <p th:case="1">Còn sản phẩm</p>
                 <p th:case="0">Sản phẩm đã hết</p>
               </div>
-              <div >
-                <a th:href="@{'/view/getOder/'+${productId.id}}">Đặt hàng </a>
+              <div th:if="${productId.isactive == 1}">
+<!--                <a th:href="@{'/view/getOder/'+${productId.id}}">Đặt hàng </a>-->
                 <div th:if="${session.username == null}">
                   <a th:href="@{'/shoping_cart/add/'+${productId.id}}"> Thêm vào giỏ hàng <i class="fa fa-shopping-basket"></i></a>
                 </div>
                 <div th:if="${session.username != null}">
                   <a th:href="@{'/shoping_cart/add/'+${productId.id}+'/'+${session.username}}"> Add to cart <i class="fa fa-shopping-basket"></i></a>
                 </div>
+              </div>
+              <div th:if="${productId.isactive == 0}">
+                <p>Hết hàng</p>
               </div>
             </div>
           </div>

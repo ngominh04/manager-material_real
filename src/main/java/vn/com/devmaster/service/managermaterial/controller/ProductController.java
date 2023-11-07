@@ -59,7 +59,7 @@ public class ProductController {
         String createBy = (String) session.getAttribute("saveNameCustomer");
         product.setCreatedBy(createBy);
         //
-        session.setAttribute("saveFile",paramService.save(file,uploadDir));
+//        session.setAttribute("saveFile",paramService.save(file,uploadDir));
 
         productService.save(product);
         model.addAttribute("product",new Product());

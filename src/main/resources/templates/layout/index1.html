@@ -191,12 +191,12 @@
                                                 <p >Phone : <span th:text="${session.saveCus.phone}"></span></p>
                                             </td>
                                             <td class="align-middle" style="padding-left: 2rem">
-                                                <label for="">Tên người nhận</label>
-                                                <input type="text" th:placeholder="${session.saveCus.name}"><br>
-                                                <label for="">Địa chỉ người nhận:</label>
-                                                <input type="text" th:placeholder="${session.saveCus.address}"><br>
-                                                <label for="">Phone người nhận:</label>
-                                                <input type="text" th:placeholder="${session.saveCus.phone}">
+                                                <label for="nameReciver">Tên người nhận</label>
+                                                <input type="text" id="nameReciver" name="nameReciver" th:placeholder="${session.saveCus.name}"><br>
+                                                <label for="address">Địa chỉ người nhận:</label>
+                                                <input type="text" id="address" name="address" th:placeholder="${session.saveCus.address}"><br>
+                                                <label for="phone">Phone người nhận:</label>
+                                                <input type="text" id="phone" name="phone" th:placeholder="${session.saveCus.phone}">
                                             </td>
                                         </tr>
                                         </tbody>
@@ -276,14 +276,15 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-xl-3">
-                                                <div class="d-flex justify-content-between" style="font-weight: 500;">
-                                                    <p class="mb-2">Subtotal</p>
-                                                    <p class="mb-2">$23.49</p>
-                                                </div>
 
                                                 <div class="d-flex justify-content-between" style="font-weight: 500;">
                                                     <p class="mb-0">Shipping</p>
-                                                    <p class="mb-0">$2.99</p>
+<!--                                                    <div th:each="tp:${listTransport}">-->
+<!--                                                        <p class="mb-0" th:if="${tp.id == 1}">50.000</p>-->
+<!--                                                        <p class="mb-0" th:if="${tp.id == 3}">150.000</p>-->
+<!--                                                        <p class="mb-0" th:if="${tp.id == 5}">250.000</p>-->
+<!--                                                    </div>-->
+                                                    <p class="mb-0">50.000</p>
                                                 </div>
 
                                                 <hr class="my-4">
