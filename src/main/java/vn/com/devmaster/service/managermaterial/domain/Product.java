@@ -62,7 +62,7 @@ public class Product {
     @Column(name = "ISACTIVE")
     private Byte isactive;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.DETACH)
     private List<CartItem> cartItems;
 
 }

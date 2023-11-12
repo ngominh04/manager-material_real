@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "cart_item")
+@Table(name = "cartitem")
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +34,8 @@ public class CartItem {
     @JoinColumn(name = "id_customer", referencedColumnName = "id")
     private Customer customer;
 
-    @ManyToOne( cascade = CascadeType.ALL)
+
+    @ManyToOne( cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_product", referencedColumnName = "id")
     private Product product;
 

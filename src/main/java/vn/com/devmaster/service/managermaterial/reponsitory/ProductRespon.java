@@ -16,6 +16,8 @@ import java.util.Optional;
 public interface ProductRespon extends CrudRepository<Product, Integer> {
 
     Product findAllById(Integer id);
+
+//    List<Product> findAllBy(Integer id);
     @Query(value = "select * from product",nativeQuery = true)
     List<Product> getAllProduct();
 

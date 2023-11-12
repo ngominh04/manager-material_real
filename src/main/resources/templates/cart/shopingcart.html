@@ -193,43 +193,85 @@
                     </thead>
                     <tbody>
                     <div th:each="sp: ${cartItem}">
-                      <form th:action="@{/shoping_cart/update}" method="post">
-                      <input name="id" th:value="${sp.id}" type="hidden"> <!-- lấy id sản phẩm để cập nhật quantity -->
-                      <tr>
-                        <th scope="row">
-                          <div class="d-flex align-items-center">
-                            <img th:src="@{'/img/product_img/product_image/'+${sp.image}}" class="img-fluid rounded-3"
-                                 style="width: 120px;" alt="Book">
-                            <div class="flex-column ms-4">
-                              <p class="mb-2" th:text="${sp.name}"></p>
-                            </div>
-                          </div>
-                        </th>
+                      <div th:if="${session.saveCus == null}">
+                        <form th:action="@{/shoping_cart/update}" method="post">
+                          <input name="id" th:value="${sp.id}" type="hidden"> <!-- lấy id sản phẩm để cập nhật quantity -->
+                          <tr>
+                            <th scope="row">
+                              <div class="d-flex align-items-center">
+                                <img th:src="@{'/img/product_img/product_image/'+${sp.image}}" class="img-fluid rounded-3"
+                                     style="width: 120px;" alt="Book">
+                                <div class="flex-column ms-4">
+                                  <p class="mb-2" th:text="${sp.name}"></p>
+                                </div>
+                              </div>
+                            </th>
 
-                        <td class="align-middle">
-                          <div class="d-flex flex-row">
-                            <button class="btn btn-link px-2"
-                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                              <i class="fas fa-minus"></i>
-                            </button>
+                            <td class="align-middle">
+                              <div class="d-flex flex-row">
+                                <button class="btn btn-link px-2"
+                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                  <i class="fas fa-minus"></i>
+                                </button>
 
-                            <input id="quantity" min="0" name="quantity" th:value="${sp.quantity}" type="number"
-                                   class="form-control form-control-sm" style="width: 50px;" />
+                                <input id="quantity" min="0" name="quantity" th:value="${sp.quantity}" type="number"
+                                       class="form-control form-control-sm" style="width: 50px;" />
 
-                            <button class="btn btn-link px-2"
-                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                              <i class="fas fa-plus"></i>
-                            </button>
-                          </div>
-                        </td>
-                        <td class="align-middle">
-                          <p class="mb-0" style="font-weight: 500;" th:text="${#numbers.formatDecimal(sp.price,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></p>
-                        </td>
-                        <td class="align-middle">
-                          <a th:href="@{'/shoping_cart/remove/'+${sp.id}}" class="text-muted"><i class="fas fa-times"></i></a>
-                        </td>
-                      </tr>
-                      </form>
+                                <button class="btn btn-link px-2"
+                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                  <i class="fas fa-plus"></i>
+                                </button>
+                              </div>
+                            </td>
+                            <td class="align-middle">
+                              <p class="mb-0" style="font-weight: 500;" th:text="${#numbers.formatDecimal(sp.price,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></p>
+                            </td>
+                            <td class="align-middle">
+                              <a th:href="@{'/shoping_cart/remove/'+${sp.id}}" class="text-muted"><i class="fas fa-times"></i></a>
+                            </td>
+                          </tr>
+                        </form>
+                      </div>
+                      <div th:if="${session.saveCus != null}">
+                        <form th:action="@{'/shoping_cart/update1/'+${session.username}}" method="post">
+                          <input name="username" th:value="${session.username}" type="hidden">
+                          <input name="id" th:value="${sp.id}" type="hidden"> <!-- lấy id sản phẩm để cập nhật quantity -->
+                          <tr>
+                            <th scope="row">
+                              <div class="d-flex align-items-center">
+                                <img th:src="@{'/img/product_img/product_image/'+${sp.image}}" class="img-fluid rounded-3"
+                                     style="width: 120px;" alt="Book">
+                                <div class="flex-column ms-4">
+                                  <p class="mb-2" th:text="${sp.name}"></p>
+                                </div>
+                              </div>
+                            </th>
+
+                            <td class="align-middle">
+                              <div class="d-flex flex-row">
+                                <button class="btn btn-link px-2"
+                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                  <i class="fas fa-minus"></i>
+                                </button>
+
+                                <input id="quantity" min="0" name="quantity" th:value="${sp.quantity}" type="number"
+                                       class="form-control form-control-sm" style="width: 50px;" />
+
+                                <button class="btn btn-link px-2"
+                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                  <i class="fas fa-plus"></i>
+                                </button>
+                              </div>
+                            </td>
+                            <td class="align-middle">
+                              <p class="mb-0" style="font-weight: 500;" th:text="${#numbers.formatDecimal(sp.price,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></p>
+                            </td>
+                            <td class="align-middle">
+                              <a th:href="@{'/shoping_cart/remove1/'+${sp.id}}" class="text-muted"><i class="fas fa-times"></i></a>
+                            </td>
+                          </tr>
+                        </form>
+                      </div>
                     </div>
                     </tbody>
                   </table>
@@ -258,15 +300,15 @@
 
                       </div>
                       <div class="col-lg-4 col-xl-3">
-                        <div class="d-flex justify-content-between" style="font-weight: 500;">
-                          <p class="mb-2">Subtotal</p>
-                          <p class="mb-2">$23.49</p>
-                        </div>
+<!--                        <div class="d-flex justify-content-between" style="font-weight: 500;">-->
+<!--                          <p class="mb-2">Subtotal</p>-->
+<!--                          <p class="mb-2">$23.49</p>-->
+<!--                        </div>-->
 
-                        <div class="d-flex justify-content-between" style="font-weight: 500;">
-                          <p class="mb-0">Shipping</p>
-                          <p class="mb-0">$2.99</p>
-                        </div>
+<!--                        <div class="d-flex justify-content-between" style="font-weight: 500;">-->
+<!--                          <p class="mb-0">Shipping</p>-->
+<!--                          <p class="mb-0">$2.99</p>-->
+<!--                        </div>-->
 
                         <hr class="my-4">
 
@@ -280,7 +322,7 @@
                             <a th:href="@{/view/login}">Checkout</a>
                           </div>
                           <div class="d-flex justify-content-between" th:if="${session.saveCus != null}">
-                            <a th:href="@{/view/showChiTiet}">Đặt hàng</a>
+                            <a th:href="@{'/view/showChiTiet/'+${session.saveCus.id}}">Đặt hàng</a>
                           </div>
                         </div>
                       </div>
@@ -296,13 +338,13 @@
     <!-- End of Main Content -->
 
     <!-- Footer -->
-    <footer class="sticky-footer bg-white">
-      <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-          <span>Copyright &copy; Your Website 2021</span>
-        </div>
-      </div>
-    </footer>
+<!--    <footer class="sticky-footer bg-white">-->
+<!--      <div class="container my-auto">-->
+<!--        <div class="copyright text-center my-auto">-->
+<!--          <span>Copyright &copy; Your Website 2021</span>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </footer>-->
     <!-- End of Footer -->
 
   </div>

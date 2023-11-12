@@ -5,72 +5,53 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
 </head>
 <body>
 <div layout:fragment="content">
-  <h1>Xác nhận đơn hàng</h1>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-5" style="margin: 2rem;text-align: center;border: 2px solid gainsboro;border-radius: 5%;">
-        <h3>Thông tin khách hàng</h3>
-        <p >Tên: <span th:text="${order.nameReciver}"></span></p>
-        <p >Địa chỉ: <span th:text="${order.address}"></span></p>
-        <p >SĐT: <span th:text="${order.phone}"></span></p><hr class="my-4">
+  <div >
+    <table>
+      <tr>
+        <th>Sản phẩm</th>
+        <th>Số lượng</th>
+        <th>Giá trị đơn hàng</th>
+        <th>Ngày Đặt hàng</th>
+        <th></th>
+      </tr>
+      <tr th:each="d: ${donhang}">
+        <td >
+          <img th:src="@{'/img/product_img/product_image/'+${d.image}}" class="img-fluid rounded-3"
+               style="width: 120px;" alt="Book">
+          <p th:text="${d.name}"></p>
+          <p th:text="${d.id}"></p>
+        </td>
+        <td th:text="${d.qty}"></td>
+        <td th:text="${#numbers.formatDecimal(d.total,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></td>
+        <td th:text="${d.ngayDat}"></td>
+        <td>
+          <a th:href="@{'/oder/removeDonHang/'+${d.id}}">Đã nhận được hàng</a>
+        </td>
+      </tr>
 
-        <h3>Thông tin sản phẩm</h3>
-        <table class="table">
-          <thead>
-          <tr>
-            <th scope="col" class="h5">Shopping Bag</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Price</th>
-          </tr>
-          </thead>
-          <tbody>
-          <div th:each="sp: ${cartItem}">
-            <form th:action="@{/shoping_cart/update}" method="post">
-              <input name="id" th:value="${sp.id}" type="hidden"> <!-- lấy id sản phẩm để cập nhật quantity -->
-              <tr>
-                <th scope="row">
-                  <div class="d-flex align-items-center">
-                    <img th:src="@{'/img/product_img/product_image/'+${sp.image}}" class="img-fluid rounded-3"
-                         style="width: 120px;" alt="Book">
-                    <div class="flex-column ms-4">
-                      <p class="mb-2" th:text="${sp.name}"></p>
-                    </div>
-                  </div>
-                </th>
-                <td class="align-middle">
-                  <div class="d-flex flex-row">
-                    <p th:text="${sp.quantity}"> </p>
-                  </div>
-                </td>
-                <td class="align-middle">
-                  <p class="mb-0" style="font-weight: 500;" th:text="${#numbers.formatDecimal(sp.price,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></p>
-                </td>
-              </tr>
-            </form>
-          </div>
-          </tbody>
-        </table>
-        </div>
-      <div class="col-5" style="margin: 2rem;text-align: center;border: 2px solid gainsboro;border-radius: 5%;">
-        <h3>Phương thức thanh toán</h3>
-        <p><span th:text="${ordersPayment.idpayment.name}"></span></p>
-        <hr class="my-4">
-        <h3>Phương thức vận chuyển</h3>
-        <p>
-          <span th:text="${ordersTransport.idtransport.name}"></span>
-          <span class="mb-0" style="font-weight: 500;" th:text="${#numbers.formatDecimal(ordersTransport.total,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></span>
-        </p>
-        <hr class="my-4">
-        <p>
-          Tổng tiền:
-          <span class="mb-0" style="font-weight: 500;" th:text="${#numbers.formatDecimal(order.totalMoney,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></span>
-        </p>
-      </div>
-    </div>
+    </table>
   </div>
+
 </div>
 
 </body>

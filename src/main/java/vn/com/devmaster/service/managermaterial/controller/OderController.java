@@ -45,9 +45,18 @@ public class OderController {
     TransportRespon transportRespon;
     @Autowired
     OderTransportService oderTransportService;
+    @Autowired
+    NguoiNhanRespon nguoiNhanRespon;
+    @Autowired
+    NguoiNhanService nguoiNhanService;
+    @Autowired
+    OrderNguoiNhanRespon orderNguoiNhanRespon;
+    @Autowired
+    OrderNguoiNhanService orderNguoiNhanService;
 
     @PostMapping("/oderUser/{username}")
     public String showOder(@RequestParam(name = "id",required = false) Integer id,
+                           @RequestParam(name = "idnguoiNhan",required = false) Integer idnguoiNhan,
                            @RequestParam(name = "idpayment",required = false) Integer idpayment,
                            @RequestParam(name = "idtransport",required = false) Integer idtransport,
                            HttpSession session,
@@ -56,18 +65,26 @@ public class OderController {
 
 //        session.getAttribute("username");
         Customer customer= customerRespon.getCustomer1(username);
+
         Order order = new Order();
         String idOrder = UUID.randomUUID().toString().substring(0,10);
-
         order.setOrdersDate(new Date().toInstant());
         order.setIdorders(idOrder);
-        order.setAddress(customer.getAddress());
-        order.setNameReciver(customer.getName());
-        order.setPhone(customer.getPhone());
         order.setNotes("Có");
         order.setIdcustomer(customer);
 
+        // save nguonhan
+        OrdersNguoinhan  ordersNguoinhan = new OrdersNguoinhan();
+        Nguoinhan nguoinhan = nguoiNhanRespon.findAllById(idnguoiNhan);
+        ordersNguoinhan.setIdguoiNhan(nguoinhan);
+        ordersNguoinhan.setIdorder(order);
+        orderNguoiNhanService.save(ordersNguoinhan);
 
+        order.setAddress(ordersNguoinhan.getIdguoiNhan().getAddress());
+        order.setNameReciver(ordersNguoinhan.getIdguoiNhan().getName());
+        order.setPhone(ordersNguoinhan.getIdguoiNhan().getPhone());
+
+        // save order  detail
         Collection<CartItem> item = (Collection<CartItem>) session.getAttribute("saveAllCart");
         List<OrdersDetail> orderDetailList = new ArrayList<>();
         for (CartItem item1 : item) {
@@ -80,7 +97,8 @@ public class OderController {
             oderDetailRespon.save(orderDetail);
             orderDetailList.add(orderDetail);
             // cập nhật lại số lượng sản phẩm
-            Product product = productRespon.findAllById(id);
+            int idProduct =  item1.getProduct().getId();
+            Product product = productRespon.findAllById(idProduct);
             product.setQuatity(product.getQuatity()-item1.getQuantity());
             // cập nhật lại trạng thái nếu hết hàng
             if(product.getQuatity() == 0){
@@ -111,6 +129,8 @@ public class OderController {
         model.addAttribute("tongTien",total);
         session.removeAttribute("saveProduct");
         oderRespon.save(order);
+        // xóa cart ra khỏi giỏ hàng
+        item.removeAll(item);
 
 
 
@@ -119,12 +139,20 @@ public class OderController {
         model.addAttribute("ordersTransport",ordersTransport);
         model.addAttribute("cartItem",service.getAllItem());
 //        model.addAttribute("")
-        return "oder/Oder";
+        return "test";
     }
 
-    @PostMapping("/orderUser1")
-    public String showOder1(@ModelAttribute("order") Order order){
+    @Autowired
+    OderService oderService;
 
+    @GetMapping("/donhang/{id}")
+    public String showDonhang(Model model,@PathVariable(name = "id") Integer id){
+        model.addAttribute("donhang",oderRespon.getDonHang(id));
         return "oder/Oder";
+    }
+    @GetMapping("/removeDonHang/{id}")
+    public String remove(@PathVariable(name = "id")Integer id){
+        oderService.deleteById(id);
+        return "redirect:/oder/donhang/{id}";
     }
 }

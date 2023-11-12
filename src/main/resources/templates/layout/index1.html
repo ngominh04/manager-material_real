@@ -191,12 +191,13 @@
                                                 <p >Phone : <span th:text="${session.saveCus.phone}"></span></p>
                                             </td>
                                             <td class="align-middle" style="padding-left: 2rem">
-                                                <label for="nameReciver">Tên người nhận</label>
-                                                <input type="text" id="nameReciver" name="nameReciver" th:placeholder="${session.saveCus.name}"><br>
-                                                <label for="address">Địa chỉ người nhận:</label>
-                                                <input type="text" id="address" name="address" th:placeholder="${session.saveCus.address}"><br>
-                                                <label for="phone">Phone người nhận:</label>
-                                                <input type="text" id="phone" name="phone" th:placeholder="${session.saveCus.phone}">
+                                                <select id="idnguoiNhan" name="idnguoiNhan">
+                                                    <option  th:each="pm:${listNguoiNhan}"
+                                                             th:value="${pm.id}"
+                                                             th:text="${pm.name}+', '+${pm.address}+', '+${pm.phone}"
+                                                    >
+                                                    </option>
+                                                </select>
                                             </td>
                                         </tr>
                                         </tbody>

@@ -157,6 +157,11 @@ public class ViewController {
                 session.setAttribute("saveNameCustomer",customer.getName());
                 session.setAttribute("username",username);
                 model.addAttribute("customer",customerRespon.getCustomer1(username));
+
+                List<Nguoinhan> nguoinhan = nguoiNhanRespon.getNguoinhan(customer.getId());
+                model.addAttribute("listNguoiNhan",nguoinhan);
+                session.setAttribute("listNguoiNhan",nguoinhan);
+
                 item.setUsername(username);
                 if(customer.getPhanquyen() == 1){
                     return "admin/admin";
@@ -190,10 +195,13 @@ public class ViewController {
     PaymentRespon paymentRespon;
     @Autowired
     TransportRespon  transportRespon;
+    @Autowired
+    NguoiNhanRespon nguoiNhanRespon;
 
 
-    @GetMapping("/showChiTiet")
-    public String showChiTiet(Model model, HttpSession session){
+    @GetMapping("/showChiTiet/{IdCustomer}")
+    public String showChiTiet(Model model, HttpSession session
+            ,@PathVariable(name = "IdCustomer") Integer IdCustomer){
 //        session.setAttribute("payment",responsitory.getPaymentActive());
 //        session.getAttribute("payment");
 //        session.setAttribute("tranport",responsitory.getTransPort());
@@ -201,13 +209,19 @@ public class ViewController {
 
 //        List<CartItem> item = (List<CartItem>) service.getAllItem();
         session.getAttribute("saveCus");
+        Customer customer = customerRespon.getCustomerId(IdCustomer);
+        model.addAttribute("customer",customerRespon.getCustomerId(IdCustomer));
         session.getAttribute("saveProduct");
         model.addAttribute("tongTien",service.getAmount());
         model.addAttribute("cartItem",service.getAllItem());
 //        model.addAttribute("payment",new OrdersPayment());
         model.addAttribute("listPayment",paymentRespon.getPaymentMethod());
-        model.addAttribute("listTransport",transportRespon.getTransportMethod());
 
+
+//        int idcustomer = customer.getId();
+
+        model.addAttribute("listNguoiNhan",nguoiNhanRespon.getNguoinhan(IdCustomer));
+        model.addAttribute("listTransport",transportRespon.getTransportMethod());
         return "layout/index1";
     }
     @GetMapping("/testOder")

@@ -1,50 +1,62 @@
 package vn.com.devmaster.service.managermaterial.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vn.com.devmaster.service.managermaterial.domain.CartItem;
+import vn.com.devmaster.service.managermaterial.reponsitory.CartItemRespon;
 
-import javax.transaction.Transactional;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-@Transactional
 @Service
-public class CartService implements IService {
-    Map<Integer, CartItem> maps= new HashMap<>();
+public class CartService  {
+    @Autowired
+    CartItemRespon cartItemRespon;
 
-    @Override
-    public void add(CartItem item) {
-
+    public CartItem save(CartItem entity) {
+        return cartItemRespon.save(entity);
     }
 
-    @Override
-    public void remove(Integer id) {
-
+    public List<CartItem> saveAll(List<CartItem> entities) {
+        return (List<CartItem>) cartItemRespon.saveAll(entities);
     }
 
-    @Override
-    public CartItem update(Integer id, int qty) {
-        return null;
+    public Optional<CartItem> findById(Integer integer) {
+        return cartItemRespon.findById(integer);
     }
 
-    @Override
-    public void clear() {
-
+    public boolean existsById(Integer integer) {
+        return cartItemRespon.existsById(integer);
     }
 
-    @Override
-    public Collection<CartItem> getAllItem(){
-        return maps.values();
+    public List<CartItem> findAll() {
+        return (List<CartItem>) cartItemRespon.findAll();
     }
 
-    @Override
-    public int getCount() {
-        return 0;
+    public List<CartItem> findAllById(List<Integer> integers) {
+        return (List<CartItem>) cartItemRespon.findAllById(integers);
     }
 
-    @Override
-    public double getAmount() {
-        return 0;
+    public long count() {
+        return cartItemRespon.count();
+    }
+
+    public void deleteById(Integer integer) {
+        cartItemRespon.deleteById(integer);
+    }
+
+    public void delete(CartItem entity) {
+        cartItemRespon.delete(entity);
+    }
+
+    public void deleteAllById(List<Integer> integers) {
+        cartItemRespon.deleteAllById(integers);
+    }
+
+    public void deleteAll(List<CartItem> entities) {
+        cartItemRespon.deleteAll(entities);
+    }
+
+    public void deleteAll() {
+        cartItemRespon.deleteAll();
     }
 }

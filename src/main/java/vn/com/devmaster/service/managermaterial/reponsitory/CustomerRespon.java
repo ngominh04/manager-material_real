@@ -2,6 +2,7 @@ package vn.com.devmaster.service.managermaterial.reponsitory;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import vn.com.devmaster.service.managermaterial.domain.Customer;
 import vn.com.devmaster.service.managermaterial.projecttion.Icustomer_ChiTIet;
@@ -9,12 +10,14 @@ import vn.com.devmaster.service.managermaterial.projecttion.Icustomer_ChiTIet;
 import java.util.List;
 
 @Repository
-public interface CustomerRespon extends JpaRepository<Customer, Integer> {
+public interface CustomerRespon extends CrudRepository<Customer, Integer> {
     @Query(value = "select c.* from Customer c",nativeQuery = true)
     List<Customer> getCustomer();
     @Query(value = "select c.* from Customer c where USERNAME = ?",nativeQuery = true)
     Customer getCustomer1(String  uname);
 
+    @Query(value = "select c.* from Customer c where c.id = ?",nativeQuery = true)
+    Customer getCustomerId(Integer id);
     @Query(value = "" +
             "select distinct c.USERNAME username,c.PASSWORD pwd,c.NAME tenDangNhap,c.ADDRESS address,c.EMAIL email,c.PHONE phone" +
             ",p.NAME sanPham,p.PRICE tienSanPham,od.QTY soLuong,tm.NAME vanChuyen,ot.TOTAL tienVanChuyen,pm.NAME thanhToan,o.TOTAL_MONEY tongTien\n" +

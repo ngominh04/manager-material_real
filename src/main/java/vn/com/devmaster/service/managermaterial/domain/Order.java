@@ -49,4 +49,7 @@ public class Order {
 
     @OneToOne(cascade = CascadeType.ALL,mappedBy = "idord")
     private OrdersPayment ordersPayments;
+
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "idorder")
+    private OrdersNguoinhan ordersNguoinhan;
 }

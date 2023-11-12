@@ -6,18 +6,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import vn.com.devmaster.service.managermaterial.domain.CartItem;
 import vn.com.devmaster.service.managermaterial.domain.Customer;
+import vn.com.devmaster.service.managermaterial.domain.Nguoinhan;
 import vn.com.devmaster.service.managermaterial.domain.Product;
-import vn.com.devmaster.service.managermaterial.reponsitory.CartItemRespon;
-import vn.com.devmaster.service.managermaterial.reponsitory.CustomerRespon;
-import vn.com.devmaster.service.managermaterial.reponsitory.ProductRespon;
-import vn.com.devmaster.service.managermaterial.reponsitory.Responsitory;
+import vn.com.devmaster.service.managermaterial.reponsitory.*;
 import vn.com.devmaster.service.managermaterial.service.CartService;
 import vn.com.devmaster.service.managermaterial.service.ParamService;
 import vn.com.devmaster.service.managermaterial.service.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/shoping_cart")
@@ -37,7 +37,7 @@ public class ShopingCartController {
     @Autowired
     CartService cartService;
 
-    // giỏ hàng
+    // giỏ hàng khi chưa đăng nhập
     @GetMapping("/a")
     public String showCart(Model model, HttpSession session){
         session.setAttribute("saveCart",service.getAllItem());
@@ -45,6 +45,30 @@ public class ShopingCartController {
         session.getAttribute("saveCus");
         session.getAttribute("saveProduct");
         model.addAttribute("cartItem",service.getAllItem());
+//        List<CartItem> item = cartItemRespon.findByUsername(username);
+//        for (CartItem item1: item ) {
+//            model.addAttribute("cartItem",item1);
+//        }
+//        model.addAttribute("cartItem",item);
+
+        session.getAttribute("tranport");
+        session.setAttribute("tongTien",service.getAmount());
+        model.addAttribute("tongTien",service.getAmount()); // xử lí tổng tiền sản phẩm
+        return "cart/shopingcart";
+    }
+    @GetMapping("/a/{username}")
+    public String showCart(Model model, HttpSession session,@PathVariable(name = "username")String username){
+        session.setAttribute("saveCart",service.getAllItem());
+        session.getAttribute("saveCart");
+        session.getAttribute("saveCus");
+        session.getAttribute("saveProduct");
+//        model.addAttribute("cartItem",service.getAllItem());
+        List<CartItem> item = cartItemRespon.findByUsername(username);
+//        for (CartItem item1: item ) {
+//            model.addAttribute("cartItem",item1);
+//        }
+        model.addAttribute("cartItem",item);
+
         session.getAttribute("tranport");
         session.setAttribute("tongTien",service.getAmount());
         model.addAttribute("tongTien",service.getAmount()); // xử lí tổng tiền sản phẩm
@@ -71,9 +95,13 @@ public class ShopingCartController {
             item.setProduct(product);
             service.add(item);
         }
+//        session.
         session.setAttribute("saveAllCart",service.getAllItem());
+
         return "redirect:/shoping_cart/a";
     }
+    @Autowired
+    NguoiNhanRespon nguoiNhanRespon;
     @GetMapping("/add/{id}/{username}")
     public String addCart1(@PathVariable(name = "id" ) Integer id,@PathVariable(name = "username") String username,HttpSession session,Model model){
         session.setAttribute("productId",productRespon.findAllById(id));
@@ -87,36 +115,49 @@ public class ShopingCartController {
         Product product = productRespon.findAllById(id);
         model.addAttribute("productId",productRespon.findAllById(id));
         Customer customer = customerRespon.getCustomer1(username);
+
+        model.addAttribute("customer",customer);
         if(product != null){
             CartItem item = new CartItem();
-            item.setId(product.getId());
+//            item.setId(product.getId());
             item.setImage(product.getImage());
             item.setName(product.getName());
             item.setPrice(product.getPrice());
             item.setCustomer(customer);
-//            item.setUsername(customer.getUsername());
+            item.setUsername(customer.getUsername());
             item.setQuantity(1);
             item.setProduct(product);
             service.add(item);
-//            cartItemRespon.save(item);
+            cartService.save(item);
         }
         session.setAttribute("saveAllCart",service.getAllItem());
 //        session.setAttribute("saveItem",);
-        return "redirect:/shoping_cart/a";
+        return "redirect:/shoping_cart/a/{username}";
     }
-    // xóa 1 sản phẩm có trong giỏ hàng theo id
+    // xóa 1 sản phẩm có trong giỏ hàng theo id (xóa khi người dùng ko đăng nhập)
     @GetMapping("/remove/{id}")
     public String removeCart(@PathVariable(name = "id") Integer id){
         service.remove(id);
         return "redirect:/shoping_cart/a";
     }
+    @GetMapping("/remove1/{idItem}")
+    public String remove(@PathVariable(name = "idItem") Integer idItem){
+//        service.remove(idPro);
+        cartService.deleteById(idItem);
+        return "redirect:/shoping_cart/a";
+    }
 
-    // update quantity
+    // update quantity khi chưa đăng nhập
     @PostMapping("update")
     public String update(@RequestParam(name = "id") Integer id,@RequestParam(name = "quantity")int quantity){
         service.update(id,quantity);
         return "redirect:/shoping_cart/a";
     }
-
-
+    @PostMapping("update1/{username}")
+    public String update1(@RequestParam(name = "id") Integer id,@RequestParam(name = "quantity")int quantity,@RequestParam(name = "username")String username){
+        CartItem item = cartItemRespon.findAllById(id);
+        item.setQuantity(quantity);
+        cartItemRespon.save(item);
+        return "redirect:/shoping_cart/a/{username}";
+    }
 }

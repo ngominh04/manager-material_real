@@ -59,6 +59,8 @@ public class Customer {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<CartItem> cartItems;
 
+    @OneToMany(mappedBy = "idCustomer", cascade = CascadeType.PERSIST)
+    private List<Nguoinhan> nguoinhans;
 
 //
 //    public Customer() {

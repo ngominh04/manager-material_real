@@ -104,7 +104,14 @@ public class Sql {
     public static final String PAYMENT="select ID id,NAME name from payment_method where ISACTIVE=1 and ID = ?";
 //    public static final String CUSTOMER="select ID id,NAME name,USERNAME uname, PASSWORD pwd from customer where ISACTIVE =1";
 
-
+    public static final String DONHANG="" +
+            "select o.ID id, o.TOTAL_MONEY total,p.NAME name,od.QTY qty,p.IMAGE image,o.ORDERS_DATE ngayDat from orders o\n" +
+            "    inner join `manager-material`.customer c on o.IDCUSTOMER = c.ID\n" +
+            "    inner join `manager-material`.orders_details od on o.ID = od.IDORD\n" +
+            "    inner join `manager-material`.product p on od.IDPRODUCT = p.ID\n" +
+            "    inner join `manager-material`.orders_nguoinhan ng on o.ID = ng.idorder\n" +
+            "where c.ID = ?\n" +
+            "order by o.ORDERS_DATE desc";
 
 
 }
