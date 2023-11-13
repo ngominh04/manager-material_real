@@ -16,7 +16,9 @@ public interface CartItemRespon extends CrudRepository<CartItem, Integer> {
 
     @Query(value = "select c.* from CartItem c where c.username = ?",nativeQuery = true)
     List<CartItem> findByUsername(String username);
+    @Query(value = "select * from cartitem where id_customer = ?",nativeQuery = true)
+    List<CartItem> getById(Integer id);
 
-    @Query(value = "select c.* from CartItem c where c.product.id = ?1 and c.customer.id = ?2",nativeQuery = true)
-    CartItem findAllById_username(Integer idPro,Integer idCus);
+//    @Query(value = "select c.* from CartItem c where c.product.id = ?1 and c.customer.id = ?2",nativeQuery = true)
+//    CartItem findAllById_username(Integer idPro,Integer idCus);
 }

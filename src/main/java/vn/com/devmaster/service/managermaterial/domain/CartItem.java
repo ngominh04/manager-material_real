@@ -30,13 +30,13 @@ public class CartItem {
     @Column(name = "username", length = 250)
     private String username;
 
-    @ManyToOne( cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_customer", referencedColumnName = "id")
-    private Customer customer;
+//    @ManyToOne( cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_customer")
+    private Integer idCustomer;
 
 
-    @ManyToOne( cascade = CascadeType.DETACH)
-    @JoinColumn(name = "id_product", referencedColumnName = "id")
-    private Product product;
+//    @ManyToOne( cascade = CascadeType.DETACH)
+    @JoinColumn(name = "id_product")
+    private Integer idProduct;
 
 }

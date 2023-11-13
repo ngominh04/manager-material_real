@@ -173,7 +173,7 @@
                         <a class="collapse-item" th:href="@{/view/payment_method}" style="text-decoration: none;">Các loại thanh toán</a>
                         <a class="collapse-item" th:href="@{/view/transport_method}" style="text-decoration: none;">Các loại phương tiện <br> vận chuyển</a>
                         <div th:if="${session.saveCus != null}">
-                            <a class="collapse-item" th:href="@{/deciver/showAllDeciver}" style="text-decoration: none;">Thêm địa <br>chỉ nhận hàng</a>
+                            <a class="collapse-item" th:href="@{'/deciver/showAllDeciver/'+${session.username}}" style="text-decoration: none;">Thêm địa <br>chỉ nhận hàng</a>
                             <a class="collapse-item" th:href="@{'/oder/donhang/'+${session.saveCus.id}}" style="text-decoration: none;">Xem đơn hàng</a>
                         </div>
                     </div>

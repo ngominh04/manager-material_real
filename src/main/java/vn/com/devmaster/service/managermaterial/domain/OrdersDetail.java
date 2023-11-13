@@ -20,9 +20,9 @@ public class OrdersDetail {
     @JoinColumn(name = "IDORD")
     private Order idord;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.DETACH)
-    @JoinColumn(name = "IDPRODUCT")
-    private Product idproduct;
+//    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.DETACH)
+    @Column(name = "IDPRODUCT")
+    private Integer idproduct;
 
     @Column(name = "PRICE")
     private Double price;

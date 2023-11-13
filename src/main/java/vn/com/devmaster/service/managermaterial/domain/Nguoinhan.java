@@ -19,9 +19,8 @@ public class Nguoinhan {
     @Column(name = "Id", nullable = false)
     private Integer id;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_customer")
-    private Customer idCustomer;
+    @Column(name = "id_customer")
+    private Integer idCustomer;
 
     @Size(max = 250)
     @Column(name = "name", length = 250)

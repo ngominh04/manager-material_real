@@ -9,6 +9,7 @@ import vn.com.devmaster.service.managermaterial.reponsitory.*;
 import vn.com.devmaster.service.managermaterial.service.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -202,26 +203,22 @@ public class ViewController {
     @GetMapping("/showChiTiet/{IdCustomer}")
     public String showChiTiet(Model model, HttpSession session
             ,@PathVariable(name = "IdCustomer") Integer IdCustomer){
-//        session.setAttribute("payment",responsitory.getPaymentActive());
-//        session.getAttribute("payment");
-//        session.setAttribute("tranport",responsitory.getTransPort());
-//        session.getAttribute("tranport");
-
-//        List<CartItem> item = (List<CartItem>) service.getAllItem();
         session.getAttribute("saveCus");
-        Customer customer = customerRespon.getCustomerId(IdCustomer);
         model.addAttribute("customer",customerRespon.getCustomerId(IdCustomer));
         session.getAttribute("saveProduct");
-        model.addAttribute("tongTien",service.getAmount());
-        model.addAttribute("cartItem",service.getAllItem());
-//        model.addAttribute("payment",new OrdersPayment());
+        // tổng tiền
+        Collection<CartItem> item = cartItemRespon.getById(IdCustomer);
+        double tongTien=0;
+        for (CartItem item1: item) {
+            tongTien = tongTien+(item1.getQuantity() * item1.getPrice());
+        }
+        model.addAttribute("tongTien",tongTien);
+        model.addAttribute("cartItem",cartItemRespon.getById(IdCustomer));
         model.addAttribute("listPayment",paymentRespon.getPaymentMethod());
-
-
-//        int idcustomer = customer.getId();
 
         model.addAttribute("listNguoiNhan",nguoiNhanRespon.getNguoinhan(IdCustomer));
         model.addAttribute("listTransport",transportRespon.getTransportMethod());
+
         return "layout/index1";
     }
     @GetMapping("/testOder")

@@ -141,7 +141,6 @@
         <thead>
         <tr>
             <th>ID</th>
-            <th>ID customer</th>
             <th>Name</th>
             <th>Address</th>
             <th>Phone</th>
@@ -151,12 +150,11 @@
         <tbody>
         <tr th:each="show: ${session.listNguoiNhan}">
             <td th:text="${show.id}"></td>
-            <td th:text="${show.idCustomer}"></td>
             <td th:text="${show.name}"></td>
             <td th:text="${show.address}"></td>
             <td th:text="${show.phone}"></td>
             <td>
-                <a th:href="@{'/deciver/payment/'+${show.id}}"> Sửa </a><a th:href="@{'/deciver/removePayment/'+${show.id}}"> Xóa</a>
+                <a th:href="@{'/deciver/deciver/'+${show.id}}"> Sửa </a><a th:href="@{'/deciver/remove/'+${session.username}+'/'+${show.id}}"> Xóa</a>
             </td>
         </tr>
         <tbody>
@@ -167,8 +165,8 @@
 
 </div>
 <div >
-    <h3 class="mb-0"><a th:href="@{/customer/back}" class="text-body"><i
-            class="fas fa-long-arrow-alt-left me-2"></i>Back to admin</a></h3>
+    <h3 class="mb-0"><a th:href="@{/view/products}" class="text-body"><i
+            class="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a></h3>
 </div>
 </body>
 </html>

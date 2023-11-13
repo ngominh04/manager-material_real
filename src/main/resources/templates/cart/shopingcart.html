@@ -267,7 +267,7 @@
                               <p class="mb-0" style="font-weight: 500;" th:text="${#numbers.formatDecimal(sp.price,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></p>
                             </td>
                             <td class="align-middle">
-                              <a th:href="@{'/shoping_cart/remove1/'+${sp.id}}" class="text-muted"><i class="fas fa-times"></i></a>
+                              <a th:href="@{'/shoping_cart/remove1/'+${sp.id}+'/'+${session.username}}" class="text-muted"><i class="fas fa-times"></i></a>
                             </td>
                           </tr>
                         </form>
@@ -314,7 +314,12 @@
 
                         <div class="d-flex justify-content-between mb-4" style="font-weight: 500;">
                           <p class="mb-2">Total</p>
-                          <p class="mb-2" th:text="${#numbers.formatDecimal(tongTien,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></p>
+                          <div th:if="${session.username == null}">
+                            <p class="mb-2" th:text="${#numbers.formatDecimal(tongTien_noUser,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></p>
+                          </div>
+                          <div th:if="${session.username != null}">
+                            <p class="mb-2" th:text="${#numbers.formatDecimal(tongTien,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></p>
+                          </div>
                         </div>
 
                         <div >

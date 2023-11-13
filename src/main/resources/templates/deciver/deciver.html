@@ -142,7 +142,6 @@
         <form th:action="@{/deciver/saveOrUpdate}"  method="post"  enctype="multipart/form-data" >
             <h2>deciver</h2>
             <input name='name' placeholder='Name deciver' type='text' >
-            <input id="idCustomer" name='idCustomer' placeholder='idCustomer' type='text' >
             <input id="address" name='address' placeholder='Address' type='text' >
             <input id="phone" name='phone' placeholder='Phone' type='text' >
 
@@ -157,10 +156,9 @@
 
 
     <div th:if="${deciver1 != null}">
-        <form th:action="@{'/deciver/saveOrUpdate/'+${deciver1.id}}"  method="post"  enctype="multipart/form-data" >
+        <form th:action="@{'/deciver/saveOrUpdate/'+${session.username}+'/'+${deciver1.id}}"  method="post"  enctype="multipart/form-data" >
             <h2>deciver</h2>
             <input name='name' placeholder='Name payment' type='text' th:value="${deciver1.name}">
-            <input id="idCustomer" name='idCustomer' placeholder='idCustomer' type='text' th:value="${deciver1.idCustomer}">
             <input id="address" name='address' placeholder='Address' type='text' th:value="${deciver1.address}">
             <input id="phone" name='phone' placeholder='Phone' type='text' th:value="${deciver1.phone}">
             <div class='agree'>

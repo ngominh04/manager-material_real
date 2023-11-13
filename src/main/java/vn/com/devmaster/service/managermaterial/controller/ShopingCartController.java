@@ -14,10 +14,7 @@ import vn.com.devmaster.service.managermaterial.service.ParamService;
 import vn.com.devmaster.service.managermaterial.service.Service;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("/shoping_cart")
@@ -45,15 +42,8 @@ public class ShopingCartController {
         session.getAttribute("saveCus");
         session.getAttribute("saveProduct");
         model.addAttribute("cartItem",service.getAllItem());
-//        List<CartItem> item = cartItemRespon.findByUsername(username);
-//        for (CartItem item1: item ) {
-//            model.addAttribute("cartItem",item1);
-//        }
-//        model.addAttribute("cartItem",item);
-
         session.getAttribute("tranport");
-        session.setAttribute("tongTien",service.getAmount());
-        model.addAttribute("tongTien",service.getAmount()); // xử lí tổng tiền sản phẩm
+        model.addAttribute("tongTien_noUser",service.getAmount());
         return "cart/shopingcart";
     }
     @GetMapping("/a/{username}")
@@ -64,14 +54,16 @@ public class ShopingCartController {
         session.getAttribute("saveProduct");
 //        model.addAttribute("cartItem",service.getAllItem());
         List<CartItem> item = cartItemRespon.findByUsername(username);
-//        for (CartItem item1: item ) {
-//            model.addAttribute("cartItem",item1);
-//        }
+        // xử lí tổng tiền sản phẩm
+        double tongTien=0;
+        for (CartItem item1: item) {
+            tongTien = tongTien+(item1.getQuantity() * item1.getPrice());
+        }
+        model.addAttribute("tongTien",tongTien);
         model.addAttribute("cartItem",item);
-
         session.getAttribute("tranport");
         session.setAttribute("tongTien",service.getAmount());
-        model.addAttribute("tongTien",service.getAmount()); // xử lí tổng tiền sản phẩm
+//        model.addAttribute("tongTien",service.getAmount()); // xử lí tổng tiền sản phẩm
         return "cart/shopingcart";
     }
     // add sản phẩm vào giỏ hàng
@@ -92,7 +84,7 @@ public class ShopingCartController {
             item.setName(product.getName());
             item.setPrice(product.getPrice());
             item.setQuantity(1);
-            item.setProduct(product);
+//            item.setProduct(product);
             service.add(item);
         }
 //        session.
@@ -123,10 +115,10 @@ public class ShopingCartController {
             item.setImage(product.getImage());
             item.setName(product.getName());
             item.setPrice(product.getPrice());
-            item.setCustomer(customer);
+            item.setIdCustomer(customer.getId());
             item.setUsername(customer.getUsername());
             item.setQuantity(1);
-            item.setProduct(product);
+            item.setIdProduct(product.getId());
             service.add(item);
             cartService.save(item);
         }
@@ -140,11 +132,11 @@ public class ShopingCartController {
         service.remove(id);
         return "redirect:/shoping_cart/a";
     }
-    @GetMapping("/remove1/{idItem}")
-    public String remove(@PathVariable(name = "idItem") Integer idItem){
+    @GetMapping("/remove1/{idItem}/{username}")
+    public String remove(@PathVariable(name = "idItem") Integer idItem,@PathVariable(name = "username")String username){
 //        service.remove(idPro);
         cartService.deleteById(idItem);
-        return "redirect:/shoping_cart/a";
+        return "redirect:/shoping_cart/a/{username}";
     }
 
     // update quantity khi chưa đăng nhập

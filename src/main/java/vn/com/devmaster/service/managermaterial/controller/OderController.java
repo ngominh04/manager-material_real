@@ -36,6 +36,8 @@ public class OderController {
     @Autowired
     CartItemRespon cartItemRespon;
     @Autowired
+    CartService cartService;
+    @Autowired
     OrderPaymentService orderPaymentService;
     @Autowired
     OrderPaymentRespon orderPaymentRespon;
@@ -85,19 +87,19 @@ public class OderController {
         order.setPhone(ordersNguoinhan.getIdguoiNhan().getPhone());
 
         // save order  detail
-        Collection<CartItem> item = (Collection<CartItem>) session.getAttribute("saveAllCart");
+        Collection<CartItem> item = cartItemRespon.findByUsername(username);
         List<OrdersDetail> orderDetailList = new ArrayList<>();
         for (CartItem item1 : item) {
             OrdersDetail orderDetail = new OrdersDetail();
             orderDetail.setIdord(order);
             orderDetail.setQty(item1.getQuantity());
-            orderDetail.setIdproduct(item1.getProduct());
+            orderDetail.setIdproduct(item1.getIdProduct());
             orderDetail.setPrice(item1.getPrice());
             //save oder detail
             oderDetailRespon.save(orderDetail);
             orderDetailList.add(orderDetail);
             // cập nhật lại số lượng sản phẩm
-            int idProduct =  item1.getProduct().getId();
+            int idProduct =  item1.getIdProduct();
             Product product = productRespon.findAllById(idProduct);
             product.setQuatity(product.getQuatity()-item1.getQuantity());
             // cập nhật lại trạng thái nếu hết hàng
@@ -118,21 +120,20 @@ public class OderController {
         TransportMethod transportMethod = transportRespon.findAllById(idtransport);
         ordersTransport.setIdtransport(transportMethod);
         ordersTransport.setIdord(order);
-        oderTransportService.save(ordersTransport,idtransport);
+        oderTransportService.save(ordersTransport);
 
         session.removeAttribute("cartItem");
         session.setAttribute("saveOder",order);
         // tổng tiền
-        Double amount =service.getAmount();
-        Double total =amount+ordersTransport.getTotal();
-        order.setTotalMoney(total);
-        model.addAttribute("tongTien",total);
+        double tongTien=0;
+        for (CartItem item1: item) {
+            tongTien = tongTien+(item1.getQuantity() * item1.getPrice());
+        }
+        order.setTotalMoney(tongTien);
         session.removeAttribute("saveProduct");
         oderRespon.save(order);
         // xóa cart ra khỏi giỏ hàng
-        item.removeAll(item);
-
-
+        cartService.deleteAll();
 
         model.addAttribute("order",order);
         model.addAttribute("ordersPayment",ordersPayment);

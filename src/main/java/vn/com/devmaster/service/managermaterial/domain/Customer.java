@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-@Data
+
 @NoArgsConstructor
 @Entity
 @Table(name = "customer")
@@ -56,8 +56,8 @@ public class Customer {
     @OneToMany(mappedBy = "idcustomer", cascade = CascadeType.ALL)
     private List<Order> orders;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<CartItem> cartItems;
+//    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+//    private List<CartItem> cartItems;
 
     @OneToMany(mappedBy = "idCustomer", cascade = CascadeType.PERSIST)
     private List<Nguoinhan> nguoinhans;

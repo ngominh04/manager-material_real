@@ -18,19 +18,7 @@ public class OderTransportService {
     @Autowired
     TransportRespon transportRespon;
 
-    public OrdersTransport save(OrdersTransport entity, @Param("idtransport") Integer idtransport) {
-//        TransportMethod transportMethod = transportRespon.findAllById(idtransport);
-        if(idtransport == 1){
-            entity.setTotal(10000);
-        }
-        if(idtransport == 3){
-            entity.setTotal(150000);
-        }
-        if(idtransport == 5){
-            entity.setTotal(250000);
-        }else {
-            entity.setTotal(10000);
-        }
+    public OrdersTransport save(OrdersTransport entity) {
         entity.setNotes(1);
         return orderTransportRespon.save(entity);
     }
