@@ -10,6 +10,11 @@ import java.util.List;
 
 @Repository
 public interface OderDetailRespon extends JpaRepository<OrdersDetail,Integer> {
-    @Query("select o from Order o where o.idcustomer.id = ?1")
+    @Query(value = "select o from Order o where o.idcustomer.id = ?1")
     List<Order> findAllByCustomerId(Long id);
+
+    @Query(value = "select * from orders_details od\n" +
+            "inner join `manager-material`.product p on od.IDPRODUCT = p.ID\n" +
+            "where od.IDORD = ?",nativeQuery = true)
+    List<OrdersDetail> getOrOrderByIdproduct(Integer idPro);
 }

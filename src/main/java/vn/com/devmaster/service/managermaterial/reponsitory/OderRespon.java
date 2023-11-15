@@ -13,5 +13,9 @@ import java.util.List;
 @Repository
 public interface OderRespon extends CrudRepository<Order,Integer> {
     @Query(value = Sql.DONHANG,nativeQuery = true)
-    List<IDonHang> getDonHang(Integer id);
+    List<IDonHang> getDonHang(Integer idCus);
+
+    @Query(value = Sql.DONHANG1,nativeQuery = true)
+    IDonHang getDonHangChiTiet(Integer idCus,Integer idOrder,Integer idNguoiNhan);
+
 }

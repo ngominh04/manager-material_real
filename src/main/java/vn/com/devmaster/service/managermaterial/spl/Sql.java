@@ -105,13 +105,25 @@ public class Sql {
 //    public static final String CUSTOMER="select ID id,NAME name,USERNAME uname, PASSWORD pwd from customer where ISACTIVE =1";
 
     public static final String DONHANG="" +
-            "select o.ID id, o.TOTAL_MONEY total,p.NAME name,od.QTY qty,p.IMAGE image,o.ORDERS_DATE ngayDat from orders o\n" +
+            "select o.IDORDERS idOrder,o.ID id,n.id_customer idCus,ng.idguoi_nhan idNguoiNhan, o.TOTAL_MONEY total, o.ORDERS_DATE orderDate\n" +
+            "from orders o\n" +
+            "    inner join `manager-material`.orders_nguoinhan ng on o.ID = ng.idorder\n" +
+            "inner join `manager-material`.nguoinhan n on ng.idguoi_nhan = n.Id\n" +
+            "where n.id_customer = ?\n" +
+            "order by o.ORDERS_DATE desc";
+    public static final String DONHANG1="" +
+            "select o.IDORDERS idOrder, o.ID id, o.TOTAL_MONEY total,o.ORDERS_DATE orderDate\n" +
+            "    ,n.name nameNguoiNhan,n.address addressNguoiNhan,n.phone phoneNguoiNhan\n" +
+            "    ,pm.NAME namePayment,tm.NAME nameTransport\n" +
+            "from orders o\n" +
             "    inner join `manager-material`.customer c on o.IDCUSTOMER = c.ID\n" +
             "    inner join `manager-material`.orders_details od on o.ID = od.IDORD\n" +
+            "    inner join `manager-material`.orders_payment op on o.ID = op.IDORD\n" +
+            "    inner join `manager-material`.payment_method pm on op.IDPAYMENT = pm.ID\n" +
+            "    inner join `manager-material`.orders_transport ot on o.ID = ot.IDORD\n" +
+            "    inner join `manager-material`.transport_method tm on ot.IDTRANSPORT = tm.ID\n" +
             "    inner join `manager-material`.product p on od.IDPRODUCT = p.ID\n" +
             "    inner join `manager-material`.orders_nguoinhan ng on o.ID = ng.idorder\n" +
-            "where c.ID = ?\n" +
-            "order by o.ORDERS_DATE desc";
-
-
+            "    inner join `manager-material`.nguoinhan n on c.ID = n.id_customer\n" +
+            "where c.ID = ? and o.ID = ? and n.Id = ?";
 }

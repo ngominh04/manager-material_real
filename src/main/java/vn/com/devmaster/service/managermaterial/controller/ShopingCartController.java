@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import vn.com.devmaster.service.managermaterial.domain.CartItem;
-import vn.com.devmaster.service.managermaterial.domain.Customer;
-import vn.com.devmaster.service.managermaterial.domain.Nguoinhan;
-import vn.com.devmaster.service.managermaterial.domain.Product;
+import vn.com.devmaster.service.managermaterial.domain.*;
 import vn.com.devmaster.service.managermaterial.reponsitory.*;
 import vn.com.devmaster.service.managermaterial.service.CartService;
 import vn.com.devmaster.service.managermaterial.service.ParamService;
@@ -33,6 +30,10 @@ public class ShopingCartController {
     CartItemRespon cartItemRespon;
     @Autowired
     CartService cartService;
+    @Autowired
+    PaymentRespon paymentRespon;
+    @Autowired
+    TransportRespon transportRespon;
 
     // giỏ hàng khi chưa đăng nhập
     @GetMapping("/a")
@@ -62,7 +63,7 @@ public class ShopingCartController {
         model.addAttribute("tongTien",tongTien);
         model.addAttribute("cartItem",item);
         session.getAttribute("tranport");
-        session.setAttribute("tongTien",service.getAmount());
+//        session.setAttribute("tongTien",service.getAmount());
 //        model.addAttribute("tongTien",service.getAmount()); // xử lí tổng tiền sản phẩm
         return "cart/shopingcart";
     }

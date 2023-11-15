@@ -5,6 +5,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
+  <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+  <link
+          href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
   <style>
     table {
       font-family: arial, sans-serif;
@@ -26,29 +33,22 @@
 <body>
 <div layout:fragment="content">
   <div >
+    <h2>Chờ giao hàng</h2>
+    <hr class="my-4">
+
     <table>
       <tr>
-        <th>Sản phẩm</th>
-        <th>Số lượng</th>
+        <th>Mã đơn hàng</th>
         <th>Giá trị đơn hàng</th>
         <th>Ngày Đặt hàng</th>
         <th></th>
       </tr>
       <tr th:each="d: ${donhang}">
-        <td >
-          <img th:src="@{'/img/product_img/product_image/'+${d.image}}" class="img-fluid rounded-3"
-               style="width: 120px;" alt="Book">
-          <p th:text="${d.name}"></p>
-          <p th:text="${d.id}"></p>
-        </td>
-        <td th:text="${d.qty}"></td>
+        <td th:text="${d.idOrder}"></td>
         <td th:text="${#numbers.formatDecimal(d.total,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></td>
-        <td th:text="${d.ngayDat}"></td>
-        <td>
-          <a th:href="@{'/oder/removeDonHang/'+${d.id}}">Đã nhận được hàng</a>
-        </td>
+        <td th:text="${d.orderDate}"></td>
+        <td><a th:href="@{'/oder/donhang_ChiTiet/'+${session.saveCus.id}+'/'+${d.id}+'/'+${d.idNguoiNhan}}">Xem chi tiết đơn hàng</a></td>
       </tr>
-
     </table>
   </div>
 

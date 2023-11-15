@@ -213,6 +213,7 @@ public class ViewController {
             tongTien = tongTien+(item1.getQuantity() * item1.getPrice());
         }
         model.addAttribute("tongTien",tongTien);
+
         model.addAttribute("cartItem",cartItemRespon.getById(IdCustomer));
         model.addAttribute("listPayment",paymentRespon.getPaymentMethod());
 
@@ -221,6 +222,7 @@ public class ViewController {
 
         return "layout/index1";
     }
+
     @GetMapping("/testOder")
     public String a(){
         return "oder/Oder";

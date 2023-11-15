@@ -33,4 +33,7 @@ public class TransportMethod {
     @Column(name = "ISACTIVE")
     private Byte isactive;
 
+    @Column(name = "PRICE")
+    private double price;
+
 }

@@ -2,9 +2,16 @@ package vn.com.devmaster.service.managermaterial.projecttion;
 
 public interface IDonHang {
     Integer getId();
+    String getIdOrder();
     double getTotal();
-    String getName();
+    String getNameProduct();
     int getQty();
     String getImage();
-    String getNgayDat();
+    String getOrderDate();
+    Integer getIdNguoiNhan();
+    String getNameNguoiNhan();
+    String getAddressNguoiNhan();
+    String getPhoneNguoiNhan();
+    String getNamePayment();
+    String getNameTransport();
 }

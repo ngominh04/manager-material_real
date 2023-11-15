@@ -119,6 +119,7 @@ public class OderController {
         OrdersTransport ordersTransport = new OrdersTransport();
         TransportMethod transportMethod = transportRespon.findAllById(idtransport);
         ordersTransport.setIdtransport(transportMethod);
+        ordersTransport.setTotal(transportMethod.getPrice());
         ordersTransport.setIdord(order);
         oderTransportService.save(ordersTransport);
 
@@ -129,7 +130,7 @@ public class OderController {
         for (CartItem item1: item) {
             tongTien = tongTien+(item1.getQuantity() * item1.getPrice());
         }
-        order.setTotalMoney(tongTien);
+        order.setTotalMoney(tongTien+transportMethod.getPrice());
         session.removeAttribute("saveProduct");
         oderRespon.save(order);
         // xóa cart ra khỏi giỏ hàng
@@ -145,15 +146,24 @@ public class OderController {
 
     @Autowired
     OderService oderService;
+    @GetMapping("/donhang/{idCus}")
+    public String showDonhang(Model model,HttpSession session,@PathVariable(name = "idCus")Integer idCus){
+//        session.setAttribute("saveDonHang",oderRespon.getDonHang(idCus));
+        model.addAttribute("donhang",oderRespon.getDonHang(idCus));
+        return "oder/menu_order";
+    }
 
-    @GetMapping("/donhang/{id}")
-    public String showDonhang(Model model,@PathVariable(name = "id") Integer id){
-        model.addAttribute("donhang",oderRespon.getDonHang(id));
+    @GetMapping("/donhang1/{idCus}")
+    public String showDonhang(Model model,@PathVariable(name = "idCus") Integer idCus){
+        model.addAttribute("donhang",oderRespon.getDonHang(idCus));
         return "oder/Oder";
     }
-    @GetMapping("/removeDonHang/{id}")
-    public String remove(@PathVariable(name = "id")Integer id){
-        oderService.deleteById(id);
-        return "redirect:/oder/donhang/{id}";
-    }
+   @GetMapping("donhang_ChiTiet/{idCus}/{idOrder}/{idNguoiNhan}")
+    public String showDonHangChiTiet(Model model,@PathVariable(name = "idCus") Integer idCus
+           ,@PathVariable(name = "idOrder") Integer idOrder
+           ,@PathVariable(name = "idNguoiNhan") Integer idNguoiNhan){
+        model.addAttribute("donhang_product",oderDetailRespon.getOrOrderByIdproduct(idOrder));
+//        model.addAttribute("donhang_ChiTiet",oderRespon.getDonHangChiTiet(idCus,idOrder,idNguoiNhan));
+        return "/oder/orderChiTiet";
+   }
 }

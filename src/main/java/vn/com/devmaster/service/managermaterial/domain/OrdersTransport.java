@@ -25,7 +25,7 @@ public class OrdersTransport {
     private TransportMethod idtransport;
 
     @Column(name = "TOTAL")
-    private Integer total;
+    private Double total;
 
     @Column(name = "NOTES")
     private Integer notes;
