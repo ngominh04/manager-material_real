@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import vn.com.devmaster.service.managermaterial.domain.Order;
 import vn.com.devmaster.service.managermaterial.domain.OrdersDetail;
+import vn.com.devmaster.service.managermaterial.projecttion.IOrderDetail;
+import vn.com.devmaster.service.managermaterial.spl.Sql;
 
 import java.util.List;
 
@@ -13,8 +15,6 @@ public interface OderDetailRespon extends JpaRepository<OrdersDetail,Integer> {
     @Query(value = "select o from Order o where o.idcustomer.id = ?1")
     List<Order> findAllByCustomerId(Long id);
 
-    @Query(value = "select * from orders_details od\n" +
-            "inner join `manager-material`.product p on od.IDPRODUCT = p.ID\n" +
-            "where od.IDORD = ?",nativeQuery = true)
-    List<OrdersDetail> getOrOrderByIdproduct(Integer idPro);
+    @Query(value = Sql.ORDERDETAIL,nativeQuery = true)
+    List<IOrderDetail> getOrdersDetailById(Integer idOrder);
 }

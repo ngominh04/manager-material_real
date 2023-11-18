@@ -33,16 +33,60 @@
 <body>
 <div layout:fragment="content">
     <div class="container-fluid">
-<!--        <div th:each="ss: ${donhang_ChiTiet}">-->
-<!--            <h2 th:text="${}"></h2>-->
-<!--        </div>-->
+        <div th:switch="${donhang_ChiTiet.trangThai}">
+            <h2 th:case="'1'">Đơn hàng đang chờ xác nhận</h2>
+            <h2 th:case="'2'">Đơn hàng đang được giao</h2>
+            <h2 th:case="'3'">Đơn hàng đã được giao đến bạn <br> Vui long bấm xác nhận nếu nhận được hàng</h2>
+        </div>
 
-        <div th:each="sp: ${donhang_product}">
-            <p th:text="${sp.id}"></p>
+        <h3 >Mã đơn hàng <span th:text="${donhang_ChiTiet.idOrder}"></span></h3>
+        <div class="row">
+            <div class="col-12">
+                <div class="container-fluid">
+                    <h6>Sản phẩm đã đặt:</h6>
+                    <div class="row">
+                        <div class="col-lg-3" th:each="sp: ${donhang_product}">
+                            <div >
+                                <img th:src="@{'/img/product_img/product_image/'+${sp.image}}" style="margin-top: 0.5rem;width: 100%">
+                                <!--                <img th:src="@{/img/product_img/product_image/laptop_acer_aspire_1.jpg}" style="margin-top: 0.5rem;width: 350px;height: 250px">-->
+                                <p><span th:text="${sp.name}"></span> / <span th:text="${sp.notes}"></span>/ <br>Số lượng đặt: <span th:text="${sp.qty}"></span></p>
+                                <span th:text="${#numbers.formatDecimal(sp.price,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12" style="border: 2px solid gray;width: 100%;height: 1px;border-radius: 2px;margin: 2rem"></div>
+            <div class="col-12">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-5">
+                            <h5>Hình thức thanh toán: <span th:text="${donhang_ChiTiet.namePayment}"></span></h5>
+                            <hr class="my-4">
+                            <h5>Hình thức vận chuyển: <span th:text="${donhang_ChiTiet.nameTransport}"></span></h5>
+                            <hr class="my-4">
+                            <h5>Thông tin người nhận</h5>
+                            <p><span th:text="${donhang_ChiTiet.nameNguoiNhan}"></span> <span th:text="${donhang_ChiTiet.phoneNguoiNhan}"></span></p>
+                            <p th:text="${donhang_ChiTiet.addressNguoiNhan}"></p>
+
+                        </div>
+                        <div class="col-5">
+                            <h5>Tiền giao hàng: <span th:text="${#numbers.formatDecimal(donhang_ChiTiet.tienShip,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></span></h5>
+                            <hr class="my-4">
+                            <h5 >Tổng tiền: <span th:text="${#numbers.formatDecimal(donhang_ChiTiet.total,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></span></h5>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <a th:href="@{/oder/back}">Back</a>
+                    </div>
+                    <div class="col-5" th:if="${donhang_ChiTiet.trangThai == 3}">
+                        <a th:href="@{'/oder/xacNhan/'+${donhang_ChiTiet.id}}">Xác nhận</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-
 </div>
-
 </body>
 </html>

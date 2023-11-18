@@ -74,6 +74,7 @@ public class OderController {
         order.setIdorders(idOrder);
         order.setNotes("Có");
         order.setIdcustomer(customer);
+        order.setTrangThai(1);
 
         // save nguonhan
         OrdersNguoinhan  ordersNguoinhan = new OrdersNguoinhan();
@@ -147,23 +148,77 @@ public class OderController {
     @Autowired
     OderService oderService;
     @GetMapping("/donhang/{idCus}")
-    public String showDonhang(Model model,HttpSession session,@PathVariable(name = "idCus")Integer idCus){
-//        session.setAttribute("saveDonHang",oderRespon.getDonHang(idCus));
-        model.addAttribute("donhang",oderRespon.getDonHang(idCus));
+    public String showDonhangChiTiet1(@PathVariable(name = "idCus")Integer idCus,Model model){
         return "oder/menu_order";
     }
 
     @GetMapping("/donhang1/{idCus}")
-    public String showDonhang(Model model,@PathVariable(name = "idCus") Integer idCus){
+    public String showDonhang1(Model model,@PathVariable(name = "idCus") Integer idCus){
         model.addAttribute("donhang",oderRespon.getDonHang(idCus));
+        model.addAttribute("trangThai1","Đơn hàng bạn đang chờ xác nhận");
         return "oder/Oder";
     }
+    @GetMapping("/donhang2/{idCus}")
+    public String showDonhang2(Model model,@PathVariable(name = "idCus") Integer idCus){
+        model.addAttribute("donhang",oderRespon.getDonHang2(idCus));
+        model.addAttribute("trangThai2","Đơn hàng đang được giao");
+        return "oder/Oder";
+    }
+    @GetMapping("/donhang3/{idCus}")
+    public String showDonhang3(Model model,@PathVariable(name = "idCus") Integer idCus){
+        model.addAttribute("donhang",oderRespon.getDonHang3(idCus));
+        model.addAttribute("trangThai3","Đơn hàng đã giao đến bạn");
+        return "oder/Oder";
+    }
+    @GetMapping("/donhang0/{idCus}")
+    public String showDonhang0(Model model,@PathVariable(name = "idCus") Integer idCus){
+        model.addAttribute("donhang",oderRespon.getDonHang0(idCus));
+        model.addAttribute("trangThai0","Đơn hàng bạn đã mua");
+        return "oder/Oder";
+    }
+
    @GetMapping("donhang_ChiTiet/{idCus}/{idOrder}/{idNguoiNhan}")
     public String showDonHangChiTiet(Model model,@PathVariable(name = "idCus") Integer idCus
            ,@PathVariable(name = "idOrder") Integer idOrder
            ,@PathVariable(name = "idNguoiNhan") Integer idNguoiNhan){
-        model.addAttribute("donhang_product",oderDetailRespon.getOrOrderByIdproduct(idOrder));
-//        model.addAttribute("donhang_ChiTiet",oderRespon.getDonHangChiTiet(idCus,idOrder,idNguoiNhan));
+        model.addAttribute("donhang_product",oderDetailRespon.getOrdersDetailById(idOrder));
+        model.addAttribute("donhang_ChiTiet",oderRespon.getDonHangChiTiet(idCus,idOrder,idNguoiNhan));
         return "/oder/orderChiTiet";
    }
+   @GetMapping("/back")
+    public String back(Model model){
+        return "/oder/menu_order";
+   }
+   @GetMapping("/xacNhan/{idOrder}")
+    public String xacNhan(Model model,@PathVariable(name = "idOrder")Integer idOrder){
+        Order order = oderRespon.findAllById(idOrder);
+        order.setTrangThai(0);
+        oderRespon.save(order);
+        return "oder/Oder";
+   }
+   // ở admin
+   @GetMapping("/donhang1_admin")
+   public String showDonhang1Adin(Model model){
+       model.addAttribute("donhang",oderRespon.getDonHangAdmin());
+       return "admin/orderAdmin";
+   }
+    @GetMapping("/xacNhanDonAdmin/{idOrder}")
+    public String xacNhanDonAdmin(Model model,@PathVariable(name = "idOrder")Integer idOrder){
+        Order order = oderRespon.findAllById(idOrder);
+        order.setTrangThai(2);
+        oderRespon.save(order);
+        return "redirect:/oder/donhang1_admin";
+    }
+    @GetMapping("/donhang2_admin")
+    public String showDonhang2Adin(Model model){
+        model.addAttribute("donhang",oderRespon.getDonHang2Admin());
+        return "admin/orderAdmin";
+    }
+    @GetMapping("/xacNhanDon1Admin/{idOrder}")
+    public String xacNhanDonAdmin1(Model model,@PathVariable(name = "idOrder")Integer idOrder){
+        Order order = oderRespon.findAllById(idOrder);
+        order.setTrangThai(3);
+        oderRespon.save(order);
+        return "redirect:/oder/donhang1_admin";
+    }
 }

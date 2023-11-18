@@ -58,6 +58,7 @@ public class ProductController {
         // cập nhật tên người thêm
         String createBy = (String) session.getAttribute("saveNameCustomer");
         product.setCreatedBy(createBy);
+        product.setIsDelete(1);
         //
 //        session.setAttribute("saveFile",paramService.save(file,uploadDir));
 
@@ -112,7 +113,17 @@ public class ProductController {
     }
     @GetMapping("/remove/{id}")
     public String remove(@PathVariable(name = "id")Integer id){
-        productService.deleteById(id);
+        Product product = productRespon.findAllById(id);
+        product.setIsDelete(0);
+        productRespon.save(product);
+        return "redirect:/product/showAllProduct";
+    }
+
+    @GetMapping("/on/{id}")
+    public String on(@PathVariable(name = "id")Integer id){
+        Product product = productRespon.findAllById(id);
+        product.setIsDelete(1);
+        productRespon.save(product);
         return "redirect:/product/showAllProduct";
     }
 }

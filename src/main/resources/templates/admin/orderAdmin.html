@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/admin}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content1">
+    <div >
+        <!--    <h2 th:text="${trangThai0}"></h2>-->
+        <!--    <h2 th:text="${trangThai1}"></h2>-->
+        <!--    <h2 th:text="${trangThai2}"></h2>-->
+        <h2> Những đơn hàng cần xác nhận</h2>
+        <hr class="my-4">
+
+        <table>
+            <tr>
+                <th>Mã đơn hàng</th>
+                <th>Giá trị đơn hàng</th>
+                <th>Ngày Đặt hàng</th>
+                <th></th>
+            </tr>
+            <tr th:each="d: ${donhang}">
+                <td th:text="${d.idOrder}"></td>
+                <td th:text="${#numbers.formatDecimal(d.total,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></td>
+                <td th:text="${d.orderDate}"></td>
+                <td>
+                    <a th:if="${d.trangThai == 1}" th:href="@{'/oder/xacNhanDonAdmin/'+${d.id}}">Xác nhận giao hàng</a>
+                    <a th:if="${d.trangThai == 2}" th:href="@{'/oder/xacNhanDon1Admin/'+${d.id}}">Xác nhận đã giao hàng thành công</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>

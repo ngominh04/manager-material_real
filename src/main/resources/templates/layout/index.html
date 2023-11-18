@@ -228,10 +228,10 @@
                     </form>
 
                     <div th:if="${session.username==null}" style="margin-left: -8rem">
-                        <a class="text-gray-800" th:href="@{/view/login}" style="text-decoration: none;">Đăng nhập</a>
+                        <a class="text-gray-800"  th:href="@{/view/login}" style="text-decoration: none">Đăng nhập</a>
                     </div>
                     <div th:if="${session.username != null}" style="margin-left: -8rem">
-                        <a class="text-gray-800" th:href="@{/view/logout}" style="text-decoration: none;">Đăng xuất</a>
+                        <a class="text-gray-800"  th:href="@{/view/logout}" style="text-decoration: none;padding-right: 3rem">Đăng xuất</a>
                         <!-- Topbar Navbar -->
                         <a  th:href="@{'/shoping_cart/a/'+${session.username}}" style="text-decoration: none;" class="text-gray-800">
                             <i class="fa fa-shopping-basket " ></i> Giỏ hàng

@@ -178,21 +178,24 @@
                 </div>
             </div>
         </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+               aria-expanded="true" aria-controls="collapseThree">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Quản lí đơn hàng</span>
+            </a>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" th:href="@{/oder/donhang1_admin}" style="text-decoration: none;" >Xác nhận đơn</a>
+                    <a class="collapse-item" th:href="@{/oder/donhang2_admin}" style="text-decoration: none;" >Đơn hàng giao <br> thành công</a>
+
+                </div>
+            </div>
+        </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 
-<!--        &lt;!&ndash; Sidebar Toggler (Sidebar) &ndash;&gt;-->
-<!--        <div class="text-center d-none d-md-inline">-->
-<!--            <button class="rounded-circle border-0" id="sidebarToggle"></button>-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash; Sidebar Message &ndash;&gt;-->
-<!--        <div class="sidebar-card d-none d-lg-flex">-->
-<!--            <img class="sidebar-card-illustration mb-2" src="../../../../../../startbootstrap-sb-admin-2-gh-pages/img/undraw_rocket.svg" alt="...">-->
-<!--            <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>-->
-<!--            <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>-->
-<!--        </div>-->
 
     </ul>
     <!-- End of Sidebar -->
@@ -237,7 +240,7 @@
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
-            <div layout:fragment="content">
+            <div layout:fragment="content1">
                 <h1>Bạn đang ở trang admin</h1>
             </div>
         </div>
@@ -264,25 +267,6 @@
     <i class="fas fa-angle-up"></i>
 </a>
 
-<!-- Logout Modal-->
-<!--<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"-->
-<!--     aria-hidden="true">-->
-<!--    <div class="modal-dialog" role="document">-->
-<!--        <div class="modal-content">-->
-<!--            <div class="modal-header">-->
-<!--                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>-->
-<!--                <button class="close" type="button" data-dismiss="modal" aria-label="Close">-->
-<!--                    <span aria-hidden="true">×</span>-->
-<!--                </button>-->
-<!--            </div>-->
-<!--            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>-->
-<!--            <div class="modal-footer">-->
-<!--                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>-->
-<!--                <a class="btn btn-primary" href="../../../../../../startbootstrap-sb-admin-2-gh-pages/login.html">Logout</a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 
 <!-- Bootstrap core JavaScript-->
 <script th:src="@{/vendor/jquery/jquery.min.js}"></script>

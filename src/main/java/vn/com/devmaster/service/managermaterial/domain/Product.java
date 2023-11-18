@@ -47,6 +47,9 @@ public class Product {
     @Column(name = "QUATITY")
     private Integer quatity;
 
+    @Column(name = "ISDELETE")
+    private Integer isDelete;
+
     @Column(name = "CREATED_DATE")
     private String createdDate;
 

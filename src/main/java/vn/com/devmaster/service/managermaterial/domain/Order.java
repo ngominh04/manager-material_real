@@ -21,6 +21,9 @@ public class Order {
     @Column(name = "IDORDERS", length = 10)
     private String idorders;
 
+    @Column(name = "TRANGTHAI")
+    private Integer trangThai;
+
     @Column(name = "ORDERS_DATE")
     private Instant ordersDate;
 
