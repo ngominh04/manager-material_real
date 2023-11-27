@@ -28,14 +28,53 @@
         tr:nth-child(even) {
             background-color: #dddddd;
         }
+        .btn1{
+            cursor:pointer;
+            position:relative;
+            padding:10px 20px;
+            background:white;
+            font-size:18px;
+            border-top-right-radius:10px;
+            border-bottom-left-radius:10px;
+            transition:all 0.5s;
+            &:after,&:before{
+                content:" ";
+                width:10px;
+                height:10px;
+                position:absolute;
+                border :0px solid #fff;
+                transition:all 1s;
+            }
+            &:after{
+                top:-1px;
+                left:-1px;
+                border-top:5px solid black;
+                border-left:5px solid black;
+            }
+            &:before{
+                bottom:-1px;
+                right:-1px;
+                border-bottom:5px solid black;
+                border-right:5px solid black;
+            }
+            &:hover{
+                border-top-right-radius:0px;
+                border-bottom-left-radius:0px;
+            // background:rgba(0,0,0,.5);
+            // color:white;
+                &:before,&:after{
+
+                    width:100%;
+                    height:100%;
+                // border-color:white;
+                }
+            }
+        }
     </style>
 </head>
 <body>
 <div layout:fragment="content1">
     <div >
-        <!--    <h2 th:text="${trangThai0}"></h2>-->
-        <!--    <h2 th:text="${trangThai1}"></h2>-->
-        <!--    <h2 th:text="${trangThai2}"></h2>-->
         <h2> Những đơn hàng cần xác nhận</h2>
         <hr class="my-4">
 
@@ -46,13 +85,15 @@
                 <th>Ngày Đặt hàng</th>
                 <th></th>
             </tr>
-            <tr th:each="d: ${donhang}">
+            <tr th:each="d: ${donhang}" style="height: 55px">
                 <td th:text="${d.idOrder}"></td>
                 <td th:text="${#numbers.formatDecimal(d.total,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></td>
                 <td th:text="${d.orderDate}"></td>
                 <td>
-                    <a th:if="${d.trangThai == 1}" th:href="@{'/oder/xacNhanDonAdmin/'+${d.id}}">Xác nhận giao hàng</a>
-                    <a th:if="${d.trangThai == 2}" th:href="@{'/oder/xacNhanDon1Admin/'+${d.id}}">Xác nhận đã giao hàng thành công</a>
+                    <a class="btn1" style="color: gray;text-decoration: none;background-color: #d6fce3"
+                       th:if="${d.trangThai == 1}" th:href="@{'/oder/xacNhanDonAdmin/'+${d.id}}">Xác nhận giao hàng</a>
+                    <a class="btn1" style="color: gray;text-decoration: none;background-color: #d6fce3"
+                       th:if="${d.trangThai == 2}" th:href="@{'/oder/xacNhanDon1Admin/'+${d.id}}">Xác nhận đã giao hàng thành công</a>
                 </td>
             </tr>
         </table>

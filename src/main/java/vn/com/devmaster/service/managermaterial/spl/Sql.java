@@ -9,6 +9,24 @@ public class Sql {
             "        end isActive \n" +
             "       from product where ISDELETE = 1";
 
+    public static final String PRODUCT_PRICE_MIN_MAX="" +
+            "select ID id,NAME name,DESCRIPTION description,NOTES notes,IMAGE image,PRICE price,QUATITY quatity,\n" +
+            "                   case\n" +
+            "                       when ISACTIVE = 1 then \"Còn bán\"\n" +
+            "                       else \"Không còn sản phẩm\"\n" +
+            "                    end isActive\n" +
+            "                   from product\n" +
+            "where ISDELETE = 1\n" +
+            "order by PRICE asc";
+    public static final String PRODUCT_PRICE_MAX_MIN="" +
+            "select ID id,NAME name,DESCRIPTION description,NOTES notes,IMAGE image,PRICE price,QUATITY quatity,\n" +
+            "                   case\n" +
+            "                       when ISACTIVE = 1 then \"Còn bán\"\n" +
+            "                       else \"Không còn sản phẩm\"\n" +
+            "                    end isActive\n" +
+            "                   from product\n" +
+            "where ISDELETE = 1\n" +
+            "order by PRICE desc";
     public static final String PRODUCT_HP="select ID id,NAME name,DESCRIPTION MoTa,IMAGE image,PRICE price,QUATITY quatity," +
             "       case\n" +
             "           when ISACTIVE = 1 then \"Còn bán\"\n" +

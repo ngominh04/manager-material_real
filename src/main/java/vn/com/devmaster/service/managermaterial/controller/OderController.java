@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import vn.com.devmaster.service.managermaterial.domain.*;
 import vn.com.devmaster.service.managermaterial.projecttion.IPayment_method;
+import vn.com.devmaster.service.managermaterial.projecttion.IProduct;
 import vn.com.devmaster.service.managermaterial.projecttion.Icustomer_ChiTIet;
 import vn.com.devmaster.service.managermaterial.reponsitory.*;
 import vn.com.devmaster.service.managermaterial.service.*;
@@ -149,6 +150,8 @@ public class OderController {
     OderService oderService;
     @GetMapping("/donhang/{idCus}")
     public String showDonhangChiTiet1(@PathVariable(name = "idCus")Integer idCus,Model model){
+        List<IProduct> product= responsitory.getProductTC();
+        model.addAttribute("trangChu",product);
         return "oder/menu_order";
     }
 

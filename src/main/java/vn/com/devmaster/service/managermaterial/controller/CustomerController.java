@@ -7,10 +7,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import vn.com.devmaster.service.managermaterial.domain.Customer;
+import vn.com.devmaster.service.managermaterial.domain.Nguoinhan;
 import vn.com.devmaster.service.managermaterial.reponsitory.CustomerRespon;
 import vn.com.devmaster.service.managermaterial.service.CustomerService;
+import vn.com.devmaster.service.managermaterial.service.ParamService;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -84,5 +88,46 @@ public class CustomerController {
     @GetMapping("/back")
     public String back(){
         return "redirect:/customer/admin";
+    }
+
+    // người dunng quên password
+    @GetMapping("/check")
+    public String check(){
+        return "/login/check_email";
+    }
+    @Autowired
+    ParamService  paramService;
+    // check email ng dùng
+    @PostMapping("/checkEmail")
+    public String checkEmail(Model model, HttpSession session){
+        String email = paramService.getString("email","");
+        Customer customer= customerRespon.getEmailCustomer(email);
+
+
+        try {
+            if(!customer.getEmail().equals(email)){
+                model.addAttribute("message","Sai email");
+
+            }else {session.setAttribute("saveEmail",customer.getEmail());
+                model.addAttribute("customer",customerRespon.getEmailCustomer(email));
+                return "/login/change_password";
+            }
+        }catch (Exception e){
+            model.addAttribute("message","Sai email");
+        }
+        return "/login/check_email";
+    }
+    // thay đổi password người dùng
+    @PostMapping("/changePassword/{email}")
+    public String changePassword(@Validated @ModelAttribute(name = "customer") Customer customer,BindingResult result
+            ,Model model,@PathVariable(name = "email") String email,HttpSession session){
+        Customer customer1=customerRespon.getEmailCustomer(email);
+
+        model.addAttribute("customer1",customer1);
+        model.addAttribute("customer",customer);
+        customer1.setPassword(customer.getPassword());
+        customerService.save(customer1);
+        session.removeAttribute("saveEmail");
+        return "/login/notify_email";
     }
 }

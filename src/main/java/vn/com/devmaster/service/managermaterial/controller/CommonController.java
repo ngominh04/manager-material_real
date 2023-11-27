@@ -5,8 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import vn.com.devmaster.service.managermaterial.domain.Product;
+import vn.com.devmaster.service.managermaterial.projecttion.IProduct;
 import vn.com.devmaster.service.managermaterial.reponsitory.CustomerRespon;
 import vn.com.devmaster.service.managermaterial.reponsitory.Responsitory;
+
+import java.util.List;
 
 @Controller
 public class CommonController {
@@ -16,7 +20,8 @@ public class CommonController {
     CustomerRespon customerRespon;
     @GetMapping("")
     public String showIndex(Model model){
-        model.addAttribute("trangChu",responsitory.getProductTC());
+        List<IProduct> product= responsitory.getProductTC();
+        model.addAttribute("trangChu",product);
         return "layout/index";
     }
 

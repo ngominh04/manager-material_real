@@ -16,6 +16,9 @@ public interface CustomerRespon extends CrudRepository<Customer, Integer> {
     @Query(value = "select c.* from Customer c where USERNAME = ?",nativeQuery = true)
     Customer getCustomer1(String  uname);
 
+    @Query(value = "select c.* from Customer c where c.email = ?",nativeQuery = true)
+    Customer getEmailCustomer(String  email);
+
     @Query(value = "select c.* from Customer c where c.id = ?",nativeQuery = true)
     Customer getCustomerId(Integer id);
     @Query(value = "" +

@@ -15,7 +15,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests()
                 // những đường dẫn trước và sau view (authenticated: đăng nhập là vào được   hasAnyRole: phân quyền)
-                .antMatchers("/view/dell").hasAnyRole("admin")
+                //.antMatchers("/view/dell").hasAnyRole("admin")
                 // đường dẫn được tất cả các quyền (thường để cuối vì duyệt toàn bộ)
                 .antMatchers("/**").permitAll()
                 .and().formLogin()

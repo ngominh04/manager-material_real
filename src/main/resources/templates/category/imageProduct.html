@@ -144,8 +144,19 @@
 
       <input name='name' placeholder='Name product' type='text' >
       <input id='url'  name='url' placeholder='Thêm url' type='file'>
-      <input id='idProduct' name='idProduct' placeholder='Chọn id product muốn thêm ảnh' type='text'>
-
+<!--      <input id='idProduct' name='idProduct' placeholder='Chọn id product muốn thêm ảnh' type='text'>-->
+      <br><p style="color: red">Chọn product muốn thêm ảnh</p>
+      <select id="idProduct" name="idProduct"
+              style="border: 2px solid green;
+              border-radius: 12px;
+              background-color: #0c0c0c;
+              color: wheat;">
+        <option  th:each="pm:${listIdProduct}"
+                 th:value="${pm.id}"
+                 th:text="${pm.name}"
+        >
+        </option>
+      </select>
       <div class='agree'>
         <input id='agree' name='agree' type='checkbox'>
         <label for='agree'></label>Accept rules and conditions
@@ -159,9 +170,27 @@
   <div th:if="${image1 != null}">
     <form th:action="@{'/image/saveOrUpdate/'+${image1.id}}"  method="post"  enctype="multipart/form-data" >
       <h2>Imgae</h2>
+        <br><p style="color: red">Tên product</p>
       <input name='name' placeholder='Name product' type='text' th:value="${image1.name}">
+        <br><p style="color: red">Chọn product muốn thêm ảnh</p>
       <input id='url' name='url' placeholder='Thêm image' type='file'>
-      <input id='idProduct' name='idProduct' placeholder='Chọn id product muốn thêm ảnh' type='text' th:value="${image1.idProduct.id}">
+<!--      <input id='idProduct' name='idProduct' placeholder='Chọn id product muốn thêm ảnh' type='text' th:value="${image1.idProduct.id}">-->
+        <br><p style="color: red">Chọn id product </p>
+      <select id="idProduct" name="idProduct"
+              style="border: 2px solid green;
+              border-radius: 12px;
+              background-color: #0c0c0c;
+              color: wheat;">
+        <option
+                 th:value="${image1.idProduct}"
+                 th:text="${image1.idProduct}"
+        >
+        <option  th:each="pm:${listIdProduct}"
+                 th:value="${pm.id}"
+                 th:text="${pm.id}"
+        >
+        </option>
+      </select>
       <div class='agree'>
         <input id='agree' name='agree' type='checkbox'>
         <label for='agree'></label>Accept rules and conditions

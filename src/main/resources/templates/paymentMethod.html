@@ -9,11 +9,10 @@
 <body>
 <div layout:fragment="content">
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-12" th:each="product: ${payment_method}" >
+    <div class="row" style="margin-left: 18rem">
+      <div class="col-4" th:each="product: ${payment_method}" style="border: 1px solid black;margin: 0.5rem;border-radius: 5px">
         <p >Tên phương thức thah toán :<span th:text="${product.name}"></span> </p>
         <p >Cách thanh toán :<span th:text="${product.notes}"></span></p>
-        <hr>
       </div>
     </div>
   </div>

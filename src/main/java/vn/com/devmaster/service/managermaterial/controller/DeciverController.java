@@ -34,7 +34,6 @@ public class DeciverController {
         Customer customer= customerRespon.getCustomer1(username);
         List<Nguoinhan> nguoinhan = nguoiNhanRespon.getNguoinhan(customer.getId());
         model.addAttribute("listNguoiNhan",nguoinhan);
-        model.addAttribute("showAll",nguoinhan);
         return "/deciver/showDeciver";
     }
     @GetMapping("/deciver")
@@ -50,8 +49,7 @@ public class DeciverController {
         nguoinhan.setIdCustomer(customer.getId());
         nguoiNhanService.save(nguoinhan);
         model.addAttribute("deciver",new Nguoinhan());
-
-        return "redirect:/view/products";
+        return "/deciver/notify";
     }
     @PostMapping("/saveOrUpdate/{username}/{id}")
     public String saveOrUpdate(@Validated @ModelAttribute(name = "deciver") Nguoinhan nguoinhan,

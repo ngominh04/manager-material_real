@@ -132,6 +132,48 @@
                 text-align: center;
             }
         }
+        .btn1{
+            cursor:pointer;
+            position:relative;
+            padding:10px 20px;
+            background:white;
+            font-size:18px;
+            border-top-right-radius:10px;
+            border-bottom-left-radius:10px;
+            transition:all 0.5s;
+            &:after,&:before{
+                content:" ";
+                width:10px;
+                height:10px;
+                position:absolute;
+                border :0px solid #fff;
+                transition:all 1s;
+            }
+            &:after{
+                top:-1px;
+                left:-1px;
+                border-top:5px solid black;
+                border-left:5px solid black;
+            }
+            &:before{
+                bottom:-1px;
+                right:-1px;
+                border-bottom:5px solid black;
+                border-right:5px solid black;
+            }
+            &:hover{
+                border-top-right-radius:0px;
+                border-bottom-left-radius:0px;
+            // background:rgba(0,0,0,.5);
+            // color:white;
+                &:before,&:after{
+
+                    width:100%;
+                    height:100%;
+                // border-color:white;
+                }
+            }
+        }
     </style>
 </head>
 <body>
@@ -147,24 +189,27 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="show: ${session.listNguoiNhan}">
+        <tr th:each="show: ${listNguoiNhan}" style="height: 55px">
             <td th:text="${show.id}"></td>
             <td th:text="${show.name}"></td>
             <td th:text="${show.address}"></td>
             <td th:text="${show.phone}"></td>
             <td>
-                <a th:href="@{'/deciver/deciver/'+${show.id}}"> Sửa </a><a th:href="@{'/deciver/remove/'+${session.username}+'/'+${show.id}}"> Xóa</a>
+                <a class="btn1" style="color: gray;text-decoration: none;font-size: 14px" th:href="@{'/deciver/deciver/'+${show.id}}"> Sửa </a>
+                <a class="btn1" style="color: gray;text-decoration: none;font-size: 14px;margin-left: 1rem" th:href="@{'/deciver/remove/'+${session.username}+'/'+${show.id}}"> Xóa</a>
             </td>
         </tr>
         <tbody>
     </table>
-    <div>
-        <a th:href="@{/deciver/deciver}">Thêm deciver</a>
-    </div>
+
 
 </div>
 <div >
-    <h3 class="mb-0"><a th:href="@{/view/products}" class="text-body"><i
+    <div>
+        <a class="btn1" style="color: gray;text-decoration: none" th:href="@{/deciver/deciver}">Thêm deciver</a>
+    </div>
+    <hr style="margin: 2rem;width: 80px">
+    <h3 class="mb-0"><a class="btn1" style="color: gray;text-decoration: none" th:href="@{/view/products}" ><i
             class="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a></h3>
 </div>
 </body>

@@ -70,37 +70,45 @@
         }
     }
 
-    .data-container{
-        background-color: #e4ffef;
-        height:100vh;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-    }
 </style>
 </head>
-<body>
+<body >
 <div layout:fragment="content">
-  <div class="data-container">
-      <h2 style="    margin-top: -39rem;margin-left: -13rem;margin-right: 2rem;">Đơn hàng</h2>
+  <div class="container-fluid">
+      <h2 style="margin-right: 2rem;margin-bottom: 2rem">Trạng thái đơn hàng</h2>
 
-      <div class="row" style="margin-top: -37rem">
+
+      <div class="row" style="margin-top: 1rem" >
           <ul>
               <div class="col-3" >
-                  <li><a style="width: 200px;text-decoration: none" class="btn1" th:href="@{'/oder/donhang1/'+${session.saveCus.id}}">Chờ xác nhận</a></li>
+                  <li><a style="width: 200px;text-decoration: none;background-color: #f5f8dc" class="btn1" th:href="@{'/oder/donhang1/'+${session.saveCus.id}}">Chờ xác nhận</a></li>
               </div>
 
-              <div class="col-3" style="margin-left: 4rem">
-                  <li><a class="btn1" style=";text-decoration: none" th:href="@{'/oder/donhang2/'+${session.saveCus.id}}">Đang giao</a></li>
+              <div class="col-3" style="margin-left: 3rem">
+                  <li><a class="btn1" style=";text-decoration: none;background-color: #f5f8dc" th:href="@{'/oder/donhang2/'+${session.saveCus.id}}">Đang giao</a></li>
               </div>
               <div class="col-3">
-                  <li ><a class="btn1" style=";text-decoration: none"  th:href="@{'/oder/donhang3/'+${session.saveCus.id}}">Đã giao</a></li>
+                  <li ><a class="btn1" style=";text-decoration: none;background-color: #f5f8dc"  th:href="@{'/oder/donhang3/'+${session.saveCus.id}}">Đã giao</a></li>
               </div>
               <div class="col-3" style="margin-left: 4rem">
-                  <li><a class="btn1" style=";text-decoration: none" th:href="@{'/oder/donhang0/'+${session.saveCus.id}}">Đã mua</a></li>
+                  <li><a class="btn1" style=";text-decoration: none;background-color: #f5f8dc" th:href="@{'/oder/donhang0/'+${session.saveCus.id}}">Đã mua</a></li>
               </div>
 
           </ul>
+      </div>
+      <h3 class="h3 mb-0 text-gray-800" style="margin-top: 3rem">Sản phẩm có thể tham khảo</h3>
+      <div class="row"  >
+          <div class="col-lg-3" th:each="product: ${trangChu}" style="border: 1px solid grey;border-radius: 5%;margin: 2rem;text-align: center">
+              <img th:src="@{'/img/product_img/product_image/'+${product.image}}" style="margin-top: 0.5rem;width: 100%">
+              <p th:text="${product.name}"></p>
+              <p th:text="${product.moTa}"></p>
+              <!--                <p th:text="${product.image}"></p>-->
+              <p >Giá chỉ: <span th:text="${#numbers.formatDecimal(product.price,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></span></p>
+              <p >Số lượng còn lại : <span th:text="${product.quatity}"></span></p>
+              <a th:href="@{'/view/productAll/'+${product.id}}"
+                 style="text-decoration: none;border: 1px solid gainsboro;background-color: gainsboro;border-radius: 15px;padding: 0.225rem;">
+                  Xem chi tiết</a>
+          </div>
       </div>
   </div>
 

@@ -34,6 +34,16 @@ public class ViewController {
         model.addAttribute("prod",responsitory.getProduct());
         return "product";
     }
+    @GetMapping("/products1")
+    String getProductMinMax(Model model){
+        model.addAttribute("prod",responsitory.getProductMinMax());
+        return "product";
+    }
+    @GetMapping("/products2")
+    String getProductMaxMin(Model model){
+        model.addAttribute("prod",responsitory.getProductMaxMin());
+        return "product";
+    }
 
     @GetMapping("/hp")
     String showProductHp(Model model){
@@ -161,7 +171,6 @@ public class ViewController {
 
                 List<Nguoinhan> nguoinhan = nguoiNhanRespon.getNguoinhan(customer.getId());
                 model.addAttribute("listNguoiNhan",nguoinhan);
-                session.setAttribute("listNguoiNhan",nguoinhan);
 
                 item.setUsername(username);
                 if(customer.getPhanquyen() == 1){
@@ -226,5 +235,12 @@ public class ViewController {
     @GetMapping("/testOder")
     public String a(){
         return "oder/Oder";
+    }
+
+    // search
+    @PostMapping("/search")
+    public String search(Model model,@RequestParam(name = "name")String name){
+        model.addAttribute("finALlByNamePro",productRespon.findAllByName(name));
+        return "searchProduct";
     }
 }

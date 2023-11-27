@@ -21,6 +21,10 @@ public interface Responsitory extends JpaRepository<Category, Integer> {
 
     @Query(value = Sql.PRODUCT,nativeQuery = true)
     List<IProduct> getProduct();
+    @Query(value = Sql.PRODUCT_PRICE_MIN_MAX,nativeQuery = true)
+    List<IProduct> getProductMinMax();
+    @Query(value = Sql.PRODUCT_PRICE_MAX_MIN,nativeQuery = true)
+    List<IProduct> getProductMaxMin();
 
     @Query(value = Sql.PRODUCT_HP,nativeQuery = true)
     List<IProduct> getProductHp();

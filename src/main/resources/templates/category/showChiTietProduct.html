@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+  <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+  <link
+          href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
     <style>
         *{
             box-sizing: border-box;
@@ -12,7 +19,7 @@
         body{
             font-family: Helvetica;
             -webkit-font-smoothing: antialiased;
-            background: rgba( 71, 147, 227, 1);
+            background-color: #dbf2ec;
         }
         h2{
             text-align: center;
@@ -178,62 +185,35 @@
     </style>
 </head>
 <body>
-<h2>Bảng quản lí category</h2>
-<div class="table-wrapper">
-    <table class="fl-table" >
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Image</th>
-            <th>Price</th>
-            <th>Quatity</th>
-            <th>IsActive</th>
-            <th>IsDelete</th>
-
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="show: ${showAll}">
-            <td th:text="${show.id}"></td>
-            <td th:text="${show.name}"></td>
-
-            <td >
-                <img th:src="@{'/img/product_img/product_image/'+${show.image}}"
-                     class="img-fluid rounded-3"
-                     style="width: 120px;" alt="Book">
-            </td>
-            <td th:text="${#numbers.formatDecimal(show.price,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></span>></td>
-            <td th:text="${show.quatity}"></td>
-            <td th:text="${show.isactive}"></td>
-            <td th:switch="${show.isDelete}">
-                <span th:case="1" style="color: white;background-color: greenyellow;border-radius: 2px">ON</span>
-                <span th:case="0" style="color: white;background-color: red;border-radius: 2px">OFF</span>
-            </td>
-            <td>
-                <a class="btn1" style="text-decoration: none;color: #1c294e;font-size: 14px;margin-right: 1rem" th:href="@{'/product/showChiTietProduct/'+${show.id}}">Xem chi tiết sản phẩm</a>
-                 <a class="btn1" style="text-decoration: none;color: #1c294e;font-size: 14px;margin-right: 1rem" th:href="@{'/product/product/'+${show.id}}"> Sửa </a>
-                 <a class="btn1" style="text-decoration: none;color: #1c294e;font-size: 14px;margin-right: 1rem" th:if="${show.isDelete == 1}" th:href="@{'/product/remove/'+${show.id}}"> Tắt</a>
-                 <a class="btn1" style="text-decoration: none;color: #1c294e;font-size: 14px;margin-right: 1rem" th:if="${show.isDelete == 0}" th:href="@{'/product/on/'+${show.id}}"> Bật</a>
-            </td>
-        </tr>
-        <tbody>
-    </table>
-</div>
-<div >
-    <a class="btn1" style="text-decoration: none;color: #1c294e" th:href="@{/product/product}">Thêm product</a>
-</div>
-<hr style="margin: 2rem;width: 80px">
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-3">
-            <a class="btn1"
-               style="text-decoration: none;color: #1c294e;text-align: center"
-               th:href="@{/customer/back}"  >Back to admin</a>
+<div class="container-fluid" style=";margin-top: 2rem">
+  <div class="row">
+      <h3>Chi tiết sản phẩm <span th:text="${show.name}"></span> id: <span th:text="${show.id}"></span></h3>
+    <div class="col-12" style="text-align: center">
+        <img th:src="@{'/img/product_img/product_image/'+${show.image}}"
+             class="img-fluid rounded-3"
+             style="width: 30%;border-radius: 10px" alt="Book">
+        <p ><span th:text="${show.name}"></span> / <span th:text="${show.notes}"></span> <span th:text="${show.description}"></span></p>
+        <p>Hãng: <span th:text="${show.idcategory.name}"></span></p>
+        <p>GIá: <span th:text="${#numbers.formatDecimal(show.price,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></span></p>
+        <p>Số lượng còn lại: <span th:text="${show.quatity}"></span></p>
+        <p th:if="${show.isactive} == 1">Còn bán</p>
+        <p th:if="${show.isactive} == 0">Hiện hết hàng</p>
+        <div th:switch="${show.isDelete}">
+            <p th:case="1">Trạng thái hiển thị: <span style="color: white;background-color: greenyellow;border-radius: 2px">ON</span></p>
+            <p th:case="0">Trạng thái hiển thị: <span style="color: white;background-color: red;border-radius: 2px">OFF</span><i class="fa-solid fa-xmark"></i></p>
         </div>
+        <a class="btn1" style="text-decoration: none;color: #1c294e;font-size: 14px;margin-right: 1rem" th:href="@{'/product/product/'+${show.id}}"> Sửa </a>
+        <a class="btn1" style="text-decoration: none;color: #1c294e;font-size: 14px;margin-right: 1rem" th:if="${show.isDelete == 1}" th:href="@{'/product/remove1/'+${show.id}}"> Tắt</a>
+        <a class="btn1" style="text-decoration: none;color: #1c294e;font-size: 14px;margin-right: 1rem" th:if="${show.isDelete == 0}" th:href="@{'/product/on1/'+${show.id}}"> Bật</a>
 
     </div>
+  </div>
 </div>
-<div></div>
+<hr class="my-4">
+<div>
+    <a class="btn1"
+       style="text-decoration: none;color: #1c294e;text-align: center"
+       th:href="@{/product/back}"  >Back to table product</a>
+</div>
 </body>
 </html>

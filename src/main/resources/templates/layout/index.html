@@ -122,6 +122,48 @@
                 top: 15px;
             }
         }
+        .btn1{
+            cursor:pointer;
+            position:relative;
+            padding:10px 20px;
+            background:white;
+            font-size:18px;
+            border-top-right-radius:10px;
+            border-bottom-left-radius:10px;
+            transition:all 0.5s;
+            &:after,&:before{
+                content:" ";
+                width:10px;
+                height:10px;
+                position:absolute;
+                border :0px solid #fff;
+                transition:all 1s;
+            }
+            &:after{
+                top:-1px;
+                left:-1px;
+                border-top:5px solid black;
+                border-left:5px solid black;
+            }
+            &:before{
+                bottom:-1px;
+                right:-1px;
+                border-bottom:5px solid black;
+                border-right:5px solid black;
+            }
+            &:hover{
+                border-top-right-radius:0px;
+                border-bottom-left-radius:0px;
+            // background:rgba(0,0,0,.5);
+            // color:white;
+                &:before,&:after{
+
+                    width:100%;
+                    height:100%;
+                // border-color:white;
+                }
+            }
+        }
     </style>
 </head>
 
@@ -138,20 +180,11 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">HOME PAGE</div>
             </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-
-            <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
@@ -164,36 +197,73 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
+                    <span>Sản Phẩm</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Danh sách:</h6>
-                        <a class="collapse-item" th:href="@{/view/products}" style="text-decoration: none;" >Sản phẩm</a>
+                        <a class="collapse-item" th:href="@{/view/products}" style="text-decoration: none;" >Các sản phẩm</a>
+                        <a class="collapse-item" th:href="@{/view/products1}" style="text-decoration: none;" >sản phẩm có giá tiền <br>tăng dần</a>
+                        <a class="collapse-item" th:href="@{/view/products2}" style="text-decoration: none;" >sản phẩm có giá tiền <br>Giảm dần</a>
+
+                    </div>
+                </div>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+                   aria-expanded="true" aria-controls="collapseThree">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Thanh toán</span>
+                </a>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Danh sách:</h6>
+<!--                        <a class="collapse-item" th:href="@{/view/products}" style="text-decoration: none;" >Các sản phẩm</a>-->
                         <a class="collapse-item" th:href="@{/view/payment_method}" style="text-decoration: none;">Các loại thanh toán</a>
+
+                    </div>
+                </div>
+            </li>
+            <hr class="sidebar-divider d-none d-md-block">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
+                   aria-expanded="true" aria-controls="collapseFour">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Vận chuyển</span>
+                </a>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Danh sách:</h6>
+                        <!--                        <a class="collapse-item" th:href="@{/view/products}" style="text-decoration: none;" >Các sản phẩm</a>-->
+<!--                        <a class="collapse-item" th:href="@{/view/payment_method}" style="text-decoration: none;">Các loại thanh toán</a>-->
                         <a class="collapse-item" th:href="@{/view/transport_method}" style="text-decoration: none;">Các loại phương tiện <br> vận chuyển</a>
+
+                    </div>
+                </div>
+            </li><hr class="sidebar-divider d-none d-md-block">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
+                   aria-expanded="true" aria-controls="collapseFive">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Người dùng</span>
+                </a>
+                <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Danh sách:</h6>
+                        <div th:if="${session.saveCus == null}">
+                            <h3>Bạn cần đăng nhập</h3>
+                        </div>
                         <div th:if="${session.saveCus != null}">
                             <a class="collapse-item" th:href="@{'/deciver/showAllDeciver/'+${session.username}}" style="text-decoration: none;">Thêm địa <br>chỉ nhận hàng</a>
-<!--                            <a class="collapse-item" th:href="@{'/oder/donhang/'+${session.saveCus.id}}" style="text-decoration: none;">Xem đơn hàng</a>-->
+                            <!--                            <a class="collapse-item" th:href="@{'/oder/donhang/'+${session.saveCus.id}}" style="text-decoration: none;">Xem đơn hàng</a>-->
                             <a class="collapse-item" th:href="@{'/oder/donhang/'+${session.saveCus.id}}" style="text-decoration: none;">Xem đơn hàng</a>
                         </div>
                     </div>
                 </div>
             </li>
 
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-
-
-            <!-- Sidebar Message -->
-            <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="../../../../../../startbootstrap-sb-admin-2-gh-pages/img/undraw_rocket.svg" alt="...">
-                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-            </div>
 
         </ul>
         <!-- End of Sidebar -->
@@ -213,13 +283,13 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
+                    <form method="post" th:action="@{/view/search}" enctype="multipart/form-data"
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                            <input name="name" id="name" type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
                                 aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
+                                <button class="btn btn-primary" type="submit">
                                     <i class="fas fa-search fa-sm"></i>
                                 </button>
                             </div>
@@ -228,14 +298,23 @@
                     </form>
 
                     <div th:if="${session.username==null}" style="margin-left: -8rem">
-                        <a class="text-gray-800"  th:href="@{/view/login}" style="text-decoration: none">Đăng nhập</a>
+                        <a class="btn1"  th:href="@{/view/login}" style="text-decoration: none">Đăng nhập</a>
                     </div>
                     <div th:if="${session.username != null}" style="margin-left: -8rem">
-                        <a class="text-gray-800"  th:href="@{/view/logout}" style="text-decoration: none;padding-right: 3rem">Đăng xuất</a>
-                        <!-- Topbar Navbar -->
-                        <a  th:href="@{'/shoping_cart/a/'+${session.username}}" style="text-decoration: none;" class="text-gray-800">
-                            <i class="fa fa-shopping-basket " ></i> Giỏ hàng
-                        </a>
+                        <div class="container">
+                            <div class="row" style="width: 600px;margin-top: 1rem">
+                                <div class="col-4">
+                                    <p> <span th:text="${session.saveCus.name}"></span></p>
+                                </div>
+                                <div class="col-6">
+                                    <a class="btn1"  th:href="@{/view/logout}" style="text-decoration: none;color: #3d3e47">Đăng xuất</a>
+                                    <!-- Topbar Navbar -->
+                                    <a  th:href="@{'/shoping_cart/a/'+${session.username}}" style=";padding-left: 3rem;text-decoration: none;" class="text-gray-800">
+                                        <i class="fa fa-shopping-basket " ></i> Giỏ hàng
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </nav>
@@ -253,7 +332,9 @@
                                 <!--                <p th:text="${product.image}"></p>-->
                                 <p >Giá chỉ: <span th:text="${#numbers.formatDecimal(product.price,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></span></p>
                                 <p >Số lượng còn lại : <span th:text="${product.quatity}"></span></p>
-                                <a th:href="@{'/view/productAll/'+${product.id}}" style="text-decoration: none;">Xem chi tiết</a>
+                                <a th:href="@{'/view/productAll/'+${product.id}}"
+                                   style="text-decoration: none;border: 1px solid gainsboro;background-color: gainsboro;border-radius: 15px;padding: 0.225rem;">
+                                    Xem chi tiết</a>
                             </div>
                         </div>
                     </div>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.com.devmaster.service.managermaterial.domain.ProductImage;
 import vn.com.devmaster.service.managermaterial.reponsitory.ImageProductRespon;
+import vn.com.devmaster.service.managermaterial.reponsitory.Responsitory;
 import vn.com.devmaster.service.managermaterial.service.ImageProductService;
 import vn.com.devmaster.service.managermaterial.service.ParamService;
 
@@ -25,6 +26,8 @@ public class ImageProductController {
     ImageProductService imageProductService;
     @Autowired
     ParamService paramService;
+    @Autowired
+    Responsitory responsitory;
     // show toàn bộ
     @GetMapping("/showAllImage")
     public String showAllProduct(Model model){
@@ -34,8 +37,8 @@ public class ImageProductController {
     // thêm mới
     @GetMapping("/image")
     public String showForm(Model model){
-
         model.addAttribute("image",new ProductImage());
+        model.addAttribute("listIdProduct",responsitory.getProduct());
         return "/category/imageProduct";
     }
     // lưu lại khi thêm mới
@@ -91,6 +94,7 @@ public class ImageProductController {
                        Model model,HttpSession session){
 
         Optional<ProductImage> image1= imageProductService.findById(id);
+        model.addAttribute("listIdProduct",responsitory.getProduct());
         if(image1.isPresent()){
             model.addAttribute("image1",image1.get());
         }else {

@@ -32,6 +32,13 @@ public class ProductController {
         model.addAttribute("showAll",productRespon.getAllProduct());
         return "/category/showProduct";
     }
+    // show chi tiết product
+    @GetMapping("/showChiTietProduct/{idPro}")
+    public String showChiTietProduct(Model model,@PathVariable(name = "idPro") Integer idPro){
+        Product product=productRespon.findAllById(idPro);
+        model.addAttribute("show",product);
+        return "/category/showChiTietProduct";
+    }
     // thêm mới
     @GetMapping("/product")
     public String showForm(Model model){
@@ -111,6 +118,7 @@ public class ProductController {
         }
         return "/category/product";
     }
+    //  trang showAll
     @GetMapping("/remove/{id}")
     public String remove(@PathVariable(name = "id")Integer id){
         Product product = productRespon.findAllById(id);
@@ -124,6 +132,26 @@ public class ProductController {
         Product product = productRespon.findAllById(id);
         product.setIsDelete(1);
         productRespon.save(product);
+        return "redirect:/product/showAllProduct";
+    }
+    // trang showChiTIet
+    @GetMapping("/remove1/{id}")
+    public String remove1(@PathVariable(name = "id")Integer id){
+        Product product = productRespon.findAllById(id);
+        product.setIsDelete(0);
+        productRespon.save(product);
+        return "redirect:/product/showChiTietProduct/{id}";
+    }
+
+    @GetMapping("/on1/{id}")
+    public String on1(@PathVariable(name = "id")Integer id){
+        Product product = productRespon.findAllById(id);
+        product.setIsDelete(1);
+        productRespon.save(product);
+        return "redirect:/product/showChiTietProduct/{id}";
+    }
+    @GetMapping("/back")
+    public String back(Model model){
         return "redirect:/product/showAllProduct";
     }
 }
