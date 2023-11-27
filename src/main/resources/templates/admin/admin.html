@@ -232,7 +232,9 @@
                     <a class="text-gray-800" th:href="@{/view/login}" style="text-decoration: none;">Đăng nhập</a>
                 </div>
                 <div th:if="${session.username != null}" style="margin-left: -8rem">
+                    <a class="text-gray-800" th:href="@{/customer/register1}" style="text-decoration: none;padding-right: 2rem">Thêm admin</a>
                     <a class="text-gray-800" th:href="@{/view/logout}" style="text-decoration: none;">Đăng xuất</a>
+
                 </div>
 
             </nav>
@@ -240,6 +242,9 @@
 
             <!-- Begin Page Content -->
             <div layout:fragment="content1">
+                <div th:if="${session.a == 1}">
+                    <h1>Bạn đã thêm admin mới thành công</h1>
+                </div>
                 <h1>Bạn đang ở trang admin</h1>
             </div>
         </div>

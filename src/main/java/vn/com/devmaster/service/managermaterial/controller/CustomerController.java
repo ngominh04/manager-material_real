@@ -25,22 +25,37 @@ public class CustomerController {
     @Autowired
     CustomerService customerService;
     @GetMapping("/register")
-    public String showForm(Model model){
+    public String showForm(Model model,HttpSession session){
         model.addAttribute("customer",new Customer());
+        session.setAttribute("a",0);
+        return "/login/register";
+    }
+    // thêm admin mới
+    @GetMapping("/register1")
+    public String showForm1(Model model,HttpSession session){
+        Customer customer = new Customer();
+        customer.setPhanquyen((byte) 1);
+        model.addAttribute("customer",customer);
+        session.setAttribute("a",1);
         return "/login/register";
     }
     @PostMapping("/saveOrUpdate")
     public String saveOrUpdate(@Validated @ModelAttribute(name = "customer") Customer customer,
                                BindingResult result,
-                               Model model){
+                               Model model,HttpSession session){
+        int a = (int) session.getAttribute("a");
         if(result.hasErrors()){
             model.addAttribute("message","Có thông tin bạn chưa nhập");
             return "/login/register";
         }
         customerService.save(customer);
         model.addAttribute("customer",new Customer());
-
-        return "/login/notification";
+        if(a == 1){
+            session.removeAttribute("a");
+            return "admin/admin";
+        }else {
+            return "/login/notification";
+        }
     }
 
     @PostMapping("/saveOrUpdate/{id}")
