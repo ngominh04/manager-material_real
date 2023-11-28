@@ -3,7 +3,7 @@ package vn.com.devmaster.service.managermaterial.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vn.com.devmaster.service.managermaterial.domain.Category;
-import vn.com.devmaster.service.managermaterial.reponsitory.CategoryRespon;
+import vn.com.devmaster.service.managermaterial.reponsitory.categoryRespon;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class CategoryService {
     @Autowired
-    CategoryRespon categoryRespon;
+    categoryRespon categoryRespon;
 
     public Category save(Category entity) {
         entity.setIsactive((byte) 1);

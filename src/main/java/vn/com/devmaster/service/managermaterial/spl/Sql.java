@@ -157,6 +157,13 @@ public class Sql {
             "            inner join `manager-material`.nguoinhan n on ng.idguoi_nhan = n.Id\n" +
             "            where n.id_customer = ? and o.TRANGTHAI = 3\n" +
             "            order by o.ORDERS_DATE desc";
+    public static final String DONHANG_TH4="" +
+            "select o.IDORDERS idOrder,o.ID id,n.id_customer idCus,ng.idguoi_nhan idNguoiNhan, o.TOTAL_MONEY total, o.ORDERS_DATE orderDate\n" +
+            "            from orders o\n" +
+            "                inner join `manager-material`.orders_nguoinhan ng on o.ID = ng.idorder\n" +
+            "            inner join `manager-material`.nguoinhan n on ng.idguoi_nhan = n.Id\n" +
+            "            where n.id_customer = ? and o.TRANGTHAI = 4\n" +
+            "            order by o.ORDERS_DATE desc";
     public static final String DONHANG_TH0="" +
             "select o.IDORDERS idOrder,o.ID id,n.id_customer idCus,ng.idguoi_nhan idNguoiNhan, o.TOTAL_MONEY total, o.ORDERS_DATE orderDate\n" +
             "            from orders o\n" +

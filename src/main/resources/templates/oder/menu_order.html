@@ -80,21 +80,25 @@
 
       <div class="row" style="margin-top: 1rem" >
           <ul>
-              <div class="col-3" >
+              <div class="col-2" >
                   <li><a style="width: 200px;text-decoration: none;background-color: #f5f8dc" class="btn1" th:href="@{'/oder/donhang1/'+${session.saveCus.id}}">Chờ xác nhận</a></li>
               </div>
-
-              <div class="col-3" style="margin-left: 3rem">
+              <div class="col-2" style="margin-left: 2rem">
                   <li><a class="btn1" style=";text-decoration: none;background-color: #f5f8dc" th:href="@{'/oder/donhang2/'+${session.saveCus.id}}">Đang giao</a></li>
               </div>
-              <div class="col-3">
+              <div class="col-2">
                   <li ><a class="btn1" style=";text-decoration: none;background-color: #f5f8dc"  th:href="@{'/oder/donhang3/'+${session.saveCus.id}}">Đã giao</a></li>
               </div>
-              <div class="col-3" style="margin-left: 4rem">
+              <div class="col-2" style="margin-left: 2rem">
                   <li><a class="btn1" style=";text-decoration: none;background-color: #f5f8dc" th:href="@{'/oder/donhang0/'+${session.saveCus.id}}">Đã mua</a></li>
               </div>
-
+              <div class="col-2" style="margin-left: 1rem">
+                  <li>
+                      <a class="btn1" style=";text-decoration: none;background-color: #f5f8dc" th:href="@{'/oder/donhang4/'+${session.saveCus.id}}">Đã Hủy</a>
+                  </li>
+              </div>
           </ul>
+
       </div>
       <h3 class="h3 mb-0 text-gray-800" style="margin-top: 3rem">Sản phẩm có thể tham khảo</h3>
       <div class="row"  >

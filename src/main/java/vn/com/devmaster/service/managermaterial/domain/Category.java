@@ -46,6 +46,9 @@ public class Category {
     @Column(name = "ISACTIVE")
     private Byte isactive;
 
+    @Column(name = "ISDELETE")
+    private int isdelete;
+
 //    @OneToMany(cascade = CascadeType.ALL,mappedBy = "idcategory",fetch = FetchType.LAZY)
 //    private List<Product> product;
 }

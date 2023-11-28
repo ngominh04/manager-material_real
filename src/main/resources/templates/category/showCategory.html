@@ -192,6 +192,7 @@
             <th>Created by</th>
             <th>Update by</th>
             <th>IsActive</th>
+            <th>IsDelete</th>
 
         </tr>
         </thead>
@@ -211,15 +212,18 @@
             <td th:text="${show.createdBy}"></td>
             <td th:text="${show.updatedBy}"></td>
             <td th:text="${show.isactive}"></td>
+            <td th:switch="${show.isdelete}" style="background-color: black">
+                <h3 th:case="1" style="color: greenyellow">ON</h3>
+                <h3 th:case="0" style="color: red">OFF</h3>
+            </td>
             <td>
                 <a class="btn1" style="color: gray;text-decoration: none;font-size: 14px" th:href="@{'/category/category/'+${show.id}}"> Sửa </a>
-                <a class="btn1" style="color: gray;text-decoration: none;font-size: 14px;margin-left: 1rem" th:href="@{'/category/remove/'+${show.id}}"> Xóa</a>
+                <a class="btn1" th:if="${show.isdelete == 1}" style="color: gray;text-decoration: none;font-size: 14px;margin-left: 1rem" th:href="@{'/category/off/'+${show.id}}"> OFF</a>
+                <a class="btn1" th:if="${show.isdelete == 0}" style="color: gray;text-decoration: none;font-size: 14px;margin-left: 1rem" th:href="@{'/category/on/'+${show.id}}"> ON</a>
             </td>
         </tr>
         <tbody>
     </table>
-
-
 </div>
 <div >
     <div>

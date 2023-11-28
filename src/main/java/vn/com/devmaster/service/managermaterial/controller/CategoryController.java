@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.com.devmaster.service.managermaterial.domain.Category;
 import vn.com.devmaster.service.managermaterial.domain.PaymentMethod;
-import vn.com.devmaster.service.managermaterial.reponsitory.CategoryRespon;
+import vn.com.devmaster.service.managermaterial.reponsitory.categoryRespon;
 import vn.com.devmaster.service.managermaterial.service.CategoryService;
 import vn.com.devmaster.service.managermaterial.service.ParamService;
 
@@ -21,7 +21,7 @@ import java.util.Optional;
 @RequestMapping("/category")
 public class CategoryController {
     @Autowired
-    CategoryRespon categoryRespon;
+    categoryRespon categoryRespon;
     @Autowired
     CategoryService categoryService;
     @Autowired
@@ -109,9 +109,18 @@ public class CategoryController {
         }
         return "/category/category";
     }
-    @GetMapping("/remove/{id}")
-    public String remove(@PathVariable(name = "id")Integer id){
-        categoryService.deleteById(id);
+    @GetMapping("/off/{id}")
+    public String off(@PathVariable(name = "id")Integer id){
+        Category category = categoryRespon.finAllById(id);
+        category.setIsdelete(0);
+        categoryService.save(category);
+        return "redirect:/category/showAllCategory";
+    }
+    @GetMapping("/on/{id}")
+    public String on(@PathVariable(name = "id")Integer id){
+        Category category = categoryRespon.finAllById(id);
+        category.setIsdelete(1);
+        categoryService.save(category);
         return "redirect:/category/showAllCategory";
     }
 }
