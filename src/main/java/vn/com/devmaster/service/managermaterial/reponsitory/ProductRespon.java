@@ -22,7 +22,7 @@ public interface ProductRespon extends CrudRepository<Product, Integer> {
     List<Product> getAllProduct();
 
     // search theo tên sản phẩm
-    @Query(value = "select p.* from Product p where p.name like concat('%',:name,'%')",nativeQuery = true)
+    @Query(value = "select p.* from Product p where p.name like concat('%',:name,'%') and p.isDelete = 1",nativeQuery = true)
     List<Product> findAllByName(String name);
 
 }
