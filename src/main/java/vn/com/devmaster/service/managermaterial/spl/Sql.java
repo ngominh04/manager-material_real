@@ -191,4 +191,6 @@ public class Sql {
             "inner join `manager-material`.product p on od.IDPRODUCT = p.ID\n" +
             "where od.IDORD = ?";
 
+    // static : khai báo để dùng chung , khi dùng chung ko cho xóa thuộc tính dó
+    // final: ko cho thay đổi
 }
