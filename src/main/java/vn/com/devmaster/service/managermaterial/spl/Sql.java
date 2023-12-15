@@ -190,6 +190,13 @@ public class Sql {
             "select p.NAME name,od.QTY qty,p.PRICE price,p.IMAGE image,p.NOTES notes from orders_details od\n" +
             "inner join `manager-material`.product p on od.IDPRODUCT = p.ID\n" +
             "where od.IDORD = ?";
+    public static final String ADMIN_DON_HANG_DA_MUA = "" +
+            "select o.TRANGTHAI trangThai,o.IDORDERS idOrder,o.ID id,n.id_customer idCus,ng.idguoi_nhan idNguoiNhan, o.TOTAL_MONEY total, o.ORDERS_DATE orderDate\n" +
+            "            from orders o\n" +
+            "                inner join `manager-material`.orders_nguoinhan ng on o.ID = ng.idorder\n" +
+            "                inner join `manager-material`.nguoinhan n on ng.idguoi_nhan = n.Id\n" +
+            "            where o.TRANGTHAI = 0\n" +
+            "            order by o.ORDERS_DATE desc";
 
     // static : khai báo để dùng chung , khi dùng chung ko cho xóa thuộc tính dó
     // final: ko cho thay đổi

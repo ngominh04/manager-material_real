@@ -29,6 +29,9 @@ public interface OderRespon extends CrudRepository<Order,Integer> {
     @Query(value = Sql.DONHANG_TH0,nativeQuery = true)
     List<IDonHang> getDonHang0(Integer idCus);
 
+    @Query(value = Sql.ADMIN_DON_HANG_DA_MUA,nativeQuery = true)
+    List<IDonHang> getDonHangDaMua();
+
     @Query(value = Sql.DONHANG1,nativeQuery = true)
     IDonHang getDonHangChiTiet(Integer idCus,Integer idOrder,Integer idNguoiNhan);
 

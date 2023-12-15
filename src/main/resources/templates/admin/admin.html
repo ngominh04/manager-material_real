@@ -86,25 +86,25 @@
                         }
                     }
                 }
-                &:hover {
-                    background: #EC4138;
-                    border: 2px solid #F05749;
-                    border-right: 2px solid #E02A21;
-                    border-bottom: 2px solid #E02A21;
-                    a {
-                        color: #F9F8FD;
-                    }
-                    ul {
-                        visibility: visible;
-                        opacity: 1;
-                        box-shadow: 0px 3px 5px 2px #EBECF1;
-                        li {
-                            a {
-                                color: #F9F8FD;
-                            }
-                        }
-                    }
-                }
+                /*&:hover {*/
+                /*    background: #EC4138;*/
+                /*    border: 2px solid #F05749;*/
+                /*    border-right: 2px solid #E02A21;*/
+                /*    border-bottom: 2px solid #E02A21;*/
+                /*    a {*/
+                /*        color: #F9F8FD;*/
+                /*    }*/
+                /*    ul {*/
+                /*        visibility: visible;*/
+                /*        opacity: 1;*/
+                /*        box-shadow: 0px 3px 5px 2px #EBECF1;*/
+                /*        li {*/
+                /*            a {*/
+                /*                color: #F9F8FD;*/
+                /*            }*/
+                /*        }*/
+                /*    }*/
+                /*}*/
             }
         }
 
@@ -120,6 +120,48 @@
             }
             100% {
                 top: 15px;
+            }
+        }
+        .btn1{
+            cursor:pointer;
+            position:relative;
+            padding:10px 20px;
+            background:white;
+            font-size:18px;
+            border-top-right-radius:10px;
+            border-bottom-left-radius:10px;
+            transition:all 0.5s;
+            &:after,&:before{
+                content:" ";
+                width:10px;
+                height:10px;
+                position:absolute;
+                border :0px solid #fff;
+                transition:all 1s;
+            }
+            &:after{
+                top:-1px;
+                left:-1px;
+                border-top:5px solid black;
+                border-left:5px solid black;
+            }
+            &:before{
+                bottom:-1px;
+                right:-1px;
+                border-bottom:5px solid black;
+                border-right:5px solid black;
+            }
+            &:hover{
+                border-top-right-radius:0px;
+                border-bottom-left-radius:0px;
+            // background:rgba(0,0,0,.5);
+            // color:white;
+                &:before,&:after{
+
+                    width:100%;
+                    height:100%;
+                // border-color:white;
+                }
             }
         }
     </style>
@@ -188,6 +230,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" th:href="@{/oder/donhang1_admin}" style="text-decoration: none;" >Xác nhận đơn</a>
                     <a class="collapse-item" th:href="@{/oder/donhang2_admin}" style="text-decoration: none;" >Đơn hàng giao <br> thành công</a>
+                    <a class="collapse-item" th:href="@{/oder/donhangdamua}" style="text-decoration: none;" >Đơn hàng đã bán</a>
                 </div>
             </div>
         </li>
@@ -242,10 +285,43 @@
 
             <!-- Begin Page Content -->
             <div layout:fragment="content1">
-<!--                <div th:if="${session.a == 1}">-->
-<!--                    <h1>Bạn đã thêm admin mới thành công</h1>-->
-<!--                </div>-->
-                <h1>Bạn đang ở trang admin</h1>
+                <h2 class="collapse-header" style="margin-bottom: 2rem">Danh sách quản lí:</h2>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-3">
+                            <a class="btn1" th:href="@{/customer/showAllCustomer}" style="text-decoration: none;" >Customer</a>
+                        </div>
+                        <div class="col-3">
+                            <a class="btn1" th:href="@{/category/showAllCategory}" style="text-decoration: none;" >Categori</a>
+                        </div>
+                        <div class="col-3">
+                            <a class="btn1" th:href="@{/product/showAllProduct}" style="text-decoration: none;" >Product</a>
+                        </div>
+                        <div class="col-3">
+                            <a class="btn1" th:href="@{/image/showAllImage}" style="text-decoration: none;" >Products image</a>
+                        </div>
+                        <div class="col-3" style="margin-top: 2rem">
+                            <a class="btn1" th:href="@{/method/showAllPayment}" style="text-decoration: none;">Payment</a>
+                        </div>
+                        <div class="col-3" style="margin-top: 2rem">
+                            <a class="btn1" th:href="@{/method/showAllTransport}" style="text-decoration: none;">Transport</a>
+                        </div>
+                    </div>
+
+                    <h2 style="margin-top: 2rem">Quản lí đơn hàng: </h2>
+                    <div class="row" style="margin-top: 2rem">
+                        <div class="col-3">
+                            <a class="btn1" th:href="@{/oder/donhang1_admin}" style="text-decoration: none;" >Xác nhận đơn</a>
+                        </div>
+                        <div class="col-3">
+                            <a class="btn1" th:href="@{/oder/donhang2_admin}" style="text-decoration: none;" >Giao thành công</a>
+                        </div>
+                        <div class="col-3">
+                            <a class="btn1" th:href="@{/oder/donhangdamua}" style="text-decoration: none">Đơn đã bán</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
         <!-- End of Main Content -->
@@ -254,7 +330,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2021</span>
+                    <span>Xây dựng và phát triển bởi: <span style="color: greenyellow">Ngô Văn Minh</span></span>
                 </div>
             </div>
         </footer>

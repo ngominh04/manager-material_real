@@ -94,6 +94,8 @@
                        th:if="${d.trangThai == 1}" th:href="@{'/oder/xacNhanDonAdmin/'+${d.id}}">Xác nhận giao hàng</a>
                     <a class="btn1" style="color: gray;text-decoration: none;background-color: #d6fce3"
                        th:if="${d.trangThai == 2}" th:href="@{'/oder/xacNhanDon1Admin/'+${d.id}}">Xác nhận đã giao hàng thành công</a>
+                    <a class="btn1" style="color: gray;text-decoration: none;background-color: #d6fce3"
+                       th:if="${d.trangThai == 0}" th:href="@{'/oder/donhangChiTiet/'+${d.idCus}+'/'+${d.id}+'/'+${d.idNguoiNhan}}">Xem chi tiết đơn</a>
                 </td>
             </tr>
         </table>

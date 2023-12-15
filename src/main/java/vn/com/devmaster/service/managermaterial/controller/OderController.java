@@ -251,4 +251,18 @@ public class OderController {
         oderRespon.save(order);
         return "redirect:/oder/donhang1_admin";
     }
+
+    @GetMapping("/donhangdamua")
+    public String ShowDonHangDaMua(Model model){
+        model.addAttribute("donhang",oderRespon.getDonHangDaMua());
+        return "admin/orderAdmin";
+    }
+    @GetMapping("/donhangChiTiet/{idCus}/{idOrder}/{idNguoiNhan}")
+    public String showDonHangChiTietAdmin(Model model,@PathVariable(name = "idCus") Integer idCus
+            ,@PathVariable(name = "idOrder") Integer idOrder
+            ,@PathVariable(name = "idNguoiNhan") Integer idNguoiNhan){
+        model.addAttribute("donhang_product",oderDetailRespon.getOrdersDetailById(idOrder));
+        model.addAttribute("donhang_ChiTiet",oderRespon.getDonHangChiTiet(idCus,idOrder,idNguoiNhan));
+        return "/admin/orderChiTiet";
+    }
 }
